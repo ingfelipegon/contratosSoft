@@ -20,4 +20,34 @@ class Movimiento extends Model
         'respopnsable_id',		//INT           ID RESPONSABLE ACTUAL HEREDA DE LA TABLA USER
         'etapa_id' ,    	    //INT           ID ETAPA
     ];
+
+    //UN MOVIMIENTO ESPECIFICO PERTENECE A UNA SOLCITUD REGISTRADA
+	public function estadoOperacion()
+	{
+		return $this->belongsTo(EstadoOperacion::class);
+    }
+
+    //UN MOVIMIENTO ESTA A CARGO DE UN RESPONSABLE O PERTENECE A UN RESPONSABLE
+	public function responsable()
+	{
+		return $this->belongsTo(User::class);
+    }
+
+    //UN MOVIMIENTO PERTENECE A UNA SOLICTUD
+	public function solicitud()
+	{
+		return $this->belongsTo(Solicitud::class);
+    }
+
+    //UN MOVIMIENTO PERTENECE A UNA ETAPA DE UN PROCESO CONTRACTUAL
+	public function etapa()
+	{
+		return $this->belongsTo(Etapa::class);
+    }
+
+    //UN MOVIMIENTO PERTENECE A UNA MODALIDAD DE PROCESO CONTRACTUAL
+	public function modalidad()
+	{
+		return $this->belongsTo(Modalidad::class);
+    }
 }

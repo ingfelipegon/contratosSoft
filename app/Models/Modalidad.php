@@ -14,9 +14,38 @@ class Modalidad extends Model
     	'nombre',				//STRING 	NOMBRE
     	'descripcion'			//STRING    DESCRIPCION
     ];
+    //[INVITACION COMPETITIVA PUBLICA, 
+    //INVITACION COMPETITIVA PUBLICA, 
+    //INVITACION COMPETITIVA PUBLICA, 
+    //INVITACION COMPETITIVA CERRADA
     
-        //[INVITACION COMPETITIVA PUBLICA, 
-        //INVITACION COMPETITIVA PUBLICA, 
-        //INVITACION COMPETITIVA PUBLICA, 
-        //INVITACION COMPETITIVA CERRADA
+    protected $hidden = [
+        'pivot' 		
+    ];
+
+    //UNA MODALIDAD PERTENCE A MUCHAS ETAPAS
+	public function etapas()
+	{
+		return $this->belongsToMany(Etapa::class);
+    }
+    
+    //UNA MODALIDAD PERTENECE A MUCHAS ADQUISICIONES
+	public function adquisiciones()
+	{
+		return $this->hasMany(Adquisicion::class);
+	}
+    
+    //UNA MODALIDAD PERTENECE A MUCHAS SOLCITUDES
+	public function solicitudes()
+	{
+		return $this->hasMany(Solicitud::class);
+    }
+    
+    //UNA MODALIDAD PERTENECE A MUCHOS MOVIMIENTOS
+	public function movimientos()
+	{
+		return $this->hasMany(Movimiento::class);
+	}
+    
+
 }

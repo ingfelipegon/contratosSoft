@@ -14,4 +14,11 @@ class Area extends Model
     	'nombre',				//STRING 	NOMBRE DEL AREA			[SALAS, GRAI, GRANCE]
     	'descripcion'			//STRING    DESCRIPCION DEL AREA
     ];
+
+    //UNA DEPENDENCIA O AREA ESTA MUCHAS VECES EN LA SOLICITUD
+	public function solicitudes()
+	{
+		return $this->hasMany(Solicitud::class);
+    }
 }
+

@@ -17,4 +17,11 @@ class Fuente extends Model
     
     //'PROPIOS', 
     //'NACION'
+
+    //UNA FUENTE DE RECURSOS ESTA MUCHAS ADQUISICIONES
+	public function adquisiciones()
+	{
+		return $this->hasMany(Adquisicion::class);
+	}
+    
 }

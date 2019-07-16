@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\VsaadDependencia','dependencia_id');
     }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

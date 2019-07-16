@@ -15,7 +15,14 @@ class TipoTramite extends Model
     	'descripcion'			//STRING    DESCRIPCION
     ];
     
-        //PRECONTRACTUAL, 
-        //POSTCONTRACTUAL
-        //NINGUNO
+    //PRECONTRACTUAL, 
+    //POSTCONTRACTUAL
+    //NINGUNO
+
+    //LA CLASIFICACION  DE UN TRAMITE ESTA EN DIFERENTES SOLICITUDES
+	public function solicitudes()
+	{
+		return $this->hasMany(Solicitud::class);
+    }
+    
 }

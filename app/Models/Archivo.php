@@ -14,7 +14,15 @@ class Archivo extends Model
     	'nombre',			//STRING            NOMBRE ARCHIVO
         'descripcion',		//STRING            DESCRIPCION ARCHIVO
         'ruta',		        //STRING            RUTA ARCHIVO
-
         'solicitud_id'      //INT               ID SOLICITUD
     ];
+
+    //UN ARCHIVO PERTENECE A UNA SOLICITUD REGISTRADA
+	public function solicitud()
+	{
+		return $this->belongsTo(Solicitud::class);
+    }
+
+    
+
 }

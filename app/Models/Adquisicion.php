@@ -26,4 +26,22 @@ class Adquisicion extends Model
     	'modalidad_id',			//INT           MODALIDAD DE SELECCION
     	'fuente_id'				//INT           FUENTE DE LOS RECURSOS
     ];
+
+    //UN PLAN DE ADQUISICION PERTENECE A UNA UNIDAD DE MEDIDA
+	public function unidadMedida()
+	{
+		return $this->belongsTo(Unidad::class);
+    }
+    
+    //UN PLAN DE ADQUISICION PERTENECE A UNA MODALIDAD
+	public function modalidad()
+	{
+		return $this->belongsTo(Modalidad::class);
+    }
+    
+    //UN PLAN DE ADQUISICION PERTENECE A UNA FUENTE DE RECURSOS
+	public function fuenteRecurso()
+	{
+		return $this->belongsTo(Fuente::class);
+	}
 }

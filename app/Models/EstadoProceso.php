@@ -14,7 +14,13 @@ class EstadoProceso extends Model
     	'nombre',				//STRING 	NOMBRE
     	'descripcion'			//STRING    DESCRIPCION
     ];
-    
+
     //'EN PROCESO'
     //'FINALIZADO'
+    
+    //EL ESTADO DE UN PROCESO ESTA MUCHAS VECES EN LA SOLICITUD
+	public function solicitudes()
+	{
+		return $this->hasMany(Solicitud::class);
+    }
 }

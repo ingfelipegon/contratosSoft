@@ -19,4 +19,16 @@ class EstadoOperacion extends Model
     //'ESTAPA EN TIEMPO',			  
     //'INICIO ETAPA',		          
     //'SUPERA ETAPA',	
+
+    //EL ESTADO DE UN AOPERACION ESTA MUCHAS VECES EN LA SOLICITUD
+	public function solicitudes()
+	{
+		return $this->hasMany(Solicitud::class);
+    }
+    
+    //EL ESTADO DE UN AOPERACION ESTA MUCHAS VECES EN LA TABLA DE MOVIMIENTOS
+	public function movimientos()
+	{
+		return $this->hasMany(Movimiento::class);
+	}
 }

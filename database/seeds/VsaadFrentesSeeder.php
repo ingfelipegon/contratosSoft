@@ -19,13 +19,31 @@ class VsaadFrentesSeeder extends Seeder
        VsaadFrentes::truncate();
 
 
-		$uploadDataController=new UploadDataController();
+    ///////////////////////////////////////////
+    VsaadFrentes::create([
+        'nombre'    => 'FRENTE 54 CORDOBA',
+        'bloque_id'    => 1,
+        'codigo'    => '10',
+        'estado'    => 1,
+      ]);
 
-      	// Log::info('Start Seeder');
+      VsaadFrentes::create([        
+        'nombre'    => 'FRENTE 19 CUNDINAMRACA',
+        'bloque_id'    => 2,
+        'codigo'    => '20',
+        'estado'    => 1,
+      ]);
 
-       //  Log::info('Cargando Municipios...');
-        $uploadDataController->uploadVfrentes('frentes.csv');
-        // Log::info('Municipios cargados');
+      ///////////////////////////////////////////
+
+
+	// 	$uploadDataController=new UploadDataController();
+
+    //   	// Log::info('Start Seeder');
+
+    //    //  Log::info('Cargando Municipios...');
+    //     $uploadDataController->uploadVfrentes('frentes.csv');
+    //     // Log::info('Municipios cargados');
 
          DB::statement('SET FOREIGN_KEY_CHECKS=1');
 

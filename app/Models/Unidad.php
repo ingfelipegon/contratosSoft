@@ -13,8 +13,11 @@ class Unidad extends Model
     	'nombre',				//STRING 	NOMBRE
     	'descripcion'			//STRING    DESCRIPCION
     ];
+
+    //UNA UNIDADA DE TIEMPO ESTA MUCHAS ADQUISICIONES TIENE MUCHAS TRANSACCIONES
+	public function adquisiciones()
+	{
+		return $this->hasMany(Adquisicion::class);
+	}
     
-        //ANO
-        //MES
-        //DIA
 }

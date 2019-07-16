@@ -14,18 +14,37 @@ class VsaadMunicipiosSeeder extends Seeder
     public function run()
     {
 
-
+        
        DB::statement('SET FOREIGN_KEY_CHECKS=0');
        VsaadMunicipios::truncate();
 
+    ///////////////////////////////////////////
+    VsaadMunicipios::create([
+        'nombre'    => 'MONTERIA',
+        'departamento_id'    => 1,
+        'codigo'    => '10',
+        'tipo'    => '10',
+        'estado'    => 1,
+      ]);
 
-		$uploadDataController=new UploadDataController();
+      VsaadMunicipios::create([        
+        'nombre'    => 'VILLETA',
+        'departamento_id'    => 2,
+        'codigo'    => '20',
+        'tipo'    => '10',
+        'estado'    => 1,
+      ]);
 
-      	// Log::info('Start Seeder');
+      ///////////////////////////////////////////
 
-       //  Log::info('Cargando Municipios...');
-        $uploadDataController->uploadVmunicipios('municipios.csv');
-        // Log::info('Municipios cargados');
+
+	// 	$uploadDataController=new UploadDataController();
+
+    //   	// Log::info('Start Seeder');
+
+    //    //  Log::info('Cargando Municipios...');
+    //     $uploadDataController->uploadVmunicipios('municipios.csv');
+    //     // Log::info('Municipios cargados');
 
          DB::statement('SET FOREIGN_KEY_CHECKS=1');
 

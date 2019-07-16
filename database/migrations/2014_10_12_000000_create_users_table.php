@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->integer('dependencia_id')->unsigned()->nullable();
             $table->foreign('dependencia_id')->references('id')->on('vsaad_dependencias');
 
+            //$table->integer('area_id')->unsigned()->nullable();
+            // $table->foreign('area_id')->references('id')->on('areas');
+
             $table->rememberToken();
             $table->timestamps();
         });
