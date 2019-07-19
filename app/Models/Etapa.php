@@ -9,6 +9,7 @@ class Etapa extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
+    protected $table = 'etapas';
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE
@@ -21,7 +22,9 @@ class Etapa extends Model
     //'ETAPA 4'
     
     protected $hidden = [
-        'pivot' 		
+        'pivot',
+        'created_at',
+        'updated_at' 		
     ];
 
     //UNA ETAPA PERTENCE A MUCHAS MODALIDADES

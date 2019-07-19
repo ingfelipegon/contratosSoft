@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TipoTramite extends Model
 {
     use SoftDeletes;
+    protected $table = 'tipos_tramite';
     protected $date = ['delete_at'];
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE

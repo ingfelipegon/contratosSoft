@@ -9,10 +9,17 @@ class Fuente extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
+    protected $table = 'fuentes';
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE
     	'descripcion'			//STRING    DESCRIPCION
+    ];
+
+        
+    protected $hidden = [
+        'created_at',
+        'updated_at' 		
     ];
     
     //'PROPIOS', 

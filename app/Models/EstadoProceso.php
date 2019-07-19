@@ -10,6 +10,7 @@ class EstadoProceso extends Model
     use SoftDeletes;
     protected $date = ['delete_at'];
     protected $hidden =['created_at','updated_at'];
+    protected $table = 'estados_proceso';
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE

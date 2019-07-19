@@ -9,6 +9,7 @@ class Modalidad extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
+    protected $table = 'modalidades';
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE
@@ -20,7 +21,8 @@ class Modalidad extends Model
     //INVITACION COMPETITIVA CERRADA
     
     protected $hidden = [
-        'pivot' 		
+        'created_at',
+        'updated_at'
     ];
 
     //UNA MODALIDAD PERTENCE A MUCHAS ETAPAS

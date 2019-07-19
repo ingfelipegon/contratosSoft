@@ -17,8 +17,14 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::resource('areas','AdminApi\AreasController',['only'=>['index','show']]);
-Route::resource('estados_operacion','AdminApi\EstadoOperacionController',['only'=>['index','show']]);
-Route::resource('estadosProceso','AdminApi\EstadosProcesoController',['only'=>['index','show']]);
+Route::resource('estadosOperacion','AdminApi\EstadoOperacionController',['only'=>['index','show']]);
+Route::resource('estadosProceso','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
+Route::resource('etapas','AdminApi\EtapasController',['only'=>['index','show']]);
+Route::resource('fuentes','AdminApi\FuentesController',['only'=>['index','show']]);
+Route::resource('modalidades','AdminApi\ModalidadesController',['only'=>['index','show']]);
+Route::resource('tiposIdentificacion','AdminApi\TipoIdentificacionController',['only'=>['index','show']]);
+Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index','show']]);
+Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
 
 
 Route::apiResource('users', 'AdminApi\UserController');

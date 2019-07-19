@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EstadoOperacion;
 use App\Http\Resources\EstadoOperacionResource;
 
-class EstadoOperacionController extends Controller
+class EstadosOperacionController extends Controller
 {
     /**
      * Display a listing of the resource.
