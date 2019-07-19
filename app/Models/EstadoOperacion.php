@@ -9,6 +9,7 @@ class EstadoOperacion extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
+    protected $hidden =['created_at','updated_at'];
 
     protected $fillable = [
     	'nombre',				//STRING 	NOMBRE

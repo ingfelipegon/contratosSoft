@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::resource('areas','AdminApi\AreasController',['only'=>['index','show']]);
+Route::resource('estados_operacion','AdminApi\EstadoOperacionController',['only'=>['index','show']]);
+Route::resource('estadosProceso','AdminApi\EstadosProcesoController',['only'=>['index','show']]);
+
+
 Route::apiResource('users', 'AdminApi\UserController');
 Route::apiResource('roles', 'AdminApi\RoleController');
 Route::apiResource('permissions', 'AdminApi\PermissionController');
