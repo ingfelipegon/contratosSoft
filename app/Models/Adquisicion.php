@@ -9,6 +9,8 @@ class Adquisicion extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
+	protected $hidden =['created_at','updated_at'];
+	protected $table = 'adquisiciones';
 
     protected $fillable = [
     	'codUNSPSC',			//STRING

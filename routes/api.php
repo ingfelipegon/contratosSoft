@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::resource('areas','AdminApi\AreasController',['only'=>['index','show']]);
+Route::resource('areas','AdminApi\AreasController');
 Route::resource('estadosOperacion','AdminApi\EstadoOperacionController',['only'=>['index','show']]);
 Route::resource('estadosProceso','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
 Route::resource('etapas','AdminApi\EtapasController',['only'=>['index','show']]);
@@ -25,7 +25,7 @@ Route::resource('modalidades','AdminApi\ModalidadesController',['only'=>['index'
 Route::resource('tiposIdentificacion','AdminApi\TipoIdentificacionController',['only'=>['index','show']]);
 Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index','show']]);
 Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
-
+Route::resource('adquisiciones','AdminApi\AdquisicionesController');
 
 Route::apiResource('users', 'AdminApi\UserController');
 Route::apiResource('roles', 'AdminApi\RoleController');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Adquisicion;
+use App\Http\Resources\AdquisicionResource;
 
 class AdquisicionesController extends Controller
 {
@@ -16,7 +17,8 @@ class AdquisicionesController extends Controller
      */
     public function index(Adquisicion $adquisicion)
     {
-        
+        $adquisiciones = Adquisicion::all();
+        return AdquisicionResource::collection($adquisiciones);
     }
 
     /**
@@ -25,24 +27,30 @@ class AdquisicionesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $seller)
+    public function store(Request $request)
     {
         $rules = [
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required|integer|min:1',
-            'image' => 'required|image',
+            'codUNSPSC' => 'required',		
+            'item' => 'required|integer|min:1',					
+            'descripcion' => 'required',	
+            'mesinicio' => 'required|integer|min:1',			
+            'mesoferta' => 'required|integer|min:1',
+            'duracion' => 'required|integer|min:1',
+            'valortotal' => 'required',
+            'valorvigencia' => 'required',
+            'vigenciafutura' => 'required',
+            'nombreresponsable' => 'required',
+            'estadovigencia' => 'required',
+            'unidadtiempo_id' => 'required|integer|min:1',
+            'modalidad_id' => 'required|integer|min:1',
+            'fuente_id' => 'required|integer|min:1'
         ];
 
         $this->validate($request, $rules);
         $data = $request->all();
 
-        $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
-        $data['image'] = $request->image->store('');
-        $data['seller_id'] = $seller->id;
-
-        $product = Product::create($data);
-        return $this->showOne($product,201);
+        $adquisicion = Adquisicion::create($data);
+        return response(['message'=>'Plan de adquisision creado', 'adquisision'=>$adquisicion]);
     }
 
     /**
@@ -52,51 +60,30 @@ class AdquisicionesController extends Controller
      * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seller $seller, Product $product)
+    public function update(Request $request, Adquisicion $adquisicion)
     {
         $rules = [
-            'quantity' => 'integer|min:1',
-            'status' => 'in: '. Product::PRODUCTO_DISPONIBLE . ',' . Product::PRODUCTO_NO_DISPONIBLE,
-            'image' => 'image',
+            'codUNSPSC' => 'required',		
+            'item' => 'required|integer|min:1',					
+            'descripcion' => 'required',	
+            'mesinicio' => 'required|integer|min:1',			
+            'mesoferta' => 'required|integer|min:1',
+            'duracion' => 'required|integer|min:1',
+            'valortotal' => 'required',
+            'valorvigencia' => 'required',
+            'vigenciafutura' => 'required',
+            'nombreresponsable' => 'required',
+            'estadovigencia' => 'required',
+            'unidadtiempo_id' => 'required|integer|min:1',
+            'modalidad_id' => 'required|integer|min:1',
+            'fuente_id' => 'required|integer|min:1'
         ];
 
         $this->validate($request, $rules);
+        $data = $request->all();
+        $adquisicion->update($data);
 
-        if($seller->id != $product->seller_id)
-        {
-            $this->errorResponse('El vendedor especificado no es el vendedor real del producto', 422);        
-        }
-
-        $product->fill($request->only([
-            'name',
-            'description',
-            'quantity',        
-        ]));        
-
-        if($request->has('status'))
-        {
-            $product->status = $request->status;
-            if($product->estaDisponible() && $product->categories()->count() == 0)
-            {
-                return $this->errorResponse('Un producto activo ebe tener al menos una categoria', 409);
-            }
-        }
-
-        if($request->hasFile('image'))
-        {
-            Storage::delete($product->image);
-
-            $product->image = $request->image->store(''); 
-        }
-
-        if ($product->isClean())
-        {
-            $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
-        }
-
-        $product->save();
-
-        return $this->showOne($product);
+        return response(['message'=>'Plan de adquisision actualizado', 'adquisision'=>$adquisicion]);
     }
 
     /**
@@ -111,4 +98,19 @@ class AdquisicionesController extends Controller
         $product->delete();
         return $this->showOne($product);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Adquisicion $adquisicion)
+    {
+        //$adquisicionRegistro = Adquisicion::find($adquisicion['id']);
+        // return response()->json(['data'=>$area], 200);
+        //return response(['data'=>'Plan de adquisicion', 'adquisision'=>$adquisicion]);
+        return response()->json(['data'=>$adquisicion], 200);
+    }
+    
 }
