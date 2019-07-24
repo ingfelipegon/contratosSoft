@@ -33,6 +33,6 @@ class CrearTablaVsaadAbogadosApoderados extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('vsaad_abogados_educacion');
+      Schema::dropIfExists('vsaad_abogados_apoderados');
     }
 }

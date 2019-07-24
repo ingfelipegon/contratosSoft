@@ -25,8 +25,8 @@ class EstadosOperacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EstadoOperacion $estadoOperacion)
+    public function show(EstadoOperacion $estadosOperacion)
     {
-        return response()->json(['data'=>$estadoOperacion], 200);
+        return response()->json(['data'=>$estadosOperacion], 200);
     }
 }

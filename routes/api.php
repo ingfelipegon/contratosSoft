@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 // });
 Route::resource('areas','AdminApi\AreasController');
 Route::resource('estadosOperacion','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
-Route::resource('estadosProceso','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
+Route::resource('estadosProceso','AdminApi\EstadosProcesoController',['only'=>['index','show']]);
 Route::resource('etapas','AdminApi\EtapasController',['only'=>['index','show']]);
 Route::resource('fuentes','AdminApi\FuentesController',['only'=>['index','show']]);
 Route::resource('modalidades','AdminApi\ModalidadesController',['only'=>['index','show']]);
@@ -26,6 +26,8 @@ Route::resource('tiposIdentificacion','AdminApi\TipoIdentificacionController',['
 Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index','show']]);
 Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
 Route::resource('adquisiciones','AdminApi\AdquisicionesController');
+Route::resource('solicitudes','AdminApi\SolicitudesController');
+Route::get('verificar_registro_PAA/{item}', 'AdminApi\SolicitudesController@verificar_registro_PAA');
 
 Route::apiResource('users', 'AdminApi\UserController');
 Route::apiResource('roles', 'AdminApi\RoleController');

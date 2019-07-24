@@ -25,8 +25,8 @@ class TipoTramiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(TipoTramite $tipoTramite)
+    public function show(TipoTramite $tiposTramite)
     {
-        return response()->json(['data'=>$tipoTramite], 200);
+        return response()->json(['data'=>$tiposTramite], 200);
     }
 }

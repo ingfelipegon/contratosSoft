@@ -25,8 +25,8 @@ class EstadosProcesoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EstadoProceso $estadoProceso)
+    public function show(EstadoProceso $estadosProceso)
     {
-        return response()->json(['data'=>$estadoProceso], 200);
+        return response()->json(['data'=>$estadosProceso], 200);
     }
 }

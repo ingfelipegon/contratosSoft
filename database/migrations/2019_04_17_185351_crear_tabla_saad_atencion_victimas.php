@@ -120,7 +120,7 @@ class CrearTablaSaadAtencionVictimas extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('saad_abogados');
+      Schema::dropIfExists('saad_atencion_victimas');
 
     }
 }

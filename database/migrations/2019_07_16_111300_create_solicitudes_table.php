@@ -18,6 +18,7 @@ class CreateSolicitudesTable extends Migration
             $table->integer('item')->unsigned();
             $table->string('descripcion')->nullable();
             $table->string('nombresupervisor')->nullable();
+            $table->integer('duracioncontrato')->unsigned();
             $table->boolean('tienereparto');
 
             $table->integer('estadoproceso_id')->unsigned();
@@ -28,15 +29,15 @@ class CreateSolicitudesTable extends Migration
 
             $table->integer('modalidad_id')->unsigned();
             $table->foreign('modalidad_id')->references('id')->on('modalidades');
-
-            $table->integer('fuente_id')->unsigned();
-            $table->foreign('fuente_id')->references('id')->on('fuentes');
             
             $table->integer('areasolicitante_id')->unsigned();
             $table->foreign('areasolicitante_id')->references('id')->on('areas');
 
             $table->integer('respopnsable_id')->unsigned();
             $table->foreign('respopnsable_id')->references('id')->on('users');
+
+            $table->integer('tipotramite_id')->unsigned();
+            $table->foreign('tipotramite_id')->references('id')->on('tipos_tramite');
 
             $table->timestamps();
             $table->softDeletes();

@@ -12,7 +12,7 @@
                   <v-card>
                       <v-card-text>
 
-                        <h1 class="text-md-center">SISTEMA DE GESTION ABOGADOS</h1>
+                        <h1 class="text-md-center">SISTEMA DE GESTION CONTRATUAL</h1>
                         <h2 class="text-md-center">JEP</h2>
 
                       </v-card-text>

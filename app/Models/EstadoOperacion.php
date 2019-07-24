@@ -17,8 +17,8 @@ class EstadoOperacion extends Model
     	'descripcion'			//STRING    DESCRIPCION DEL AREA
     ];
 
-    //'COMENZAR ETAPA', 			
-    //'ESTAPA EN TIEMPO',			  
+    //'COMENZAR AHORA ETAPA', 			
+    //'ETAPA EN TIEMPO',			  
     //'INICIO ETAPA',		          
     //'SUPERA ETAPA',	
 

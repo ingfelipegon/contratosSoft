@@ -8,6 +8,7 @@ import AbogadosConfianza from '../pages/AbogadosConfianza'
 import AtencionVictimas from '../pages/AtencionVictimas'
 import AtencionVictimasRegistro from '../pages/AtencionVictimasRegistro'
 import Adquisiciones from '../pages/Adquisiciones'
+import Solicitudes from '../pages/Solicitudes'
 
 Vue.use(Router)
 
@@ -49,6 +50,10 @@ export default new Router({
 	 {
 			 path: '/home/adquisiciones',
 			 component: Adquisiciones
+	 },
+	 {
+			 path: '/home/solicitudes',
+			 component: Solicitudes
 	 }
  ]
 })
