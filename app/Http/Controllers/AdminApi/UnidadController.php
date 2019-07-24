@@ -25,8 +25,8 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Unidad $unidad)
+    public function show(Unidad $unidade)
     {
-        return response()->json(['data'=>$unidad], 200);
+        return response()->json(['data'=>$unidade], 200);
     }
 }

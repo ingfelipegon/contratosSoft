@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::resource('areas','AdminApi\AreasController');
-Route::resource('estadosOperacion','AdminApi\EstadoOperacionController',['only'=>['index','show']]);
+Route::resource('estadosOperacion','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
 Route::resource('estadosProceso','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
 Route::resource('etapas','AdminApi\EtapasController',['only'=>['index','show']]);
 Route::resource('fuentes','AdminApi\FuentesController',['only'=>['index','show']]);

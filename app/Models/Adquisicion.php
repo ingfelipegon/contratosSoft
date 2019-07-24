@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Adquisicion extends Model
 {
     use SoftDeletes;
-    protected $date = ['delete_at'];
-	protected $hidden =['created_at','updated_at'];
+	protected $date = ['delete_at'];
 	protected $table = 'adquisiciones';
 
     protected $fillable = [
@@ -27,7 +26,9 @@ class Adquisicion extends Model
     	'unidadtiempo_id',		//INT  			UNIDAD DE TIEMPO DE LA DURACION ESIMADA DEL CONTRATO
     	'modalidad_id',			//INT           MODALIDAD DE SELECCION
     	'fuente_id'				//INT           FUENTE DE LOS RECURSOS
-    ];
+	];
+	
+	protected $hidden =['created_at','updated_at'];
 
     //UN PLAN DE ADQUISICION PERTENECE A UNA UNIDAD DE MEDIDA
 	public function unidadMedida()

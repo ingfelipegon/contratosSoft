@@ -7,6 +7,7 @@ import Abogados from '../pages/Abogados'
 import AbogadosConfianza from '../pages/AbogadosConfianza'
 import AtencionVictimas from '../pages/AtencionVictimas'
 import AtencionVictimasRegistro from '../pages/AtencionVictimasRegistro'
+import Adquisiciones from '../pages/Adquisiciones'
 
 Vue.use(Router)
 
@@ -44,6 +45,10 @@ export default new Router({
 	 {
 			 path: '/home/atencion_victimas',
 			 component: AtencionVictimas
+	 },
+	 {
+			 path: '/home/adquisiciones',
+			 component: Adquisiciones
 	 }
  ]
 })

@@ -46,8 +46,15 @@ class AdquisicionesController extends Controller
             'fuente_id' => 'required|integer|min:1'
         ];
 
+
         $this->validate($request, $rules);
         $data = $request->all();
+        if($data['vigenciafutura'] == "Si"){
+            $data['vigenciafutura'] = true;
+        }
+        if($data['vigenciafutura'] == "No"){
+            $data['vigenciafutura'] = false;
+        }
 
         $adquisicion = Adquisicion::create($data);
         return response(['message'=>'Plan de adquisision creado', 'adquisision'=>$adquisicion]);
@@ -60,7 +67,7 @@ class AdquisicionesController extends Controller
      * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Adquisicion $adquisicion)
+    public function update(Request $request, Adquisicion $adquisicione)
     {
         $rules = [
             'codUNSPSC' => 'required',		
@@ -81,9 +88,9 @@ class AdquisicionesController extends Controller
 
         $this->validate($request, $rules);
         $data = $request->all();
-        $adquisicion->update($data);
+        $adquisicione->update($data);
 
-        return response(['message'=>'Plan de adquisision actualizado', 'adquisision'=>$adquisicion]);
+        return response(['message'=>'Plan de adquisision actualizado', 'adquisision'=>$adquisicione]);
     }
 
     /**
@@ -92,11 +99,10 @@ class AdquisicionesController extends Controller
      * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seller $seller, Product $product)
+    public function destroy(Adquisicion $adquisicione)
     {
-        Storage::delete($product->image);
-        $product->delete();
-        return $this->showOne($product);
+        $adquisicione->delete();
+        return response(['message'=>'El Item de adquisision se ha eliminado correctamente', 'adquisision'=>$adquisicione]);
     }
 
     /**
@@ -105,12 +111,12 @@ class AdquisicionesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Adquisicion $adquisicion)
+    public function show(Adquisicion $adquisicione)
     {
-        //$adquisicionRegistro = Adquisicion::find($adquisicion['id']);
+        //$adquisicionRegistro = Adquisicion::find($id);
         // return response()->json(['data'=>$area], 200);
-        //return response(['data'=>'Plan de adquisicion', 'adquisision'=>$adquisicion]);
-        return response()->json(['data'=>$adquisicion], 200);
+        return response(['data'=>$adquisicione]);
+        //return response()->json(['data'=>$adquisicionRegistro], 200);
     }
     
 }

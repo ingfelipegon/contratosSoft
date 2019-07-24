@@ -25,9 +25,9 @@ class ModalidadesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Modalidad $modalidad)
+    public function show(Modalidad $modalidade)
     {
-        return response()->json(['data'=>$modalidad], 200);
+        return response()->json(['data'=>$modalidade], 200);
         
     }
 }

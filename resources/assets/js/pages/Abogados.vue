@@ -781,7 +781,11 @@ import CargarDocumento from '../components/CargarDocumento'
       },
 
       showItem(item) {
+        console.log("entro a mostrar: " + item);
+        
         this.editedIndex = this.tableData.indexOf(item);
+        alert("entro a mostrar: " + this.editedIndex);
+
         this.editedItem = Object.assign({}, item);
         this.dialog2 = true;
       },
@@ -991,7 +995,7 @@ import CargarDocumento from '../components/CargarDocumento'
 
           axios.put('/api/abogados/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
-          console.log("Entró a save");
+          console.log("Entró a save abogados");
 
 
           // console.log(this.editedItem)

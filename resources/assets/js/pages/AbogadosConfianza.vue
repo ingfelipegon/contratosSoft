@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div> 
         <v-toolbar dark flat color="grey-lighten">
             <v-toolbar-title>Abogados de confianza</v-toolbar-title>
             <v-divider
@@ -397,14 +397,6 @@ import CargarDocumento from '../components/CargarDocumento'
     methods: {
       initialize() {
 
-      //  this.editedItem.educacion.push(Object.assign({},this.educa));
-        // this.editedItem.experiencia.push(Object.assign({},this.experiencia));
-        // console.log(this.editedItem)
-        // axios.get('/api/abogados').then(response => {
-        //   console.log(response);
-        //   this.tableData = response.data.data;
-        // });
-
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
         axios.get('/api/permissions').then(response=>this.allPermissions=response.data.data);
 
@@ -611,7 +603,7 @@ import CargarDocumento from '../components/CargarDocumento'
 
           axios.put('/api/abogados/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
-          console.log("Entró a save");
+          console.log("Entró a save abogado");
 
 
           // console.log(this.editedItem)

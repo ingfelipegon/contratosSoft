@@ -31,6 +31,15 @@
 
                     <!-- <v-list-tile to="/home/abogados" v-if="!$auth.hasRole('Persona')"> -->
                     <!-- <v-list-tile to="/home/abogados" v-if="!$auth.hasRole('Persona')"> -->
+                    <v-list-tile to="/home/Adquisiciones">
+                        <v-list-tile-action>
+                            <v-icon>person</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>Configuracion PAA</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+
                     <v-list-tile to="/home/abogados">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>

@@ -17,6 +17,7 @@ class AdquisicionResource extends JsonResource
 
           // return parent::toArray($request);
           return [
+            'id' => $this->id,  
             'codUNSPSC' => $this->codUNSPSC,		
             'item' => $this->item,					
             'descripcion' => $this->descripcion,	
@@ -29,8 +30,11 @@ class AdquisicionResource extends JsonResource
             'nombreresponsable' =>  $this->nombreresponsable,
             'estadovigencia' =>  $this->estadovigencia,
             'unidadtiempo_id' =>  $this->unidadtiempo_id,
-            'modalidad_id' =>  $this->modalidad_id,
-            'fuente_id' =>  $this->fuente_id
+            //'unidades_tiempo' => $this->unidadMedida,           //RELACION CON UNIDADES
+            'modalidad_id' =>  $this->modalidad_id,             
+            'modalidades' => $this->modalidad,                  //RELACION CON MODALIDAD
+            'fuente_id' =>  $this->fuente_id,                   
+            //'fuente_recursos' => $this->fuenteRecurso,          //RELACION CON LA FUENTES DE LOS RECURSOS
         ];
     }
 }
