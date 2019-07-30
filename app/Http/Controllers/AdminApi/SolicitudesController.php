@@ -118,7 +118,9 @@ class SolicitudesController extends Controller
      */
     public function show(Solicitud $solicitude)
     {
-        return response(['data'=>$solicitude]);
+        // return SolicitudeResource::collection($solicitude);
+        // return response(['data'=>$solicitude]);
+        return new SolicitudeResource($solicitude);
     }
     
 }

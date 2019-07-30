@@ -47,6 +47,14 @@
                             <v-list-tile-title>Solicitud a Contratación JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
+                    <v-list-tile to="/home/Procesos">
+                        <v-list-tile-action>
+                            <v-icon>person</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>Procesos de Contratación JEP</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
                     <v-list-tile to="/home/abogados">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>

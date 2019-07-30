@@ -24,13 +24,13 @@ class Movimiento extends Model
     //UN MOVIMIENTO ESPECIFICO PERTENECE A UNA SOLCITUD REGISTRADA
 	public function estadoOperacion()
 	{
-		return $this->belongsTo(EstadoOperacion::class);
+		return $this->belongsTo('App\Models\EstadoOperacion','estadooperacion_id');
     }
 
     //UN MOVIMIENTO ESTA A CARGO DE UN RESPONSABLE O PERTENECE A UN RESPONSABLE
 	public function responsable()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo('App\Models\User','respopnsable_id'::class);
     }
 
     //UN MOVIMIENTO PERTENECE A UNA SOLICTUD
@@ -48,6 +48,6 @@ class Movimiento extends Model
     //UN MOVIMIENTO PERTENECE A UNA MODALIDAD DE PROCESO CONTRACTUAL
 	public function modalidad()
 	{
-		return $this->belongsTo(Modalidad::class);
+		return $this->belongsTo('App\Models\Modalidad','modalidad_id');
     }
 }

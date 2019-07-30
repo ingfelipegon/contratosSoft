@@ -442,14 +442,14 @@ import CargarDocumento from '../components/CargarDocumento'
 
         } else {
           console.log("Entró a save de adquisiciones");
-          axios.post('/api/solicitudes',this.editedItem).then(response=>{
-          this.tableData.push(response.data)});
+          // axios.post('/api/solicitudes',this.editedItem).then(response=>{
+          // this.tableData.push(response.data)});
 
-          // axios.post('/api/solicitudes',this.editedItem).then(function (response) {
-          //     console.log(response.data);
-          // }, function (error) {
-          //     console.log(error.response.data); 
-          // });
+          axios.post('/api/solicitudes',this.editedItem).then(function (response) {
+              console.log(response.data);
+          }, function (error) {
+              console.log(error.response.data); 
+          });
         }
         this.close();
       },

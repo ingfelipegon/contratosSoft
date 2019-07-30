@@ -75,7 +75,7 @@ class Solicitud extends Model
     //UNA SOLICITUD COONTIENE VARIOS MOVIMIENTOS
 	public function movimientos()
 	{
-		return $this->hasMany(Movimiento::class);
+		return $this->hasMany('App\Models\Movimiento','solicitud_id');
     }
     
 }

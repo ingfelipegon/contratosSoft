@@ -27,7 +27,14 @@ Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index
 Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
 Route::resource('adquisiciones','AdminApi\AdquisicionesController');
 Route::resource('solicitudes','AdminApi\SolicitudesController');
+Route::resource('solicitudes.movimientos','AdminApi\SolicitudMovimientoController',['only'=>['index','show']]);
 Route::get('verificar_registro_PAA/{item}', 'AdminApi\SolicitudesController@verificar_registro_PAA');
+
+Route::resource('movimientos','AdminApi\MovimientoController');
+Route::get('obtener_dias_etapa/{idModaldad}/{idEtapa}', 'AdminApi\MovimientoController@obtenerDiasEtapa');
+
+
+
 
 Route::apiResource('users', 'AdminApi\UserController');
 Route::apiResource('roles', 'AdminApi\RoleController');

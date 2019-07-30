@@ -21,6 +21,7 @@ class CreateEtapasModalidadTable extends Migration
             $table->foreign('etapa_id')->references('id')->on('etapas');
             $table->foreign('modalidad_id')->references('id')->on('modalidades');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
