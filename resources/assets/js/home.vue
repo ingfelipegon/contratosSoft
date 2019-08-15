@@ -39,7 +39,7 @@
                             <v-list-tile-title>Configuracion PAA</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/Solicitudes" v-if="$auth.hasRole('Subdirector') && $auth.hasRole('Administrador')">
+                    <v-list-tile to="/home/Solicitudes">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
@@ -47,7 +47,7 @@
                             <v-list-tile-title>Solicitud a Contratación JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/Procesos" v-if="$auth.hasRole('Administrador')">
+                    <v-list-tile to="/home/Procesos">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>

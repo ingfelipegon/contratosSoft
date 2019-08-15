@@ -43,6 +43,7 @@ class ArchivoController extends Controller
             Log::info($filename);            
             $files[] = $filename;
         }
+        // return Storage::download($files[0]);
         return response($files);
     }
 

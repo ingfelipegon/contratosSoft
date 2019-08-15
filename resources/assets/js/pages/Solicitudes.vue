@@ -4,6 +4,22 @@
         <v-toolbar-title>Registro de Solictudes para dar tramite de Contratación</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
+        <v-dialog
+          v-model="dialog3"
+          max-width="30%"
+        >
+          <v-data-table
+                  :headers="headersFiles"
+                  :items="tableDataFiles"
+                  class="elevation-1"
+          >
+              <template slot="items" slot-scope="props" >
+                  <td ><a target="_blank"  :href="'/storage/repositorio_documentos/' +props.item">{{ props.item}} </a></td>
+
+
+              </template>
+          </v-data-table>
+        </v-dialog>
         <v-dialog v-model="dialog2" max-width="60%">
           <v-card>
             <v-card-text> 
@@ -132,6 +148,16 @@
                                             chips
                                         ></v-select>            
                                     </v-layout>   
+
+                                    <template v-for='(item, index) in adjuntar_documentos'>
+                                    <cargar-documento documento="Adjunto" :tipo="index" ></cargar-documento>
+                                    <!-- adjuntar_documentos ++; -->
+                                    <!-- <v-btn color="danger" @click="less_documentos(index)">-</v-btn> -->
+                                    <v-divider class="mx-1"></v-divider>
+                                    <v-spacer></v-spacer>
+                                    </template>
+                                    <v-btn color="info" @click="add_documentos">+</v-btn><label>Clic para agregar tantos documentos como requiera.</label>
+                                    <v-divider class="mx-1"></v-divider>
                                     <v-btn color="primary" @click.prevent="save">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
@@ -211,6 +237,13 @@
                     >
                         delete
                     </v-icon>
+                    <v-icon
+                            small
+                            class="done"
+                            @click="showFiles(props.item)"
+                    >
+                        attach_file
+                    </v-icon>
                 </td>  
           </template>
           <template slot="no-data">
@@ -230,6 +263,10 @@ import CargarDocumento from '../components/CargarDocumento'
       valid: true,
       dialog: false,
       dialog2: false,
+      dialog3: false,
+      headersFiles: [
+        {text: 'Nombre Archivo', value: 'nombres'},
+      ],
       headers: [
         {text: 'Num. Ítem', value: 'item'},
         {text: 'Descripción', value: 'descripcion'},
@@ -245,6 +282,7 @@ import CargarDocumento from '../components/CargarDocumento'
         {text: 'Tipo Tramite', value: 'tipotramite_id'},
       ],
       tableData: [],
+      tableDataFiles: [],
       editedIndex: -1,
       modalidades:[],    
       estadosProceso:[],
@@ -253,7 +291,10 @@ import CargarDocumento from '../components/CargarDocumento'
       responsables:[],
       tiposTramite:[],
       responsables:[],
-
+      adjuntar_documentos:[],
+      docu_adjunto:{
+        documento:'',
+      },
       editedItem: {
         created_at: '',
         id: '',
@@ -268,6 +309,7 @@ import CargarDocumento from '../components/CargarDocumento'
         areasolicitante_id:'',
         respopnsable_id:'',
         tipotramite_id:'',
+        files_to_upload:[],
       },
       defaultItem: {
         created_at: '',
@@ -283,6 +325,7 @@ import CargarDocumento from '../components/CargarDocumento'
         areasolicitante_id:'',
         respopnsable_id:'',
         tipotramite_id:'',
+        files_to_upload:[],
       },
 
       rules: {
@@ -363,6 +406,7 @@ import CargarDocumento from '../components/CargarDocumento'
         axios.get('/api/areas').then(response => {this.dependencias=response.data.data;});
         axios.get('/api/tiposTramite').then(response => {this.tiposTramite=response.data.data;});
         axios.get('/api/users').then(response => {this.responsables=response.data.data;});
+        this.adjuntar_documentos.push(Object.assign({},this.docu_adjunto));
         
       },
 
@@ -380,6 +424,15 @@ import CargarDocumento from '../components/CargarDocumento'
         // alert("entro a mostrar: " + this.editedIndex);
         this.editedItem = Object.assign({}, item);
         this.dialog2 = true;
+      },
+
+      showFiles(item) {
+        console.log("entro a mostrar: " + item.item);
+        axios.get('/api/showfiles/'+item.item).then(response => {
+          console.log(response);
+          this.tableDataFiles = response.data;
+          });
+          this.dialog3 = true;
       },
 
       deleteItem(item) {
@@ -415,6 +468,13 @@ import CargarDocumento from '../components/CargarDocumento'
               this.$refs.form_step_2.reset()
               this.$refs.form_step_3.reset()
       },
+
+      add_documentos () {
+        this.adjuntar_documentos.push(Object.assign({},this.docu_adjunto));
+          // this.adjuntar_documentos++;
+          // this.editedItem.allegados_familiares.push(Object.assign({},this.fami_alle));
+      },
+
       agregar_documento(){
         this.openFileDialog[this.num_docs]=true;
        this.num_docs++;
@@ -448,6 +508,38 @@ import CargarDocumento from '../components/CargarDocumento'
       save() {
         console.log(this.editedIndex);
         console.log(this.editedItem);
+
+        if(this.editedItem.files_to_upload){
+          console.log('Si existe files_to_upload')
+          Object.entries(this.editedItem.files_to_upload).forEach(([key, val]) => {
+              console.log(key);          // the name of the current key.
+              console.log(val);          // the value of the current key.
+              this.file = val;
+              // this.file = this.editedItem.files_to_upload['"'+element+'"'];
+
+              var formData = new FormData();
+              formData.append('archivo', this.file);
+              formData.append('nombre_adjunto', key);
+              formData.append('identificacion', this.editedItem.item);
+              console.log("A guardar = "+this.file.name);
+              axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
+          });
+
+          // Object.entries(this.editedItem.files_to_upload).forEach(function(elemento) {
+          //   console.log("en el array = "+elemento);
+          //   if(this.editedItem.files_to_upload['"'+element+'"'])
+          //   {
+          //     // this.editedItem.adjunto_tarjeta_profesional=this.editedItem.files_to_upload['"'+element+'"'].name
+          //     this.file = this.editedItem.files_to_upload['"'+element+'"'];
+          
+          //     var formData = new FormData();
+          //     formData.append('archivo', this.file);
+          //     formData.append('identificacion', this.editedItem.item);
+          //     console.log("A guardar = "+this.file.name);
+          //     axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
+          //   }
+          // });
+        }
         
         if (this.editedIndex > -1) {
           // console.log("Entró a update");

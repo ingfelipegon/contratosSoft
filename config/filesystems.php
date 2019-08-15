@@ -66,6 +66,7 @@ return [
         'repositorio_documentos' => [
             'driver' => 'local',
             'root' => storage_path('app/public/repositorio_documentos'),
+            'visibility' => 'public',
         ],
 
     ],
