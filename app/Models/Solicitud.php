@@ -9,10 +9,10 @@ class Solicitud extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
-    protected $hidden = [
-        'created_at',
-        'updated_at'
-    ];
+    // protected $hidden = [
+    //     'created_at',
+    //     'updated_at'
+    // ];
     protected $table = 'solicitudes';
 
     protected $fillable = [

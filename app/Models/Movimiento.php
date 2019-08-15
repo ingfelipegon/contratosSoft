@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Movimiento extends Model
 {
     use SoftDeletes;
-    protected $date = ['delete_at'];
+	protected $date = ['delete_at'];
+	// protected $hidden = [
+    //     'created_at',
+    //     'updated_at'
+    // ];
 
     protected $fillable = [
     	'descripcion',			//STRING        DESCRIPCION SOLICITUD
@@ -42,7 +46,7 @@ class Movimiento extends Model
     //UN MOVIMIENTO PERTENECE A UNA ETAPA DE UN PROCESO CONTRACTUAL
 	public function etapa()
 	{
-		return $this->belongsTo(Etapa::class);
+		return $this->belongsTo('App\Models\Etapa','etapa_id');
     }
 
     //UN MOVIMIENTO PERTENECE A UNA MODALIDAD DE PROCESO CONTRACTUAL

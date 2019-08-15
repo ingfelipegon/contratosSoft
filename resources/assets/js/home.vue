@@ -39,7 +39,7 @@
                             <v-list-tile-title>Configuracion PAA</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/Solicitudes">
+                    <v-list-tile to="/home/Solicitudes" v-if="$auth.hasRole('Subdirector') && $auth.hasRole('Administrador')">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
@@ -47,7 +47,7 @@
                             <v-list-tile-title>Solicitud a Contratación JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/Procesos">
+                    <v-list-tile to="/home/Procesos" v-if="$auth.hasRole('Administrador')">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
@@ -55,7 +55,7 @@
                             <v-list-tile-title>Procesos de Contratación JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/abogados">
+                    <!-- <v-list-tile to="/home/abogados">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
@@ -63,27 +63,25 @@
                             <v-list-tile-title>Abogados SAAD</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/abogados_confianza">
+                    <v-list-tile to="/home/abogados_confianza"> -->
                     <!-- <v-list-tile to="/home/abogados_confianza" v-if="!$auth.hasRole('Persona')"> -->
-                        <v-list-tile-action>
+                        <!-- <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
                             <v-list-tile-title>Abogados de confianza</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile to="/home/atencion_victimas" >
+                    <v-list-tile to="/home/atencion_victimas" > -->
                     <!-- <v-list-tile to="/home/atencion_victimas" v-if="!$auth.hasRole('Persona')"> -->
-                        <v-list-tile-action>
+                        <!-- <v-list-tile-action>
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
                             <v-list-tile-title>Atención a victimas (Registro)</v-list-tile-title>
                         </v-list-tile-content>
-                    </v-list-tile>
-                    <v-list-group
-                            no-action
-                    >
+                    </v-list-tile> -->
+                    <v-list-group no-action>
                         <v-list-tile slot="activator">
                             <v-list-tile-action>
                                 <v-icon>account_circle</v-icon>

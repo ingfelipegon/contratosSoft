@@ -3,15 +3,9 @@ export default class Auth{
 	constructor(user){
 		this.user=user;
 	}
-
 	
-
 	getId(){
 		return this.user.user.id;
-	}
-
-	genero(){
-		return this.user.user.genero;
 	}
 
 	roles(){

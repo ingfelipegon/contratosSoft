@@ -142,16 +142,16 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-right" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
-                <td class="text-xs-right" v-if="props.item.item">{{ props.item.item }}</td>
-                <td class="text-xs-right" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-right" v-if="props.item.mesinicio">{{ props.item.mesinicio }}</td>
-                <td class="text-xs-right" v-if="props.item.mesoferta">{{ props.item.mesoferta }}</td>
-                <td class="text-xs-right" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
-                <td class="text-xs-right" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
-                <td class="text-xs-right" v-if="props.item.duracion">{{ props.item.duracion }}</td>
-                <td class="text-xs-right" v-if="props.item.unidadtiempo_id">{{ props.item.unidadtiempo_id }}</td>    
-                <td class="text-xs-right" v-if="props.item.modalidades.nombre">{{ props.item.modalidades.nombre }}</td>   
+                <td class="text-xs-left" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
+                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                <td class="text-xs-left" v-if="props.item.mesinicio">{{ props.item.mesinicio }}</td>
+                <td class="text-xs-left" v-if="props.item.mesoferta">{{ props.item.mesoferta }}</td>
+                <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
+                <td class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
+                <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
+                <td class="text-xs-left" v-if="props.item.unidadtiempo_id">{{ props.item.unidadtiempo_id }}</td>    
+                <td class="text-xs-left" v-if="props.item.modalidades.nombre">{{ props.item.modalidades.nombre }}</td>   
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -229,8 +229,22 @@ import CargarDocumento from '../components/CargarDocumento'
         fuente_id:'',
       },
       defaultItem: {
+        id: '',
         created_at: '',
-        mes:'',
+        codUNSPSC:'',
+        item:'',
+        descripcion:'',
+        mesinicio:'',
+        mesoferta:'',
+        duracion:'',
+        valortotal:'',
+        valorvigencia:'',
+        vigenciafutura:'',
+        nombreresponsable:'',
+        estadovigencia:'',
+        unidadtiempo_id:'',
+        modalidad_id:'',
+        fuente_id:'',
       },
 
       rules: {
@@ -319,7 +333,7 @@ import CargarDocumento from '../components/CargarDocumento'
       },
 
       editItem(item) {
-        alert("entro a editar");
+        // alert("entro a editar");
         this.editedIndex = this.tableData.indexOf(item);
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
@@ -327,9 +341,9 @@ import CargarDocumento from '../components/CargarDocumento'
 
       showItem(item) {
         console.log("entro a mostrar: " + item);
-        alert("entor a mostrar registro");
+        // alert("entor a mostrar registro");
         this.editedIndex = this.tableData.indexOf(item);
-        alert("entro a mostrar: " + this.editedIndex);
+        // alert("entro a mostrar: " + this.editedIndex);
         this.editedItem = Object.assign({}, item);
         this.dialog2 = true;
       },
@@ -337,7 +351,7 @@ import CargarDocumento from '../components/CargarDocumento'
       deleteItem(item) {
         console.log("entro a borrad: " + item);
         const index = this.tableData.indexOf(item);
-        alert("el index es  " + index);
+        // alert("el index es  " + index);
         confirm('Esta seguro que desea borrar el registro?') && this.tableData.splice(index, 1);
 
         axios.delete('/api/adquisiciones/'+item.id).then(response=>console.log(response.data))
@@ -388,7 +402,6 @@ import CargarDocumento from '../components/CargarDocumento'
       save() {
         console.log(this.editedIndex);
         console.log(this.editedItem);
-        alert("Para que entro?");
         
         if (this.editedIndex > -1) {
           console.log("Entró a update");

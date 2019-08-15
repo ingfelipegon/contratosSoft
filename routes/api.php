@@ -28,6 +28,7 @@ Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']
 Route::resource('adquisiciones','AdminApi\AdquisicionesController');
 Route::resource('solicitudes','AdminApi\SolicitudesController');
 Route::resource('solicitudes.movimientos','AdminApi\SolicitudMovimientoController',['only'=>['index','show']]);
+Route::resource('solicitudes.etapas','AdminApi\SolicitudMovimientosEtapasController',['only'=>['index']]);
 Route::get('verificar_registro_PAA/{item}', 'AdminApi\SolicitudesController@verificar_registro_PAA');
 
 Route::resource('movimientos','AdminApi\MovimientoController');

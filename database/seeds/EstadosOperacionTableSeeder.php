@@ -13,10 +13,11 @@ class EstadosOperacionTableSeeder extends Seeder
     public function run()
     {
         $estados = [
-            'COMENZAR ETAPA',             //SEMAFORO NARANJA
-            'ESTAPA EN TIEMPO',           //SEMAFORO VERDE
-            'INICIO ETAPA',               //SEMAFORO AMARILLO
+            'COMENZAR ETAPA',             //SEMAFORO AMARILLO
+            'ETAPA EN TIEMPO',            //SEMAFORO AMARILLO
+            'INICIO ETAPA',               //SEMAFORO NARANJA
             'SUPERA ETAPA',               //SEMAFORO ROJO
+            'ETAPA FINALIZADA',           //SEMAFORO VERDE
         ];
 
         foreach ($estados as $key => $value) {

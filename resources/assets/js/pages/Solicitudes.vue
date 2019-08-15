@@ -148,54 +148,56 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-right" v-if="props.item.item">{{ props.item.item }}</td>
-                <td class="text-xs-right" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-right" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
-                <td class="text-xs-right" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>
-                <td class="text-xs-right" v-if="props.item.tienereparto">
+                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                <td class="text-xs-left" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
+                <td class="text-xs-left" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>
+                <td class="text-xs-left" v-if="props.item.tienereparto">
                   <v-icon color="teal darken-2">
-                    verified_user 
+                    assignment_turned_in 
                   </v-icon>
                 </td>
-                <td class="text-xs-right" v-if="!props.item.tienereparto">
+                <td class="text-xs-left" v-if="!props.item.tienereparto">
                   <v-icon color="red darken-2">
-                    error_outline
+                    assignment_late
                   </v-icon>
                 </td>
-                <td class="text-xs-right" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
-                <td class="text-xs-right" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
-                <!-- <td class="text-xs-right" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td> -->
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==1">
+                <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
+                <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td>
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==1">
                   <v-icon color="orange darken-2">
-                    schedule
+                    brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==2">
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==2">
                   <v-icon color="yellow darken-2">
-                    check_circle
+                    brightness_1
                   </v-icon>
                 </td> 
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==3">
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==3">
                   <v-icon color="green darken-2">
-                    done
+                    brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==4">
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==4">
                   <v-icon color="red darken-2">
-                    pan_tool
+                    brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-right" v-if="props.item.areasolicitante_id">{{ props.item.dependencias.nombre }}</td>
-                <td class="text-xs-right" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
-                <td class="text-xs-right" v-if="props.item.tipotramite_id">{{ props.item.tiposTramite.nombre }}</td>   
+                <td class="text-xs-left" v-if="props.item.areasolicitante_id">{{ props.item.dependencias.nombre }}</td>
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">
+                  <router-link class="justify-center" :to="{ name: 'procesoAbogado', params: {id : props.item.id} }">
+                        <v-chip color="indigo" text-color="white">
+                          <v-avatar>
+                            <v-icon>account_circle</v-icon>
+                          </v-avatar>
+                          {{ props.item.responsables.name }}   
+                        </v-chip>   
+                  </router-link>
+                </td>    
+                <td class="text-xs-left" v-if="props.item.tipotramite_id">{{ props.item.tiposTramite.nombre }}</td>   
                 <td class="justify-center layout px-0">
-                    <v-icon
-                            small
-                            class="done"
-                            @click="showItem(props.item)"
-                    >
-                        visibility
-                    </v-icon>
                     <v-icon
                             small
                             class="done"
@@ -236,7 +238,8 @@ import CargarDocumento from '../components/CargarDocumento'
         {text: 'Tiene Reparto', value: 'tienereparto'},        
         {text: 'Modalidad', value: 'modalidad_id'},
         {text: 'Estado Proceso', value: 'estadoproceso_id'},
-        {text: 'Estado Operación', value: 'estadooperacion_id'},
+        {text: 'Estado Operación', value: 'estadoproceso_id'},
+        {text: 'Semáforo', value: 'estadooperacion_id'},
         {text: 'Dependencia', value: 'areasolicitante_id'},
         {text: 'Responsable', value: 'respopnsable_id'},
         {text: 'Tipo Tramite', value: 'tipotramite_id'},
@@ -268,7 +271,18 @@ import CargarDocumento from '../components/CargarDocumento'
       },
       defaultItem: {
         created_at: '',
-        mes:'',
+        id: '',
+        item:'',
+        descripcion:'',
+        duracioncontrato:'',
+        modalidad_id:'',
+        nombresupervisor:'',
+        estadoproceso_id:'',
+        estadooperacion_id:'',
+        tienereparto:'',
+        areasolicitante_id:'',
+        respopnsable_id:'',
+        tipotramite_id:'',
       },
 
       rules: {
@@ -353,7 +367,7 @@ import CargarDocumento from '../components/CargarDocumento'
       },
 
       editItem(item) {
-        alert("entro a editar");
+        // alert("entro a editar");
         this.editedIndex = this.tableData.indexOf(item);
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
@@ -361,17 +375,17 @@ import CargarDocumento from '../components/CargarDocumento'
 
       showItem(item) {
         console.log("entro a mostrar: " + item);
-        alert("entor a mostrar registro");
+        // alert("entor a mostrar registro");
         this.editedIndex = this.tableData.indexOf(item);
-        alert("entro a mostrar: " + this.editedIndex);
+        // alert("entro a mostrar: " + this.editedIndex);
         this.editedItem = Object.assign({}, item);
         this.dialog2 = true;
       },
 
       deleteItem(item) {
-        console.log("entro a borrad: " + item);
+        // console.log("entro a borrad: " + item);
         const index = this.tableData.indexOf(item);
-        alert("el index es  " + index);
+        // alert("el index es  " + index);
         confirm('Esta seguro que desea borrar el registro?') && this.tableData.splice(index, 1);
 
         axios.delete('/api/solicitudes/'+item.id).then(response=>console.log(response.data))
@@ -436,7 +450,7 @@ import CargarDocumento from '../components/CargarDocumento'
         console.log(this.editedItem);
         
         if (this.editedIndex > -1) {
-          console.log("Entró a update");
+          // console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
           axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data)); 
 

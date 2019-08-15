@@ -30,6 +30,7 @@ class MovimientoResource extends JsonResource
             'etapas' =>  $this->etapa,                              //RELACION CON ETAPAS   
             'modalidad_id' =>  $this->modalidad_id,             
             'modalidades' => $this->modalidad,                      //RELACION CON MODALIDAD
+            'creado' => date("d-m-Y", strtotime($this->created_at)) ,                      //RELACION CON MODALIDAD
         ];
     }
 }

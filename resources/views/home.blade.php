@@ -28,7 +28,6 @@
         window.user=@json(
             [
                 'user'=> auth()->user(),
-                // 'nombre' => auth()->user()->getNombreCompleto()
             ]
         );
     </script>

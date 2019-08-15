@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-toolbar dark flat color="grey-lighten">
-        <v-toolbar-title>Registro de Solictudes para dar tramite de Contratación</v-toolbar-title>
+        <v-toolbar-title>Registro de Solicitudes para dar tramite de Contratación</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog max-width="60%">
@@ -17,10 +17,10 @@
         <v-spacer></v-spacer>
         
         <v-dialog v-model="dialog" max-width="70%">
-            <v-btn slot="activator" color="primary" dark class="mb-2">Registrar solcitud Contractual - JEP</v-btn>
+            <v-btn slot="activator" color="primary" dark class="mb-2">Registrar solicitud Contractual - JEP</v-btn>
             <v-card>
                 <v-card-title>
-                    <span class="headline">Registro de la solcitud - JEP</span>
+                    <span class="headline">Registro de la solicitud - JEP</span>
                 </v-card-title>
                 <v-card-text>                        
                     <v-stepper  v-model="step" vertical>
@@ -126,46 +126,6 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-right" v-if="props.item.item">{{ props.item.item }}</td>
-                <td class="text-xs-right" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-right" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
-                <td class="text-xs-right" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>
-                <td class="text-xs-right" v-if="props.item.tienereparto">
-                  <v-icon color="teal darken-2">
-                    verified_user 
-                  </v-icon>
-                </td>
-                <td class="text-xs-right" v-if="!props.item.tienereparto">
-                  <v-icon color="red darken-2">
-                    error_outline
-                  </v-icon>
-                </td>
-                <td class="text-xs-right" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
-                <td class="text-xs-right" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
-                <!-- <td class="text-xs-right" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td> -->
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==1">
-                  <v-icon color="orange darken-2">
-                    schedule
-                  </v-icon>
-                </td>
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==2">
-                  <v-icon color="yellow darken-2">
-                    check_circle
-                  </v-icon>
-                </td> 
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==3">
-                  <v-icon color="green darken-2">
-                    done
-                  </v-icon>
-                </td>
-                <td class="text-xs-right" v-if="props.item.estadooperacion_id==4">
-                  <v-icon color="red darken-2">
-                    pan_tool
-                  </v-icon>
-                </td>
-                <td class="text-xs-right" v-if="props.item.areasolicitante_id">{{ props.item.dependencias.nombre }}</td>
-                <td class="text-xs-right" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
-                <td class="text-xs-right" v-if="props.item.tipotramite_id">{{ props.item.tiposTramite.nombre }}</td>   
                 <td class="justify-center layout px-0">
                     <router-link :to="{ name: 'procesoAbogado', params: {id : props.item.id} }">
                         <v-btn fab dark small color="cyan">
@@ -173,6 +133,47 @@
                         </v-btn>         
                     </router-link>
                 </td>  
+                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                <td class="text-xs-left" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
+                <td class="text-xs-left" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>
+                <td class="text-xs-left" v-if="props.item.tienereparto">
+                  <v-icon color="teal darken-2">
+                    assignment_turned_in 
+                  </v-icon>
+                </td>
+                <td class="text-xs-left" v-if="!props.item.tienereparto">
+                  <v-icon color="red darken-2">
+                    assignment_late
+                  </v-icon>
+                </td>
+                <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
+                <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
+                <!-- <td class="text-xs-right" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td> -->
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==1">
+                  <v-icon color="orange darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==2">
+                  <v-icon color="yellow darken-2">
+                    brightness_1
+                  </v-icon>
+                </td> 
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==3">
+                  <v-icon color="green darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
+                <td class="text-xs-center" v-if="props.item.estadooperacion_id==4">
+                  <v-icon color="red darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
+                <td class="text-xs-left" v-if="props.item.areasolicitante_id">{{ props.item.dependencias.nombre }}</td>
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
+                <td class="text-xs-left" v-if="props.item.tipotramite_id">{{ props.item.tiposTramite.nombre }}</td>   
+                
           </template>
           <template slot="no-data">
             <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -191,14 +192,15 @@ import CargarDocumento from '../components/CargarDocumento'
       valid: true,
       dialog: false,
       headers: [
+        {text: 'Enlazar etapa'},
         {text: 'Num. Ítem', value: 'item'},
         {text: 'Descripción', value: 'descripcion'},
         {text: 'Duración de Contrato', value: 'duracioncontrato'},
         {text: 'Nombre Supervisor', value: 'nombresupervisor'},
         {text: 'Tiene Reparto', value: 'tienereparto'},        
         {text: 'Modalidad', value: 'modalidad_id'},
-        {text: 'Estado Proceso', value: 'estadoproceso_id'},
-        {text: 'Estado Operación', value: 'estadooperacion_id'},
+        {text: 'Estado Operación', value: 'estadoproceso_id'},
+        {text: 'Semáforo', value: 'estadooperacion_id'},
         {text: 'Dependencia', value: 'areasolicitante_id'},
         {text: 'Responsable', value: 'respopnsable_id'},
         {text: 'Tipo Tramite', value: 'tipotramite_id'},
