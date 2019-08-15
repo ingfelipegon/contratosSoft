@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
                 AreaTableSeeder::class,
                 EstadosOperacionTableSeeder::class,
                 EstadosProcesoTableSeeder::class,
+                EstadosCustodiaTableSeeder::class,
                 EtapaTableSeeder::class,
                 FuenteTableSeeder::class,
                 IdentificacionTableSeeder::class,

@@ -33,8 +33,8 @@ class AdquisicionesController extends Controller
             'codUNSPSC' => 'required',		
             'item' => 'required|integer|min:1',					
             'descripcion' => 'required',	
-            'mesinicio' => 'required|integer|min:1',			
-            'mesoferta' => 'required|integer|min:1',
+            // 'mesinicio' => 'required|integer|min:1',			
+            // 'mesoferta' => 'required|integer|min:1',
             'duracion' => 'required|integer|min:1',
             'valortotal' => 'required',
             'valorvigencia' => 'required',
@@ -49,6 +49,79 @@ class AdquisicionesController extends Controller
 
         $this->validate($request, $rules);
         $data = $request->all();
+        if($data['mesinicio'] == "Enero"){
+            $data['mesinicio'] = 1;
+        }
+        if($data['mesinicio'] == "Febrero"){
+            $data['mesinicio'] = 2;
+        }
+        if($data['mesinicio'] == "Marzo"){
+            $data['mesinicio'] = 3;
+        }
+        if($data['mesinicio'] == "Abríl"){
+            $data['mesinicio'] = 4;
+        }
+        if($data['mesinicio'] == "Mayo"){
+            $data['mesinicio'] = 5;
+        }
+        if($data['mesinicio'] == "Junio"){
+            $data['mesinicio'] = 6;
+        }
+        if($data['mesinicio'] == "Julio"){
+            $data['mesinicio'] = 7;
+        }
+        if($data['mesinicio'] == "Agosto"){
+            $data['mesinicio'] = 8;
+        }
+        if($data['mesinicio'] == "Septiembre"){
+            $data['mesinicio'] = 9;
+        }
+        if($data['mesinicio'] == "Octubre"){
+            $data['mesinicio'] = 10;
+        }
+        if($data['mesinicio'] == "Noviembre"){
+            $data['mesinicio'] = 11;
+        }
+        if($data['mesinicio'] == "Diciembre"){
+            $data['mesinicio'] = 12;
+        }
+
+        if($data['mesoferta'] == "Enero"){
+            $data['mesoferta'] = 1;
+        }
+        if($data['mesoferta'] == "Febrero"){
+            $data['mesoferta'] = 2;
+        }
+        if($data['mesoferta'] == "Marzo"){
+            $data['mesoferta'] = 3;
+        }
+        if($data['mesoferta'] == "Abríl"){
+            $data['mesoferta'] = 4;
+        }
+        if($data['mesoferta'] == "Mayo"){
+            $data['mesoferta'] = 5;
+        }
+        if($data['mesoferta'] == "Junio"){
+            $data['mesoferta'] = 6;
+        }
+        if($data['mesoferta'] == "Julio"){
+            $data['mesoferta'] = 7;
+        }
+        if($data['mesoferta'] == "Agosto"){
+            $data['mesoferta'] = 8;
+        }
+        if($data['mesoferta'] == "Septiembre"){
+            $data['mesoferta'] = 9;
+        }
+        if($data['mesoferta'] == "Octubre"){
+            $data['mesoferta'] = 10;
+        }
+        if($data['mesoferta'] == "Noviembre"){
+            $data['mesoferta'] = 11;
+        }
+        if($data['mesoferta'] == "Diciembre"){
+            $data['mesoferta'] = 12;
+        }
         if($data['vigenciafutura'] == "Si"){
             $data['vigenciafutura'] = true;
         }
@@ -57,7 +130,7 @@ class AdquisicionesController extends Controller
         }
 
         $adquisicion = Adquisicion::create($data);
-        return response(['message'=>'Plan de adquisision creado', 'adquisision'=>$adquisicion]);
+        return response(['message'=>'Plan de adquisision creado', 'adquisision'=>new AdquisicionResource($adquisicion)]);
     }
 
     /**
@@ -73,8 +146,8 @@ class AdquisicionesController extends Controller
             'codUNSPSC' => 'required',		
             'item' => 'required|integer|min:1',					
             'descripcion' => 'required',	
-            'mesinicio' => 'required|integer|min:1',			
-            'mesoferta' => 'required|integer|min:1',
+            // 'mesinicio' => 'required|integer|min:1',			
+            // 'mesoferta' => 'required|integer|min:1',
             'duracion' => 'required|integer|min:1',
             'valortotal' => 'required',
             'valorvigencia' => 'required',
@@ -88,9 +161,89 @@ class AdquisicionesController extends Controller
 
         $this->validate($request, $rules);
         $data = $request->all();
+        if($data['mesinicio'] == "Enero"){
+            $data['mesinicio'] = 1;
+        }
+        if($data['mesinicio'] == "Febrero"){
+            $data['mesinicio'] = 2;
+        }
+        if($data['mesinicio'] == "Marzo"){
+            $data['mesinicio'] = 3;
+        }
+        if($data['mesinicio'] == "Abríl"){
+            $data['mesinicio'] = 4;
+        }
+        if($data['mesinicio'] == "Mayo"){
+            $data['mesinicio'] = 5;
+        }
+        if($data['mesinicio'] == "Junio"){
+            $data['mesinicio'] = 6;
+        }
+        if($data['mesinicio'] == "Julio"){
+            $data['mesinicio'] = 7;
+        }
+        if($data['mesinicio'] == "Agosto"){
+            $data['mesinicio'] = 8;
+        }
+        if($data['mesinicio'] == "Septiembre"){
+            $data['mesinicio'] = 9;
+        }
+        if($data['mesinicio'] == "Octubre"){
+            $data['mesinicio'] = 10;
+        }
+        if($data['mesinicio'] == "Noviembre"){
+            $data['mesinicio'] = 11;
+        }
+        if($data['mesinicio'] == "Diciembre"){
+            $data['mesinicio'] = 12;
+        }
+
+        if($data['mesoferta'] == "Enero"){
+            $data['mesoferta'] = 1;
+        }
+        if($data['mesoferta'] == "Febrero"){
+            $data['mesoferta'] = 2;
+        }
+        if($data['mesoferta'] == "Marzo"){
+            $data['mesoferta'] = 3;
+        }
+        if($data['mesoferta'] == "Abríl"){
+            $data['mesoferta'] = 4;
+        }
+        if($data['mesoferta'] == "Mayo"){
+            $data['mesoferta'] = 5;
+        }
+        if($data['mesoferta'] == "Junio"){
+            $data['mesoferta'] = 6;
+        }
+        if($data['mesoferta'] == "Julio"){
+            $data['mesoferta'] = 7;
+        }
+        if($data['mesoferta'] == "Agosto"){
+            $data['mesoferta'] = 8;
+        }
+        if($data['mesoferta'] == "Septiembre"){
+            $data['mesoferta'] = 9;
+        }
+        if($data['mesoferta'] == "Octubre"){
+            $data['mesoferta'] = 10;
+        }
+        if($data['mesoferta'] == "Noviembre"){
+            $data['mesoferta'] = 11;
+        }
+        if($data['mesoferta'] == "Diciembre"){
+            $data['mesoferta'] = 12;
+        }
+        
+        if($data['vigenciafutura'] == "Si"){
+            $data['vigenciafutura'] = true;
+        }
+        if($data['vigenciafutura'] == "No"){
+            $data['vigenciafutura'] = false;
+        }
         $adquisicione->update($data);
 
-        return response(['message'=>'Plan de adquisision actualizado', 'adquisision'=>$adquisicione]);
+        return response(['message'=>'Plan de adquisision actualizado', 'adquisision'=>new AdquisicionResource($adquisicione)]);
     }
 
     /**
@@ -102,7 +255,7 @@ class AdquisicionesController extends Controller
     public function destroy(Adquisicion $adquisicione)
     {
         $adquisicione->delete();
-        return response(['message'=>'El Item de adquisision se ha eliminado correctamente', 'adquisision'=>$adquisicione]);
+        return response(['message'=>'El Item de adquisision se ha eliminado correctamente', 'adquisision'=>new AdquisicionResource($adquisicione)]);
     }
 
     /**
@@ -115,7 +268,7 @@ class AdquisicionesController extends Controller
     {
         //$adquisicionRegistro = Adquisicion::find($id);
         // return response()->json(['data'=>$area], 200);
-        return response(['data'=>$adquisicione]);
+        return response(['data'=>new AdquisicionResource($adquisicione)]);
         //return response()->json(['data'=>$adquisicionRegistro], 200);
     }
     

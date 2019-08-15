@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 Route::resource('areas','AdminApi\AreasController');
 Route::resource('estadosOperacion','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
 Route::resource('estadosProceso','AdminApi\EstadosProcesoController',['only'=>['index','show']]);
+Route::resource('estadosCustodia','AdminApi\EstadosCustodiaController',['only'=>['index','show']]);
 Route::resource('etapas','AdminApi\EtapasController',['only'=>['index','show']]);
 Route::resource('fuentes','AdminApi\FuentesController',['only'=>['index','show']]);
 Route::resource('modalidades','AdminApi\ModalidadesController',['only'=>['index','show']]);
@@ -27,6 +28,7 @@ Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index
 Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
 Route::resource('adquisiciones','AdminApi\AdquisicionesController');
 Route::resource('solicitudes','AdminApi\SolicitudesController');
+Route::resource('custodias','AdminApi\CustodiaController');
 Route::resource('solicitudes.movimientos','AdminApi\SolicitudMovimientoController',['only'=>['index','show']]);
 Route::resource('solicitudes.etapas','AdminApi\SolicitudMovimientosEtapasController',['only'=>['index']]);
 Route::get('verificar_registro_PAA/{item}', 'AdminApi\SolicitudesController@verificar_registro_PAA');

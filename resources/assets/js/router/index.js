@@ -11,6 +11,7 @@ import Adquisiciones from '../pages/Adquisiciones'
 import Solicitudes from '../pages/Solicitudes'
 import Procesos from '../pages/Procesos'
 import ProcesoAbogado from '../pages/ProcesoAbogado'
+import Custodias from '../pages/Custodias'
 
 Vue.use(Router)
 
@@ -65,6 +66,10 @@ export default new Router({
 			 path: '/home/procesoAbogado/:id',
 			 name: 'procesoAbogado',
 			 component: ProcesoAbogado
+	 },
+	 {
+			 path: '/home/custodias', 
+			 component: Custodias
 	 }
  ]
 })

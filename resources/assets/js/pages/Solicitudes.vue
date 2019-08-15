@@ -191,23 +191,28 @@
                 <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td>
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==1">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
                   <v-icon color="orange darken-2">
                     brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==2">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==2">
                   <v-icon color="yellow darken-2">
                     brightness_1
                   </v-icon>
                 </td> 
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==3">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==3">
                   <v-icon color="green darken-2">
                     brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==4">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==4">
                   <v-icon color="red darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==5">
+                  <v-icon color="blue darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -380,14 +385,13 @@ import CargarDocumento from '../components/CargarDocumento'
           this.num_docs=1;
             EventBus.$on('file-to-upload', (file_to_upload,nombreAdjunto) => {
                  // this.openFileDialog=false;
-                 this.editedItem.files_to_upload[nombreAdjunto]=file_to_upload;
+                 this.editedItem.files_to_upload.push(file_to_upload);
                  // this.editedItem.this[nombreAdjunto]=file_to_upload;
                  console.log("Archivo recibido = "+file_to_upload);
                  // console.log(this.editedItem.this[nombreAdjunto]);
                  console.log(this.editedItem);
                  // this.no_upload[this.num_docs]=false;
                });
-
         },
 
     methods: {
@@ -544,15 +548,15 @@ import CargarDocumento from '../components/CargarDocumento'
         if (this.editedIndex > -1) {
           // console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data)); 
-
+          axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
           console.log("Entró a save de adquisiciones");
           // axios.post('/api/solicitudes',this.editedItem).then(response=>{
           // this.tableData.push(response.data)});
 
-          axios.post('/api/solicitudes',this.editedItem).then(function (response) {
-              console.log(response.data);
+          axios.post('/api/solicitudes',this.editedItem).then(response=>{
+            console.log(response.data.solicitud)
+            this.tableData.push(response.data.solicitud);            
           }, function (error) {
               console.log(error.response.data); 
           });

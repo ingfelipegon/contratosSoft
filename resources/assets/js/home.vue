@@ -55,6 +55,14 @@
                             <v-list-tile-title>Procesos de Contratación JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
+                    <v-list-tile to="/home/Custodias">
+                        <v-list-tile-action>
+                            <v-icon>person</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>Registro y custodia de documentos físicos</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>                    
                     <!-- <v-list-tile to="/home/abogados">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>
@@ -199,7 +207,7 @@
                     white--text
                     xs12
                   >
-               Sistema de Gestión de Abogados - JEP &copy; {{ new Date().getFullYear() }}
+               Sistema de Gestión de Procesos de Contratación - JEP &copy; {{ new Date().getFullYear() }}
                 </v-flex>
             </v-footer>
         </v-app>

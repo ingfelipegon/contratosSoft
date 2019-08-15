@@ -13,9 +13,9 @@ class UnidadTableSeeder extends Seeder
     public function run()
     {
 		$unidades = [
-        	'ANOS', 
-        	'MESES`',
-        	'DIAS',        	
+        	'Años', 
+        	'Meses',
+        	'Días',        	
         ];
 
         foreach ($unidades as $key => $value) {

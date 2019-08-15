@@ -65,7 +65,7 @@ class SolicitudesController extends Controller
         }    
 
         $solicitud = Solicitud::create($data);
-        return response(['message'=>'Solicitud de contratación ha sido creada correctamente', 'solicitud'=>$solicitud]);
+        return response(['message'=>'Solicitud de contratación ha sido creada correctamente', 'solicitud'=>new SolicitudeResource($solicitud)]);
     }
 
     /**
@@ -95,7 +95,7 @@ class SolicitudesController extends Controller
         $data = $request->all();
         $solicitude->update($data);
 
-        return response(['message'=>'Solicitud de contratación ha sido ', 'solicitud'=>$solicitude]);
+        return response(['message'=>'Solicitud de contratación ha sido actualizado correctamente', 'solicitud'=>new SolicitudeResource($solicitude)]);
     }
 
     /**
@@ -107,7 +107,7 @@ class SolicitudesController extends Controller
     public function destroy(Solicitud $solicitude)
     {
         $solicitude->delete();
-        return response(['message'=>'El Item de la solcitud seleccionada ha eliminado correctamente', 'solicitud'=>$solicitude]);
+        return response(['message'=>'El Item de la solcitud seleccionada ha eliminado correctamente', 'solicitud'=>new SolicitudeResource($solicitude)]);
     }
 
     /**

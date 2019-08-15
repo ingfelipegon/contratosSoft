@@ -150,23 +150,28 @@
                 <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
                 <!-- <td class="text-xs-right" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td> -->
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==1">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
                   <v-icon color="orange darken-2">
                     brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==2">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==2">
                   <v-icon color="yellow darken-2">
                     brightness_1
                   </v-icon>
                 </td> 
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==3">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==3">
                   <v-icon color="green darken-2">
                     brightness_1
                   </v-icon>
                 </td>
-                <td class="text-xs-center" v-if="props.item.estadooperacion_id==4">
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==4">
                   <v-icon color="red darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==5">
+                  <v-icon color="blue darken-2">
                     brightness_1
                   </v-icon>
                 </td>

@@ -151,6 +151,11 @@
                     brightness_1
                   </v-icon>
                 </td>
+                <td class="text-xs-left" v-if="props.item.estadooperacion_id==5">
+                  <v-icon color="blue darken-2">
+                    brightness_1
+                  </v-icon>
+                </td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                 <td class="text-xs-left" v-if="props.item.duracionetapa">{{ props.item.duracionetapa }}</td>
                 <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>  

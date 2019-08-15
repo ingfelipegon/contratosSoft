@@ -39,7 +39,7 @@
         <v-spacer></v-spacer>
         
         <v-dialog v-model="dialog" max-width="70%">
-            <v-btn slot="activator" color="primary" dark class="mb-2">Registrar PAA</v-btn>
+            <v-btn slot="activator" color="primary" dark class="mb-2">Registro de Custodias documentos físicos</v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline">Registro del PAA</span>
@@ -47,7 +47,7 @@
                 <v-card-text>                        
                     <v-stepper  v-model="step" vertical>
                         <v-stepper-header>
-                            <v-stepper-step editable step="1"> Formulario de ingreso de datos por cada Item </v-stepper-step>
+                            <v-stepper-step editable step="1"> Formulario de registro y custodia de Información física de la Dirección de Contratación </v-stepper-step>
                         </v-stepper-header>
                         <v-stepper-items>
                             <v-stepper-content step="1">
@@ -57,15 +57,13 @@
                                 lazy-validation
                                 >
                                     <label>Formulario PAA</label>
-                                    <v-text-field label="Código UNSPSC" v-model="editedItem.codUNSPSC" :rules="requiredRules"></v-text-field>
-                                    <v-text-field label="Número de Ítem"  v-model="editedItem.item" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
-                                            v-model="editedItem.mesinicio"
-                                            :items="contadorMeses"
-                                            label="Mes estimado de inicio del proceso de selección"
-                                            item-text="nombre"
+                                            v-model="editedItem.respopnsable_id"
+                                            :items="responsables"
+                                            label="Responsable en custodia"
+                                            item-text="name"
                                             item-value='id'
                                             :rules="requiredRules"
                                             chips
@@ -73,60 +71,16 @@
                                     </v-layout>
                                     <v-layout>
                                         <v-select
-                                            v-model="editedItem.mesoferta"
-                                            :items="contadorMeses"
-                                            label="Mes estimado de presentación de ofertas"
+                                            v-model="editedItem.estadocustodia_id"
+                                            :items="estadosCustodia"
+                                            label="Estado de prestamo"
                                             item-text="nombre"
                                             item-value='id'
                                             :rules="requiredRules"
                                             chips
                                         ></v-select>            
                                     </v-layout>
-                                    <v-text-field label="Duracion" v-model="editedItem.duracion" :rules="requiredRules"></v-text-field>
-                                    <v-layout>
-                                        <v-select
-                                            v-model="editedItem.unidadtiempo_id"
-                                            :items="unidadesTiempo"
-                                            label="Duración estimada del contrato (intervalo: días, meses, años)"
-                                            item-text="nombre"
-                                            item-value='id'
-                                            :rules="requiredRules"
-                                            chips
-                                        ></v-select>            
-                                    </v-layout>
-                                    <v-layout>
-                                        <v-select
-                                            v-model="editedItem.modalidad_id"
-                                            :items="modalidades"
-                                            label="Modalidad de selección"
-                                            item-text="nombre"
-                                            item-value='id'
-                                            :rules="requiredRules"
-                                            chips
-                                        ></v-select>            
-                                    </v-layout>
-                                    <v-layout>
-                                        <v-select
-                                            v-model="editedItem.fuente_id"
-                                            :items="fuentesIngreso"
-                                            label="Fuente de los recursos"
-                                            item-text="nombre"
-                                            item-value='id'
-                                            :rules="requiredRules"
-                                            chips
-                                        ></v-select>            
-                                    </v-layout>
-                                    <v-text-field label="Valor total estimado" v-model="editedItem.valortotal" :rules="requiredRules"></v-text-field>
-                                    <v-text-field label="Valor estimado en la vigencia actual" v-model="editedItem.valorvigencia" :rules="requiredRules"></v-text-field>
-                                    <label>¿Se requieren vigencias futuras? </label>
-                                    <v-radio-group v-model='editedItem.vigenciafutura' :rules="requiredRules" row>
-                                    <v-radio label="Si" value=1></v-radio>
-                                    <v-radio label="No" value=0></v-radio>
-                                    </v-radio-group>
-                                    <v-text-field label="Estado de solicitud de vigencias futuras" v-model="editedItem.estadovigencia" :rules="requiredRules"></v-text-field>
-                                    <v-text-field label="Datos de contacto del responsable" v-model="editedItem.nombreresponsable" :rules="requiredRules"></v-text-field>
-
-                                    <v-btn color="primary" @click.prevent="save,validate($refs.form_step_1)">Guardar</v-btn>
+                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1,0)">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -142,16 +96,13 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-left" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
-                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.id">{{ props.item.id }}</td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-left" v-if="props.item.mesinicio">{{ props.item.mesinicio }}</td>
-                <td class="text-xs-left" v-if="props.item.mesoferta">{{ props.item.mesoferta }}</td>
-                <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
-                <td class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
-                <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
-                <td class="text-xs-left" v-if="props.item.unidadtiempo_id">{{ props.item.unidadtiempo_id }}</td>    
-                <td class="text-xs-left" v-if="props.item.modalidades.nombre">{{ props.item.modalidades.nombre }}</td>   
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
+                <td class="text-xs-left" v-if="props.item.estadocustodia_id">{{ props.item.estadosCustodia.nombre }}</td> 
+                <td class="text-xs-left" v-if="props.item.creado">{{ props.item.creado }}</td>   
+                <td class="text-xs-left" v-if="props.item.actualizado">{{ props.item.actualizado }}</td>   
+
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -193,58 +144,32 @@ import CargarDocumento from '../components/CargarDocumento'
       dialog: false,
       dialog2: false,
       headers: [
-        {text: 'Cod. UNSPSC', value: 'codUNSPSC'},
-        {text: 'Num. Ítem', value: 'item'},
+        {text: 'Consecutivo Registro', value: 'id'},
         {text: 'Descripción', value: 'descripcion'},
-        {text: 'Mes Inicio', value: 'mesinicio'},
-        {text: 'Mes Oferta', value: 'mesoferta'},
-        {text: 'Valor Total', value: 'valortotal'},
-        {text: 'Nombre Responsable', value: 'nombreresponsable'},
-        {text: 'Duracion', value: 'duracion'},
-        {text: 'Tiempo', value: 'unidadtiempo_id'},
-        {text: 'Modalidad', value: 'modalidad_id'},
+        {text: 'Responsable', value: 'respopnsable_id'},
+        {text: 'Estado Prestamo', value: 'estadocustodia_id'},
+        {text: 'Fecha Creación', value: 'created_at'},
+        {text: 'Fecha Actualización', value: 'updated_at'},
       ],
       tableData: [],
       editedIndex: -1,
-      unidadesTiempo:[],
-      modalidades:[],  
-      fuentesIngreso:[],
-      contadorMeses:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      estadosCustodia:[],
+      responsables:[],
       editedItem: {
         id: '',
         created_at: '',
-        codUNSPSC:'',
-        item:'',
+        updated_at: '',
         descripcion:'',
-        mesinicio:'',
-        mesoferta:'',
-        duracion:'',
-        valortotal:'',
-        valorvigencia:'',
-        vigenciafutura:'',
-        nombreresponsable:'',
-        estadovigencia:'',
-        unidadtiempo_id:'',
-        modalidad_id:'',
-        fuente_id:'',
+        estadocustodia_id:'',
+        respopnsable_id:'',
       },
       defaultItem: {
         id: '',
         created_at: '',
-        codUNSPSC:'',
-        item:'',
+        updated_at: '',
         descripcion:'',
-        mesinicio:'',
-        mesoferta:'',
-        duracion:'',
-        valortotal:'',
-        valorvigencia:'',
-        vigenciafutura:'',
-        nombreresponsable:'',
-        estadovigencia:'',
-        unidadtiempo_id:'',
-        modalidad_id:'',
-        fuente_id:'',
+        estadocustodia_id:'',
+        respopnsable_id:'',
       },
 
       rules: {
@@ -306,30 +231,21 @@ import CargarDocumento from '../components/CargarDocumento'
                  console.log(this.editedItem);
                  // this.no_upload[this.num_docs]=false;
                });
-
         },
 
     methods: {
       initialize() {
 
-        axios.get('/api/adquisiciones').then(response => {
+        axios.get('/api/custodias').then(response => {
           console.log(response);
           this.tableData = response.data.data;
         });
         
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
         axios.get('/api/permissions').then(response=>this.allPermissions=response.data.data);
-        axios.get('/api/unidades').then(response => {
-          this.unidadesTiempo=response.data.data;
-        });
+        axios.get('/api/users').then(response => {this.responsables=response.data.data;});
+        axios.get('/api/estadosCustodia').then(response => {this.estadosCustodia=response.data.data;});
 
-        axios.get('/api/modalidades').then(response => {
-          this.modalidades=response.data.data;
-        });
-
-        axios.get('/api/fuentes').then(response => {
-          this.fuentesIngreso=response.data.data;
-        });
       },
 
       editItem(item) {
@@ -354,13 +270,14 @@ import CargarDocumento from '../components/CargarDocumento'
         // alert("el index es  " + index);
         confirm('Esta seguro que desea borrar el registro?') && this.tableData.splice(index, 1);
 
-        axios.delete('/api/adquisiciones/'+item.id).then(response=>console.log(response.data))
+        axios.delete('/api/custodias/'+item.id).then(response=>console.log(response.data))
 
       },
 
       validate (form_s,next_step) {
         if (form_s.validate()) {
-          this.step = next_step;
+          this.dialog = false;
+          this.save();
         }
       },
 
@@ -400,17 +317,19 @@ import CargarDocumento from '../components/CargarDocumento'
       },
 
       save() {
-        console.log(this.editedIndex);
-        console.log("el edit item es :" + this.editedItem);
+        // console.log(this.editedIndex);
+        // console.log("el edit item es :" + this.editedItem);
+        console.log("el edit item es :");
         
         if (this.editedIndex > -1) {
           console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/adquisiciones/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
+          axios.put('/api/custodias/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
-          console.log("Entró a save de adquisiciones");
-          axios.post('/api/adquisiciones',this.editedItem).then(function (response) {
-              this.tableData.push(response.data)
+          console.log("Entró a save de custodias");
+          axios.post('/api/custodias',this.editedItem).then(response=>{
+            console.log(response.data.custodia)
+            this.tableData.push(response.data.custodia);            
           }, function (error) {
               console.log(error.response.data); 
           });
