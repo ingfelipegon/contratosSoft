@@ -94,6 +94,13 @@ class SolicitudesController extends Controller
         $this->validate($request, $rules);
         $data = $request->all();
         $solicitude->update($data);
+        $idResponsable = $data['respopnsable_id'];
+        $movimientos = $solicitude->movimientos;  
+        if ($movimientos->count()) { 
+            $movimiento = $solicitude->movimientos->last(); 
+            $movimiento->respopnsable_id = $idResponsable;
+            $movimiento->save();  
+        }        
 
         return response(['message'=>'Solicitud de contratación ha sido actualizado correctamente', 'solicitud'=>new SolicitudeResource($solicitude)]);
     }

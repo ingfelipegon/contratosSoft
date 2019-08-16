@@ -99,7 +99,7 @@
                                             chips
                                         ></v-select>            
                                     </v-layout>
-                                    <v-layout>
+                                    <v-layout v-if="this.editedIndex == -1">
                                         <v-select
                                             v-model="editedItem.estadooperacion_id"
                                             :items="estadosOperacion"

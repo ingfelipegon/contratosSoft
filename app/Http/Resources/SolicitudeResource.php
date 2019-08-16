@@ -35,6 +35,8 @@ class SolicitudeResource extends JsonResource
             'responsables' =>  $this->responsable,                  //RELACION DE RESPONSABLES
             'tipotramite_id' =>  $this->tipotramite_id,              
             'tiposTramite' =>  $this->tipoTramite,                  //RELACION CON TIPOS TRAMITE 
+            'movimientos' =>  $this->movimientos,                   //RELACION CON MOVIMIENTOS
+            
         ];
     }
 }

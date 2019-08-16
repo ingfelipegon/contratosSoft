@@ -223,6 +223,7 @@ import CargarDocumento from '../components/CargarDocumento'
       tableData: [],
       editedIndex: -1,
       solicitudes:[],    
+      movimientosRead:[],    
       responsables:[],
       estadosOperacion:[],
       etapas:[],
@@ -350,8 +351,10 @@ import CargarDocumento from '../components/CargarDocumento'
         //alert("entro a cargar registro la solcitud: " + idSolicitud);
         axios.get('/api/solicitudes/'+idSolicitud).then(response => {
             //alert("entro a cargar registro la solcitud adentro del llamdo");
-            console.log("estaod de opercion de una etapa: " + response.data.data.estadooperacion_id);
-            if(response.data.data.estadooperacion_id != 5){
+            // console.log("estaod de opercion de una etapa: " + response.data.data.estadooperacion_id);
+            this.movimientosRead = response.data.data.movimientos;
+            console.log("estaod de opercion de una etapa: " + this.movimientosRead.length);
+            if(response.data.data.estadooperacion_id != 5 && this.movimientosRead.length > 0){
               alert("No se puede registrar una nueva etapa sin antes haber modificado la inmediatamente anterior a ETAPA FINALIZADA");
               this.dialog = false;
               return false;

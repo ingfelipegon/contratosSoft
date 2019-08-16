@@ -60,10 +60,10 @@ class MovimientoController extends Controller
         $data = $request->all();
 
         $idSolicitud = $data['solicitud_id'];
-        $idEstadooperacion = $data['estadooperacion_id'];
+        // $idEstadooperacion = $data['estadooperacion_id'];
         $idResponsable = $data['respopnsable_id'];
         $solicitud = Solicitud::where('id', $idSolicitud)->get()->first();
-        $solicitud->estadooperacion_id = $idEstadooperacion;
+        // $solicitud->estadooperacion_id = $idEstadooperacion;
         $solicitud->respopnsable_id = $idResponsable;
         $solicitud->save();   
 
