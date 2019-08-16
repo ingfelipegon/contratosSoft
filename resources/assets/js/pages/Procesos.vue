@@ -176,7 +176,14 @@
                   </v-icon>
                 </td>
                 <td class="text-xs-left" v-if="props.item.areasolicitante_id">{{ props.item.dependencias.nombre }}</td>
-                <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">
+                  <v-chip color="indigo" text-color="white">
+                    <v-avatar>
+                      <v-icon>account_circle</v-icon>
+                    </v-avatar>
+                    {{ props.item.responsables.name }}   
+                  </v-chip>
+                </td>    
                 <td class="text-xs-left" v-if="props.item.tipotramite_id">{{ props.item.tiposTramite.nombre }}</td>   
                 
           </template>

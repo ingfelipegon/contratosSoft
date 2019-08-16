@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Movimiento;
 use App\Http\Resources\MovimientoResource;
 use App\Models\EtapaModadalidad;
+use App\Models\Solicitud;
 
 class MovimientoController extends Controller
 {
@@ -58,6 +59,14 @@ class MovimientoController extends Controller
         $this->validate($request, $rules);
         $data = $request->all();
 
+        $idSolicitud = $data['solicitud_id'];
+        $idEstadooperacion = $data['estadooperacion_id'];
+        $idResponsable = $data['respopnsable_id'];
+        $solicitud = Solicitud::where('id', $idSolicitud)->get()->first();
+        $solicitud->estadooperacion_id = $idEstadooperacion;
+        $solicitud->respopnsable_id = $idResponsable;
+        $solicitud->save();   
+
         $movimiento = Movimiento::create($data);
         return response(['message'=>'La etapa del actual proceso de contratación ha sido creada correctamente', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
@@ -83,9 +92,27 @@ class MovimientoController extends Controller
 
         $this->validate($request, $rules);
         $data = $request->all();
-        $movimiento->update($data);
 
-        return response(['message'=>'La etapa del actual proceso de contratación ha sido ', 'movimiento'=>new MovimientoResource($movimiento)]);
+        // $idSolicitud = $movimiento->solicitud_id;
+        // $idEstadooperacion = $data['estadooperacion_id'];
+        // $idResponsable = $data['respopnsable_id'];
+        // $solicitud = Solicitud::where('id', $idSolicitud)->get()->first();
+        
+        // $solicitud->estadooperacion_id = $idEstadooperacion;
+        // $solicitud->respopnsable_id = $idResponsable;
+        // $solicitud->save();   
+        
+
+        $movimiento->update($data);
+        $idSolicitud = $movimiento->solicitud_id;
+        $idEstadooperacion = $data['estadooperacion_id'];
+        $idResponsable = $data['respopnsable_id'];
+        $solicitud = Solicitud::find($idSolicitud)->first();
+        $solicitud->estadooperacion_id = $idEstadooperacion;
+        $solicitud->respopnsable_id = $idResponsable;
+        $solicitud->save();   
+
+        return response(['message'=>'La etapa del actual proceso de contratación ha sido actualizada', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
 
     /**

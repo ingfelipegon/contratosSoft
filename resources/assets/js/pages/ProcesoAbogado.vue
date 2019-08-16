@@ -60,7 +60,7 @@
                                 lazy-validation
                                 >
                                     <label>Formulario Etapa</label>
-                                    <v-layout>
+                                    <v-layout v-if="this.editedIndex == -1">
                                         <v-select
                                             v-model="editedItem.etapa_id"
                                             :items="etapas[0]"
@@ -86,7 +86,7 @@
                                     </v-layout>   
                                     <v-text-field readonly label="Duración de etapa" v-model="editedItem.duracionetapa" ></v-text-field>
                                     <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
-                                    <v-layout>
+                                    <v-layout v-if="this.editedItem.estadooperacion_id != 5">
                                         <v-select
                                             v-model="editedItem.respopnsable_id"
                                             :items="responsables"
@@ -97,7 +97,7 @@
                                             chips
                                         ></v-select>            
                                     </v-layout>                                    
-                                    <v-layout>
+                                    <v-layout v-if="this.editedItem.estadooperacion_id != 5">
                                         <v-select
                                             v-model="editedItem.estadooperacion_id"
                                             :items="estadosOperacion"
@@ -124,7 +124,11 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-left" v-if="props.item.id">{{ props.item.id }}</td>
+                <td class="text-xs-left" v-if="props.item.id">
+                  <v-chip color="teal" text-color="white">
+                    {{ props.item.id }} 
+                  </v-chip>
+                </td>
                 <td class="text-xs-left" v-if="props.item.creado">{{ props.item.creado }}</td>
                 <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.etapa_id">{{ props.item.etapas.nombre }}</td>
@@ -156,15 +160,22 @@
                 </td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                 <td class="text-xs-left" v-if="props.item.duracionetapa">{{ props.item.duracionetapa }}</td>
-                <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>  
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">
+                  <v-chip color="indigo" text-color="white">
+                    <v-avatar>
+                      <v-icon>account_circle</v-icon>
+                    </v-avatar>
+                    {{ props.item.responsables.name }}   
+                  </v-chip>      
+                </td>  
                 <td class="justify-center layout px-0">
-                    <v-icon
+                    <!-- <v-icon
                             small
                             class="done"
                             @click="showItem(props.item)"
                     >
                         visibility
-                    </v-icon>
+                    </v-icon> -->
                     <v-icon
                             small
                             class="done"
@@ -227,6 +238,7 @@ import CargarDocumento from '../components/CargarDocumento'
         solicitud_id:'',
         respopnsable_id:'',
         estadooperacion_id:'',  
+        estadooperacion_id_read:'',  
         etapa_id:'',                
         modalidad_id:'',
       },
@@ -239,6 +251,7 @@ import CargarDocumento from '../components/CargarDocumento'
         solicitud_id:'',
         respopnsable_id:'',
         estadooperacion_id:'',  
+        estadooperacion_id_read:'',  
         etapa_id:'',                
         modalidad_id:'',
       },
@@ -337,11 +350,18 @@ import CargarDocumento from '../components/CargarDocumento'
         //alert("entro a cargar registro la solcitud: " + idSolicitud);
         axios.get('/api/solicitudes/'+idSolicitud).then(response => {
             //alert("entro a cargar registro la solcitud adentro del llamdo");
+            console.log("estaod de opercion de una etapa: " + response.data.data.estadooperacion_id);
+            if(response.data.data.estadooperacion_id != 5){
+              alert("No se puede registrar una nueva etapa sin antes haber modificado la inmediatamente anterior a ETAPA FINALIZADA");
+              this.dialog = false;
+              return false;
+            }
+
             console.log(response);
             //this.tableData = response.data.data;
             //this.editedItem.descripcion = response.data.data.descripcion;                   
             this.editedItem.respopnsable_id =  response.data.data.respopnsable_id;            
-            this.editedItem.estadooperacion_id =  response.data.data.estadooperacion_id;                                        
+            this.editedItem.estadooperacion_id_read =  response.data.data.estadooperacion_id;                                        
             this.editedItem.modalidad_id =  response.data.data.modalidad_id;
             this.editedItem.solicitud_id =  idSolicitud;
             console.log(this.editedItem.descripcion);     
@@ -389,7 +409,7 @@ import CargarDocumento from '../components/CargarDocumento'
         confirm('Esta seguro que desea borrar el registro?') && this.tableData.splice(index, 1);
 
         axios.delete('/api/movimientos/'+item.id).then(response=>console.log(response.data))
-
+        this.close();
       },
 
       validate (form_s,next_step) {
@@ -414,7 +434,8 @@ import CargarDocumento from '../components/CargarDocumento'
         if (this.editedIndex > -1) {
           console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/movimientos/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
+          axios.put('/api/movimientos/'+this.editedItem.id,this.editedItem).then(
+            response=>console.log(response.data));
         } else {
           console.log("Entró a save de movimientos");
           axios.post('/api/movimientos',this.editedItem).then(response=>{

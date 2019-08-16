@@ -40,57 +40,67 @@ class SolicitudMovimientoController extends Controller
                 
         $movimientos = $solicitude->movimientos;     
         if ($movimientos->count()) { 
-            $movimiento = $solicitude->movimientos->last();    
-            $duracionDiasEtapaActual =  $movimiento->duracionetapa;
-            $duracionHorasEtapaActual =  $duracionDiasEtapaActual * 24;
-            $fechaEtapaAsiganda = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $movimiento->created_at);
-            $fechaActual = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());
-            $horasLlevaEtapaIniciada = $fechaEtapaAsiganda->diffInHours($fechaActual);
-    
-            $horasTopeComienzoEtapa = $duracionHorasEtapaActual * $topeComienzoEtapa;
-            $horasTopeEtapaEnTiempo = $duracionHorasEtapaActual * $topeEtapaEnTiempo;
-            $horasTopeIniciarYaEtapa = $duracionHorasEtapaActual * $topeIniciarYaEtapa;
-    
-            if($horasLlevaEtapaIniciada > $duracionHorasEtapaActual){
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $idOperacionEtapa = EstadoOperacion::where('nombre', $stringSuperaEtapa)
-                ->orWhere('nombre', 'like', '%' . $stringSuperaEtapa . '%')->get()->first()->id;
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $movimiento->estadooperacion_id = $idOperacionEtapa;
-                $movimiento->save();            
-                $solicitude->estadooperacion_id = $idOperacionEtapa;
-                $solicitude->save();            
-            }
-            else if($horasLlevaEtapaIniciada >= $horasTopeIniciarYaEtapa){
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $idOperacionEtapa = EstadoOperacion::where('nombre', $stringIniciarYaEtapa)
-                ->orWhere('nombre', 'like', '%' . $stringIniciarYaEtapa . '%')->get()->first()->id;
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $movimiento->estadooperacion_id = $idOperacionEtapa;            
-                $movimiento->save();    
-                $solicitude->estadooperacion_id = $idOperacionEtapa;
-                $solicitude->save();           
-            }
-            else if($horasLlevaEtapaIniciada >= $horasTopeEtapaEnTiempo){
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $idOperacionEtapa = EstadoOperacion::where('nombre', $stringEtapaEnTiempo)
-                ->orWhere('nombre', 'like', '%' . $stringEtapaEnTiempo . '%')->get()->first()->id;
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $movimiento->estadooperacion_id = $idOperacionEtapa;            
-                $movimiento->save();   
-                $solicitude->estadooperacion_id = $idOperacionEtapa;
-                $solicitude->save();            
-            }
-            else if($horasLlevaEtapaIniciada >= $horasTopeComienzoEtapa || $horasLlevaEtapaIniciada == 0){
-                //CONSULTA 
-                $idOperacionEtapa = EstadoOperacion::where('nombre', $stringComienzoEtapa)
-                ->orWhere('nombre', 'like', '%' . $stringComienzoEtapa . '%')->get()->first()->id;
-                //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
-                $movimiento->estadooperacion_id = $idOperacionEtapa;            
-                $movimiento->save();
-                $solicitude->estadooperacion_id = $idOperacionEtapa;
+            $movimiento = $solicitude->movimientos->last(); 
+            $estadoOperacion =  $movimiento->estadooperacion_id;  
+            if($estadoOperacion != 5){
+                //ACTUALIZA ETAPA PORQUE NO FINALIZA        
+                $duracionDiasEtapaActual =  $movimiento->duracionetapa;
+                $duracionHorasEtapaActual =  $duracionDiasEtapaActual * 24;
+                $fechaEtapaAsiganda = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $movimiento->created_at);
+                $fechaActual = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());
+                $horasLlevaEtapaIniciada = $fechaEtapaAsiganda->diffInHours($fechaActual);
+        
+                $horasTopeComienzoEtapa = $duracionHorasEtapaActual * $topeComienzoEtapa;
+                $horasTopeEtapaEnTiempo = $duracionHorasEtapaActual * $topeEtapaEnTiempo;
+                $horasTopeIniciarYaEtapa = $duracionHorasEtapaActual * $topeIniciarYaEtapa;
+        
+                if($horasLlevaEtapaIniciada > $duracionHorasEtapaActual){
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $idOperacionEtapa = EstadoOperacion::where('nombre', $stringSuperaEtapa)
+                    ->orWhere('nombre', 'like', '%' . $stringSuperaEtapa . '%')->get()->first()->id;
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $movimiento->estadooperacion_id = $idOperacionEtapa;
+                    $movimiento->save();            
+                    $solicitude->estadooperacion_id = $idOperacionEtapa;
+                    $solicitude->save();            
+                }
+                else if($horasLlevaEtapaIniciada >= $horasTopeIniciarYaEtapa){
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $idOperacionEtapa = EstadoOperacion::where('nombre', $stringIniciarYaEtapa)
+                    ->orWhere('nombre', 'like', '%' . $stringIniciarYaEtapa . '%')->get()->first()->id;
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $movimiento->estadooperacion_id = $idOperacionEtapa;            
+                    $movimiento->save();    
+                    $solicitude->estadooperacion_id = $idOperacionEtapa;
+                    $solicitude->save();           
+                }
+                else if($horasLlevaEtapaIniciada >= $horasTopeEtapaEnTiempo){
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $idOperacionEtapa = EstadoOperacion::where('nombre', $stringEtapaEnTiempo)
+                    ->orWhere('nombre', 'like', '%' . $stringEtapaEnTiempo . '%')->get()->first()->id;
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $movimiento->estadooperacion_id = $idOperacionEtapa;            
+                    $movimiento->save();   
+                    $solicitude->estadooperacion_id = $idOperacionEtapa;
+                    $solicitude->save();            
+                }
+                else if($horasLlevaEtapaIniciada >= $horasTopeComienzoEtapa || $horasLlevaEtapaIniciada == 0){
+                    //CONSULTA 
+                    $idOperacionEtapa = EstadoOperacion::where('nombre', $stringComienzoEtapa)
+                    ->orWhere('nombre', 'like', '%' . $stringComienzoEtapa . '%')->get()->first()->id;
+                    //ACTUALIZA ESTADO DE OPERACION DE LA ETAPA
+                    $movimiento->estadooperacion_id = $idOperacionEtapa;            
+                    $movimiento->save();
+                    $solicitude->estadooperacion_id = $idOperacionEtapa;
+                    $solicitude->save();   
+                }    
+            }else{
+                //ACTUALIZA ESTADO EN LA SOLICITUD
+                $solicitude->estadooperacion_id = $estadoOperacion;
                 $solicitude->save();   
             }
+
+            
         } 
         // return response()->json($movimiento,200);	   
         return MovimientoResource::collection($movimientos);
