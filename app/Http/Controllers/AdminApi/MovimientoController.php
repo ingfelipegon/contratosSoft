@@ -59,7 +59,7 @@ class MovimientoController extends Controller
         $data = $request->all();
 
         $movimiento = Movimiento::create($data);
-        return response(['message'=>'La etapa del actual proceso de contratación ha sido creada correctamente', 'movimiento'=>$movimiento]);
+        return response(['message'=>'La etapa del actual proceso de contratación ha sido creada correctamente', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
 
 
@@ -85,7 +85,7 @@ class MovimientoController extends Controller
         $data = $request->all();
         $movimiento->update($data);
 
-        return response(['message'=>'La etapa del actual proceso de contratación ha sido ', 'movimiento'=>$movimiento]);
+        return response(['message'=>'La etapa del actual proceso de contratación ha sido ', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
 
     /**
@@ -97,7 +97,7 @@ class MovimientoController extends Controller
     public function destroy(Movimiento $movimiento)
     {
         $movimiento->delete();
-        return response(['message'=>'La etapa del actual proceso de contratación ha eliminado correctamente', 'movimiento'=>$movimiento]);
+        return response(['message'=>'La etapa del actual proceso de contratación ha eliminado correctamente', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
 
         /**

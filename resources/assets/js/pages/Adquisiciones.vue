@@ -126,7 +126,7 @@
                                     <v-text-field label="Estado de solicitud de vigencias futuras" v-model="editedItem.estadovigencia" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Datos de contacto del responsable" v-model="editedItem.nombreresponsable" :rules="requiredRules"></v-text-field>
 
-                                    <v-btn color="primary" @click.prevent="save,validate($refs.form_step_1)">Guardar</v-btn>
+                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1, 0)">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -143,7 +143,12 @@
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
                 <td class="text-xs-left" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
-                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.item">
+                  <v-chip color="indigo" text-color="white">
+                    {{ props.item.item }} 
+                  </v-chip>
+                </td>
+
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                 <td class="text-xs-left" v-if="props.item.mesinicio">{{ props.item.mesinicio }}</td>
                 <td class="text-xs-left" v-if="props.item.mesoferta">{{ props.item.mesoferta }}</td>
@@ -153,13 +158,13 @@
                 <td class="text-xs-left" v-if="props.item.unidadtiempo_id">{{ props.item.unidadtiempo_id }}</td>    
                 <td class="text-xs-left" v-if="props.item.modalidades.nombre">{{ props.item.modalidades.nombre }}</td>   
                 <td class="justify-center layout px-0">
-                    <v-icon
+                    <!-- <v-icon
                             small
                             class="done"
                             @click="showItem(props.item)"
                     >
                         visibility
-                    </v-icon>
+                    </v-icon> -->
                     <v-icon
                             small
                             class="done"
@@ -360,7 +365,8 @@ import CargarDocumento from '../components/CargarDocumento'
 
       validate (form_s,next_step) {
         if (form_s.validate()) {
-          this.step = next_step;
+          this.dialog = false;
+          this.save();
         }
       },
 
@@ -402,19 +408,21 @@ import CargarDocumento from '../components/CargarDocumento'
       save() {
         console.log(this.editedIndex);
         console.log("el edit item es :" + this.editedItem);
-        
+
         if (this.editedIndex > -1) {
           console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
           axios.put('/api/adquisiciones/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
           console.log("Entró a save de adquisiciones");
-          axios.post('/api/adquisiciones',this.editedItem).then(function (response) {
-              this.tableData.push(response.data)
+          axios.post('/api/adquisiciones',this.editedItem).then(response=>{
+            console.log(response.data.adquisision)
+            this.tableData.push(response.data.adquisision);            
           }, function (error) {
               console.log(error.response.data); 
           });
         }
+        
         this.close();
       },
     },

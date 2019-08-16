@@ -151,7 +151,7 @@
                 <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
                 <!-- <td class="text-xs-right" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td> -->
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
-                  <v-icon color="orange darken-2">
+                  <v-icon color="green darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -161,7 +161,7 @@
                   </v-icon>
                 </td> 
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==3">
-                  <v-icon color="green darken-2">
+                  <v-icon color="orange darken-2">
                     brightness_1
                   </v-icon>
                 </td>

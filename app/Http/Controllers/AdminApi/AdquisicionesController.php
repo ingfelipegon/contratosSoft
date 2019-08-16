@@ -17,7 +17,7 @@ class AdquisicionesController extends Controller
      */
     public function index(Adquisicion $adquisicion)
     {
-        $adquisiciones = Adquisicion::all();
+        $adquisiciones = Adquisicion::all();        
         return AdquisicionResource::collection($adquisiciones);
     }
 
@@ -58,7 +58,7 @@ class AdquisicionesController extends Controller
         if($data['mesinicio'] == "Marzo"){
             $data['mesinicio'] = 3;
         }
-        if($data['mesinicio'] == "Abríl"){
+        if($data['mesinicio'] == "Abril"){
             $data['mesinicio'] = 4;
         }
         if($data['mesinicio'] == "Mayo"){
@@ -95,7 +95,7 @@ class AdquisicionesController extends Controller
         if($data['mesoferta'] == "Marzo"){
             $data['mesoferta'] = 3;
         }
-        if($data['mesoferta'] == "Abríl"){
+        if($data['mesoferta'] == "Abril"){
             $data['mesoferta'] = 4;
         }
         if($data['mesoferta'] == "Mayo"){

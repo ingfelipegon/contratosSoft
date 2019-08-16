@@ -26,8 +26,9 @@ class SolicitudMovimientosEtapasController extends Controller
             foreach ($etapasMovimiento as $etapaMovimiento) {
                 $data[] = $etapaMovimiento->id;            	            
             }
-            $etapasAll = $etapasAll->diff(Etapa::whereIn('id', $data)->get());    
-        }
+            $etapasAll = $etapasAll->diff(Etapa::whereIn('id', $data)->get());             
+        } 
+
         return EtapasResource::collection($etapasAll);        
     }
 }

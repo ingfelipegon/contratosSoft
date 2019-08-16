@@ -158,7 +158,7 @@
                                     </template>
                                     <v-btn color="info" @click="add_documentos">+</v-btn><label>Clic para agregar tantos documentos como requiera.</label>
                                     <v-divider class="mx-1"></v-divider>
-                                    <v-btn color="primary" @click.prevent="save">Guardar</v-btn>
+                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1,0)">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -174,7 +174,11 @@
 
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
-                <td class="text-xs-left" v-if="props.item.item">{{ props.item.item }}</td>
+                <td class="text-xs-left" v-if="props.item.item">
+                  <v-chip color="teal" text-color="white">
+                    {{ props.item.item }} 
+                  </v-chip>
+                </td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                 <td class="text-xs-left" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
                 <td class="text-xs-left" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>
@@ -192,7 +196,7 @@
                 <td class="text-xs-left" v-if="props.item.estadoproceso_id">{{ props.item.estadosProceso.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
-                  <v-icon color="orange darken-2">
+                  <v-icon color="green darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -202,7 +206,7 @@
                   </v-icon>
                 </td> 
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==3">
-                  <v-icon color="green darken-2">
+                  <v-icon color="orange darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -451,7 +455,8 @@ import CargarDocumento from '../components/CargarDocumento'
 
       validate (form_s,next_step) {
         if (form_s.validate()) {
-          this.step = next_step;
+          this.dialog = false;
+          this.save();
         }
       },
 

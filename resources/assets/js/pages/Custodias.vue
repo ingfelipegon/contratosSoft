@@ -98,7 +98,14 @@
           <template slot="items" slot-scope="props">    
                 <td class="text-xs-left" v-if="props.item.id">{{ props.item.id }}</td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-left" v-if="props.item.respopnsable_id">{{ props.item.responsables.name }}</td>    
+                <td class="text-xs-left" v-if="props.item.respopnsable_id">
+                  <v-chip color="indigo" text-color="white">
+                          <v-avatar>
+                            <v-icon>account_circle</v-icon>
+                          </v-avatar>
+                          {{ props.item.responsables.name }}   
+                  </v-chip>
+                </td>    
                 <td class="text-xs-left" v-if="props.item.estadocustodia_id">{{ props.item.estadosCustodia.nombre }}</td> 
                 <td class="text-xs-left" v-if="props.item.creado">{{ props.item.creado }}</td>   
                 <td class="text-xs-left" v-if="props.item.actualizado">{{ props.item.actualizado }}</td>   

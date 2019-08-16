@@ -63,7 +63,7 @@
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.etapa_id"
-                                            :items="etapas"
+                                            :items="etapas[0]"
                                             label="Etapa actual del proceso"
                                             item-text="nombre"
                                             item-value='id'
@@ -95,7 +95,6 @@
                                             item-value='id'
                                             :rules="requiredRules"
                                             chips
-                                            readonly
                                         ></v-select>            
                                     </v-layout>                                    
                                     <v-layout>
@@ -107,10 +106,9 @@
                                             item-value='id'
                                             :rules="requiredRules"
                                             chips
-                                            readonly
                                         ></v-select>            
                                     </v-layout>
-                                    <v-btn color="primary" @click.prevent="save">Guardar</v-btn>
+                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1,0)">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -132,7 +130,7 @@
                 <td class="text-xs-left" v-if="props.item.etapa_id">{{ props.item.etapas.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id">{{ props.item.estadosOperacion.nombre }}</td>
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
-                  <v-icon color="orange darken-2">
+                  <v-icon color="green darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -142,7 +140,7 @@
                   </v-icon>
                 </td> 
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==3">
-                  <v-icon color="green darken-2">
+                  <v-icon color="orange darken-2">
                     brightness_1
                   </v-icon>
                 </td>
@@ -317,7 +315,9 @@ import CargarDocumento from '../components/CargarDocumento'
         axios.get('/api/users').then(response => {this.responsables=response.data.data;});
         axios.get('/api/estadosOperacion').then(response => {this.estadosOperacion=response.data.data;});                
         axios.get('/api/modalidades').then(response => {this.modalidades=response.data.data;});        
-        axios.get('/api/solicitudes/'+ idSolicitud + '/etapas').then(response => {this.etapas=response.data.data;});        
+        axios.get('/api/solicitudes/'+ idSolicitud + '/etapas').then(response => {
+          this.etapas=response.data.data;
+        });        
 
         axios.get('/api/solicitudes/'+ idSolicitud + '/movimientos').then(response => {
           console.log(response);
@@ -394,7 +394,8 @@ import CargarDocumento from '../components/CargarDocumento'
 
       validate (form_s,next_step) {
         if (form_s.validate()) {
-          this.step = next_step;
+          this.dialog = false;
+          this.save();
         }
       },
 
@@ -413,18 +414,15 @@ import CargarDocumento from '../components/CargarDocumento'
         if (this.editedIndex > -1) {
           console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/movimientos/'+this.editedItem.id,this.editedItem).then(response=>{this.tableData.push(response.data)}); 
-
+          axios.put('/api/movimientos/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
         } else {
           console.log("Entró a save de movimientos");
           axios.post('/api/movimientos',this.editedItem).then(response=>{
-          this.tableData.push(response.data)});
-        
-          // axios.post('/api/movimientos',this.editedItem).then(function (response) {
-          //     console.log(response.data);
-          // }, function (error) {
-          //     console.log(error.response.data); 
-          // });
+            console.log(response.data.movimiento)
+            this.tableData.push(response.data.movimiento);            
+          }, function (error) {
+              console.log(error.response.data); 
+          });
         }
         this.close();
       },
