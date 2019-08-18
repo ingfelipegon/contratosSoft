@@ -176,9 +176,5 @@ class AbogadosController extends Controller
 
     $abogado->delete();
     return response(['message'=>'Abogado borrado', 'abogado'=>$abogado]);
-
-      // $this->educacion()->delete();
-      // VsaadabogadoEducacion::
-      // return VsaadAbogado::destroy($id);
   }
 }
