@@ -33,6 +33,7 @@ Route::resource('solicitudes.movimientos','AdminApi\SolicitudMovimientoControlle
 Route::resource('solicitudes.etapas','AdminApi\SolicitudMovimientosEtapasController',['only'=>['index']]);
 Route::get('verificar_registro_PAA/{item}', 'AdminApi\SolicitudesController@verificar_registro_PAA');
 Route::get('showfiles/{item}', 'AdminApi\ArchivoController@showfiles');
+Route::get('descarga/{id}/{nombre}', 'AdminApi\ArchivoController@show');
 
 Route::resource('movimientos','AdminApi\MovimientoController');
 Route::get('obtener_dias_etapa/{idModaldad}/{idEtapa}', 'AdminApi\MovimientoController@obtenerDiasEtapa');

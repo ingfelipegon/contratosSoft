@@ -43,24 +43,15 @@ class ArchivoController extends Controller
             Log::info($filename);            
             $files[] = $filename;
         }
-        // return Storage::download($files[0]);
-        return response($files);
+        // return Storage::download($files[0]);        
+        $archivos = Archivo::where('ruta', $file)->get();        
+        return ArchivoResource::collection($archivos); 
     }
 
-    public function show(Archivo $archivo)
-    {
-        // $dl = Archivo::find($archivo)->first();
-        
-        // $rutaDeArchivo = storage_path()."/"."app"."/"."public"."/"."repositorio_documentos"."/".$dl->ruta;
-        // $file = Storage::disk('app/public/repositorio_documentos')->get($dl->nombre);
-        return response()->download('Informacion⁩/Documentos⁩/FABRICA⁩/plantilla_proyecto_laravel_vuejs⁩/storage/app/public/repositorio_documentos/'.$archivo->ruta."/".$archivo->nombre);
-        // return response()->download($file);
-
-        // return response()->download(storage_path("app/public/{$dl->nombre}"));
-
-        // $ruta = $dl->ruta;
-        // return Storage::download($rutaDeArchivo, $dl->nombre);  
-        // return Storage::download($dl->ruta, $dl->title);              
+    public function show($id, $nombre)
+    {        
+        $dl = Archivo::find($id);        
+        return response()->download(storage_path("app/public/repositorio_documentos/{$nombre}/{$dl->nombre}"));
     }
 
 

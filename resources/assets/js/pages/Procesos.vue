@@ -313,7 +313,8 @@ import CargarDocumento from '../components/CargarDocumento'
       initialize() {
 
         axios.get('/api/solicitudes').then(response => {
-          console.log(response);
+          console.log("entro a mostrar: ");
+          console.log(response.data.data);
           this.tableData = response.data.data;
         });
         

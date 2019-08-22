@@ -14,9 +14,7 @@
                   class="elevation-1"
           >
               <template slot="items" slot-scope="props" >
-                  <td ><a target="_blank"  :href="'/storage/repositorio_documentos/' +props.item">{{ props.item}} </a></td>
-
-
+                  <td ><a @click.prevent="downloadItem(props.item.id, props.item.nombre, props.item.ruta)" target="_blank"  :href="props.item">{{ props.item.nombre}} </a></td>
               </template>
           </v-data-table>
         </v-dialog>
@@ -301,6 +299,7 @@ import CargarDocumento from '../components/CargarDocumento'
       tiposTramite:[],
       responsables:[],
       adjuntar_documentos:[],
+      archivos:[],
       docu_adjunto:{
         documento:'',
       },
@@ -389,9 +388,13 @@ import CargarDocumento from '../components/CargarDocumento'
           this.num_docs=1;
             EventBus.$on('file-to-upload', (file_to_upload,nombreAdjunto) => {
                  // this.openFileDialog=false;
-                 this.editedItem.files_to_upload.push(file_to_upload);
-                 // this.editedItem.this[nombreAdjunto]=file_to_upload;
+                // this.editedItem.files_to_upload.push(file_to_upload);
+                this.archivos.push(file_to_upload);
+                //  this.editedItem.this[nombreAdjunto]=file_to_upload;
                  console.log("Archivo recibido = "+file_to_upload);
+                if(this.archivos){
+                  console.log('Si existe files_to_upload y el item es: ' + this.editedItem.item)
+                }
                  // console.log(this.editedItem.this[nombreAdjunto]);
                  console.log(this.editedItem);
                  // this.no_upload[this.num_docs]=false;
@@ -404,6 +407,8 @@ import CargarDocumento from '../components/CargarDocumento'
         axios.get('/api/solicitudes').then(response => {
           console.log(response);
           this.tableData = response.data.data;
+        }, function (error) {
+            console.log(error.response.data); 
         });
         
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
@@ -418,10 +423,25 @@ import CargarDocumento from '../components/CargarDocumento'
         
       },
 
+      downloadItem (id,nombre,ruta) {        
+        console.log("descarga el siguiente item:  " + id);
+        console.log("descarga con nombre:  " + ruta);
+        
+        axios.get('/api/descarga/' + id + '/'+ ruta, { responseType: 'arraybuffer' })
+          .then(({ data }) => {
+            let blob = new Blob([data], {type: 'application/pdf'});
+            let link = document.createElement('a')
+            link.href = window.URL.createObjectURL(blob)
+            link.download = nombre
+            link.click()          
+        })
+      },
+
       editItem(item) {
         // alert("entro a editar");
-        this.editedIndex = this.tableData.indexOf(item);
+        this.editedIndex = this.tableData.indexOf(item);        
         this.editedItem = Object.assign({}, item);
+        this.editedItem.files_to_upload = '';
         this.dialog = true;
       },
 
@@ -437,8 +457,8 @@ import CargarDocumento from '../components/CargarDocumento'
       showFiles(item) {
         console.log("entro a mostrar: " + item.item);
         axios.get('/api/showfiles/'+item.item).then(response => {
-          console.log(response);
-          this.tableDataFiles = response.data;
+          console.log(response.data.data);
+          this.tableDataFiles = response.data.data;
           });
           this.dialog3 = true;
       },
@@ -517,38 +537,6 @@ import CargarDocumento from '../components/CargarDocumento'
       save() {
         console.log(this.editedIndex);
         console.log(this.editedItem);
-
-        if(this.editedItem.files_to_upload){
-          console.log('Si existe files_to_upload')
-          Object.entries(this.editedItem.files_to_upload).forEach(([key, val]) => {
-              console.log(key);          // the name of the current key.
-              console.log(val);          // the value of the current key.
-              this.file = val;
-              // this.file = this.editedItem.files_to_upload['"'+element+'"'];
-
-              var formData = new FormData();
-              formData.append('archivo', this.file);
-              formData.append('nombre_adjunto', key);
-              formData.append('identificacion', this.editedItem.item);
-              console.log("A guardar = "+this.file.name);
-              axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
-          });
-
-          // Object.entries(this.editedItem.files_to_upload).forEach(function(elemento) {
-          //   console.log("en el array = "+elemento);
-          //   if(this.editedItem.files_to_upload['"'+element+'"'])
-          //   {
-          //     // this.editedItem.adjunto_tarjeta_profesional=this.editedItem.files_to_upload['"'+element+'"'].name
-          //     this.file = this.editedItem.files_to_upload['"'+element+'"'];
-          
-          //     var formData = new FormData();
-          //     formData.append('archivo', this.file);
-          //     formData.append('identificacion', this.editedItem.item);
-          //     console.log("A guardar = "+this.file.name);
-          //     axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
-          //   }
-          // });
-        }
         
         if (this.editedIndex > -1) {
           // console.log("Entró a update");
@@ -560,8 +548,29 @@ import CargarDocumento from '../components/CargarDocumento'
           // this.tableData.push(response.data)});
 
           axios.post('/api/solicitudes',this.editedItem).then(response=>{
-            console.log(response.data.solicitud)
+            console.log(response.data.solicitud);
             this.tableData.push(response.data.solicitud);            
+            if(this.archivos){
+                console.log('Si existe files_to_upload')
+                // Object.entries(this.editedItem.files_to_upload).forEach(([key, val]) => {
+                Object.entries(this.archivos).forEach(([key, val]) => {            
+                    console.log(key);          // the name of the current key.
+                    console.log(val);          // the value of the current key.
+                    this.file = val;
+                    // this.file = this.editedItem.files_to_upload['"'+element+'"'];
+
+                    var formData = new FormData();
+                    formData.append('archivo', this.file);
+                    formData.append('nombre_adjunto', this.file.name);
+                    formData.append('identificacion', this.editedItem.item);
+                    formData.append('id_solicitud', response.data.solicitud.id);
+                    console.log("A guardar archivo= "+this.file);
+                    console.log("A guardar solicitud= "+response.data.solicitud.id);
+                    console.log("A guardar identificacion= "+this.editedItem.item);
+                    console.log("A guardar = "+this.file.name);
+                    axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
+                });
+              }
           }, function (error) {
               console.log(error.response.data); 
           });

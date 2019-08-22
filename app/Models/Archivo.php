@@ -12,7 +12,6 @@ class Archivo extends Model
 
     protected $fillable = [
     	'nombre',			//STRING            NOMBRE ARCHIVO
-        'descripcion',		//STRING            DESCRIPCION ARCHIVO
         'ruta',		        //STRING            RUTA ARCHIVO
         'solicitud_id'      //INT               ID SOLICITUD
     ];
