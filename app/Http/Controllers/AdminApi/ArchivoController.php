@@ -54,5 +54,10 @@ class ArchivoController extends Controller
         return response()->download(storage_path("app/public/repositorio_documentos/{$nombre}/{$dl->nombre}"));
     }
 
+    public function showBiblioteca($nombre)
+    {        
+        return response()->download(storage_path("app/public/repositorio_documentos/biblioteca/{$nombre}"));
+    }
+
 
 }

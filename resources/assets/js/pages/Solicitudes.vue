@@ -433,7 +433,8 @@ import CargarDocumento from '../components/CargarDocumento'
             let link = document.createElement('a')
             link.href = window.URL.createObjectURL(blob)
             link.download = nombre
-            link.click()          
+            console.log("ruta:  " + link.href);
+            link.click()            
         })
       },
 
