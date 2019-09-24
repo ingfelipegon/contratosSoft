@@ -568,7 +568,7 @@ import CargarDocumento from '../components/CargarDocumento'
                     console.log("A guardar solicitud= "+response.data.solicitud.id);
                     console.log("A guardar identificacion= "+this.editedItem.item);
                     console.log("A guardar = "+this.file.name);
-                    axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));
+                    axios.post('/api/uploadFile',formData).then(response=>console.log(response.data));                    
                 });
               }
           }, function (error) {

@@ -21,14 +21,15 @@ class DatabaseSeeder extends Seeder
         $this->call(VsaadSexosSeeder::class);
         $this->call(VsaadEnfoquesAbogadosSeeder::class);
         $this->call(VsaadDepartamentosSeeder::class);
-        $this->call(VsaadBloquesSeeder::class);
+        // $this->call(VsaadBloquesSeeder::class);
         $this->call(VsaadMunicipiosSeeder::class);
-        $this->call(VsaadFrentesSeeder::class);
+        // $this->call(VsaadFrentesSeeder::class);
 
         $this->truncateTables([
             'areas',
             'estados_operacion',
             'estados_proceso',
+            'estados_custodia',
             'etapas',
             'fuentes',
             'tipos_identificacion',

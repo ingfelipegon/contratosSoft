@@ -62,6 +62,14 @@
                         <v-list-tile-content>
                             <v-list-tile-title>Registro y custodia de documentos físicos</v-list-tile-title>
                         </v-list-tile-content>
+                    </v-list-tile>     
+                    <v-list-tile to="/home/Biblioteca">
+                        <v-list-tile-action>
+                            <v-icon>person</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>Biblioteca de Documentos</v-list-tile-title>
+                        </v-list-tile-content>
                     </v-list-tile>                    
                     <!-- <v-list-tile to="/home/abogados">
                         <v-list-tile-action>

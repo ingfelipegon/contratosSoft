@@ -12,6 +12,7 @@ import Solicitudes from '../pages/Solicitudes'
 import Procesos from '../pages/Procesos'
 import ProcesoAbogado from '../pages/ProcesoAbogado'
 import Custodias from '../pages/Custodias'
+import Biblioteca from '../pages/Biblioteca'
 
 Vue.use(Router)
 
@@ -70,6 +71,10 @@ export default new Router({
 	 {
 			 path: '/home/custodias', 
 			 component: Custodias
+	 },
+	 {
+			 path: '/home/biblioteca', 
+			 component: Biblioteca
 	 }
  ]
 })
