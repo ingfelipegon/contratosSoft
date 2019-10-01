@@ -8,17 +8,32 @@ use App\Models\Solicitud;
 use App\Http\Resources\SolicitudeResource;
 use App\Models\Adquisicion;
 
-class SolicitudesController extends Controller
+class SolicitudesPostcontractualController extends Controller
 {
 
-    public function verificar_registro_PAA($item)
+    public function verificar_registro_PAA_solicitud($item)
     {
         //BUSCA QUE ITEM A REGISTRAR ESTE EN EL PAA
         $encontrado=Adquisicion::where('item',$item)->first();
         if(!empty($encontrado->id))
-        {return 1;}             //EXISTE RETORNA 1
-        else
-        {return 0;}             //NO EXISTE RETORNA 0
+        {
+            $solicitud = Solicitud::where('item', $item)->get();      
+            if ($solicitud->count()) { 
+                $solicitudTerminada = $solicitud->where('estadoproceso_id', 2);
+                if ($solicitudTerminada->count() > 0){
+                    return 1;               //EXISTE RETORNA 1
+                }    
+                else{
+                    return 0;               //NO EXISTE EN ESTADO TERMINADA RETORNA 0
+                }        
+            }                
+            else{
+                return 0;                   //NO EXISTE RETORNA 0
+            }                
+        }
+        else{
+            return 0;
+        }                                   //NO EXISTE RETORNA 0
     }
 
     /**
@@ -29,21 +44,9 @@ class SolicitudesController extends Controller
     public function index(Solicitud $solicitude)
     {
         $solicitudes = Solicitud::all();        
-        $solicitudes = $solicitudes->where('tipotramite_id', 1); 
+        $solicitudes = $solicitudes->where('tipotramite_id', 2); 
         return SolicitudeResource::collection($solicitudes);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function solicitudesPrePost()
-    {
-        $solicitudes = Solicitud::all();        
-        return SolicitudeResource::collection($solicitudes);
-    }
-
 
     /**
      * Store a newly created resource in storage.

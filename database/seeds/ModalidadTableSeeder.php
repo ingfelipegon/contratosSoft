@@ -13,10 +13,19 @@ class ModalidadTableSeeder extends Seeder
     public function run()
     {
 		$modalidades = [
-        	'INVITACION COMPETITIVA PUBLICA', 
-        	'INVITACION COMPETITIVA PUBLICA INFERIOR A 100 SMMLV',
-        	'INVITACION COMPETITIVA PUBLICA SUBASTA A LA BAJA',
-        	'INVITACIÓN COMPETITIVA CERRADA',
+        	'INVITACIÓN  PUBLICA (igual o superior a 450 SMMLV)', 
+        	'INVITACIÓN PUBLICA (INFERIOR A 450 SMMLV)',
+        	'INVITACIÓN PUBLICA (INFERIOR A 45 SMMLV)',
+            'SUBASTA A LA BAJA',
+            'INVITACIÓN CERRADA',
+            'INCUMPLIMIENTO CLAUSULA PENAL PECUNIARIA',
+            'INCUMPLIMIENTO CLAUSULA PENAL DE APREMIO',
+            'INCUMPLIMIENTO CLAUSULA PENAL TERMINACION ANTICIPADA',
+            'CESION',
+            'SUSPENSION O TERMINACION MUTUO ACUERDO',
+            'OTROS',
+            'BALANCE FINAL Y CIERRE',
+
         ];
 
         foreach ($modalidades as $key => $value) {

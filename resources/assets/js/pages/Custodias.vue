@@ -58,6 +58,8 @@
                                 >
                                     <label>Formulario PAA</label>
                                     <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
+                                    <v-text-field label="Ubicación" v-model="editedItem.ubicacion" :rules="requiredRules"></v-text-field>
+                                    <v-text-field label="Folio" v-model="editedItem.folio" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.respopnsable_id"
@@ -98,6 +100,8 @@
           <template slot="items" slot-scope="props">    
                 <td class="text-xs-left" v-if="props.item.id">{{ props.item.id }}</td>
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                <td class="text-xs-left" v-if="props.item.ubicacion">{{ props.item.ubicacion }}</td>
+                <td class="text-xs-left" v-if="props.item.folio">{{ props.item.folio }}</td>
                 <td class="text-xs-left" v-if="props.item.respopnsable_id">
                   <v-chip color="indigo" text-color="white">
                           <v-avatar>
@@ -111,13 +115,6 @@
                 <td class="text-xs-left" v-if="props.item.actualizado">{{ props.item.actualizado }}</td>   
 
                 <td class="justify-center layout px-0">
-                    <v-icon
-                            small
-                            class="done"
-                            @click="showItem(props.item)"
-                    >
-                        visibility
-                    </v-icon>
                     <v-icon
                             small
                             class="done"
@@ -153,6 +150,8 @@ import CargarDocumento from '../components/CargarDocumento'
       headers: [
         {text: 'Consecutivo Registro', value: 'id'},
         {text: 'Descripción', value: 'descripcion'},
+        {text: 'Ubicación', value: 'ubicacion'},
+        {text: 'Folio', value: 'folio'},
         {text: 'Responsable', value: 'respopnsable_id'},
         {text: 'Estado Prestamo', value: 'estadocustodia_id'},
         {text: 'Fecha Creación', value: 'created_at'},
@@ -167,6 +166,8 @@ import CargarDocumento from '../components/CargarDocumento'
         created_at: '',
         updated_at: '',
         descripcion:'',
+        ubicacion:'',
+        folio:'',
         estadocustodia_id:'',
         respopnsable_id:'',
       },
@@ -175,6 +176,8 @@ import CargarDocumento from '../components/CargarDocumento'
         created_at: '',
         updated_at: '',
         descripcion:'',
+        ubicacion:'',
+        folio:'',        
         estadocustodia_id:'',
         respopnsable_id:'',
       },

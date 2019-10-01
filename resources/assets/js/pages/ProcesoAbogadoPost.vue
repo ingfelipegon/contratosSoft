@@ -328,7 +328,7 @@ import CargarDocumento from '../components/CargarDocumento'
         axios.get('/api/permissions').then(response=>this.allPermissions=response.data.data);
         axios.get('/api/users').then(response => {this.responsables=response.data.data;});
         axios.get('/api/estadosOperacion').then(response => {this.estadosOperacion=response.data.data;});                
-        axios.get('/api/modalidades').then(response => {this.modalidades=response.data.data;});        
+        axios.get('/api/modalidadesPostcontractual').then(response => {this.modalidades=response.data.data;});        
         axios.get('/api/solicitudes/'+ idSolicitud + '/etapas').then(response => {
           this.etapas=response.data.data;
           console.log(

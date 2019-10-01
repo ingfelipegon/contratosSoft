@@ -16,6 +16,19 @@ class ModalidadesController extends Controller
     public function index()
     {
         $modadlidades = Modalidad::all();
+        $modadlidades = $modadlidades->whereIn('id', array(1, 2, 3, 4, 5));        
+        return ModalidadesResource::collection($modadlidades);
+    }
+
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function modalidadesPostcontractual()
+    {
+        $modadlidades = Modalidad::all();
+        $modadlidades = $modadlidades->whereIn('id', array(6, 7, 8, 9, 10, 11, 12));
         return ModalidadesResource::collection($modadlidades);
     }
 

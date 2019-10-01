@@ -18,6 +18,8 @@ class CustodiaResource extends JsonResource
           return [
             'id' => $this->id,  	
             'descripcion' => $this->descripcion,	
+            'ubicacion' => $this->ubicacion,	
+            'folio' => $this->folio,	
             'estadocustodia_id' =>  $this->estadocustodia_id,
             'estadosCustodia' =>  $this->estadoCustodia,                        //RELACION CON LOS ESTADOS DE LA CUSTODIA
             'respopnsable_id' =>  $this->respopnsable_id,

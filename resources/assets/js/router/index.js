@@ -9,8 +9,10 @@ import AtencionVictimas from '../pages/AtencionVictimas'
 import AtencionVictimasRegistro from '../pages/AtencionVictimasRegistro'
 import Adquisiciones from '../pages/Adquisiciones'
 import Solicitudes from '../pages/Solicitudes'
+import SolicitudesPostcontractual from '../pages/Postcontractual'
 import Procesos from '../pages/Procesos'
 import ProcesoAbogado from '../pages/ProcesoAbogado'
+import ProcesoAbogadoPost from '../pages/ProcesoAbogadoPost'
 import Custodias from '../pages/Custodias'
 import Biblioteca from '../pages/Biblioteca'
 
@@ -60,6 +62,10 @@ export default new Router({
 			 component: Solicitudes
 	 },
 	 {
+			 path: '/home/Postcontractual',
+			 component: SolicitudesPostcontractual
+	 },	 
+	 {
 			 path: '/home/procesos',
 			 component: Procesos
 	 },
@@ -68,6 +74,11 @@ export default new Router({
 			 name: 'procesoAbogado',
 			 component: ProcesoAbogado
 	 },
+	 {
+			 path: '/home/procesoAbogadoPost/:id',
+			 name: 'procesoAbogadoPost',
+			 component: ProcesoAbogadoPost
+	 },	 
 	 {
 			 path: '/home/custodias', 
 			 component: Custodias

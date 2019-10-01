@@ -15,6 +15,8 @@ class Custodia extends Model
     	'descripcion',			//STRING        DESCRIPCION CUSTODIA
     	'estadocustodia_id',	//INT           ID ESTADO CUSTODIA
         'respopnsable_id',		//INT           ID RESPONSABLE ACTUAL HEREDA DE LA TABLA USER
+        'ubicacion',			//STRING        UBICACION CUSTODIA
+        'folio',    			//STRING        FOLIO CUSTODIA
     ];
 
     //UNA SOLICITUD PERTENECE A UN ESTADO EN SU OPERACION
