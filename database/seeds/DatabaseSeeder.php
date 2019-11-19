@@ -12,17 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(VsaadDependenciasSeeder::class);
+        // $this->call(VsaadDependenciasSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(VsaadTiposDcumentosSeeder::class);
-        $this->call(VsaadTiposAbogadosSeeder::class);
-        $this->call(VsaadPertenenciasEtniasSeeder::class);
-        $this->call(VsaadIdentidadesGenerosSeeder::class);
-        $this->call(VsaadSexosSeeder::class);
-        $this->call(VsaadEnfoquesAbogadosSeeder::class);
-        $this->call(VsaadDepartamentosSeeder::class);
+        // $this->call(VsaadTiposDcumentosSeeder::class);
+        // $this->call(VsaadTiposAbogadosSeeder::class);
+        // $this->call(VsaadPertenenciasEtniasSeeder::class);
+        // $this->call(VsaadIdentidadesGenerosSeeder::class);
+        // $this->call(VsaadSexosSeeder::class);
+        // $this->call(VsaadEnfoquesAbogadosSeeder::class);
+        // $this->call(VsaadDepartamentosSeeder::class);
         // $this->call(VsaadBloquesSeeder::class);
-        $this->call(VsaadMunicipiosSeeder::class);
+        // $this->call(VsaadMunicipiosSeeder::class);
         // $this->call(VsaadFrentesSeeder::class);
 
         $this->truncateTables([
@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             'tipos_tramite',
             'unidades',
             'etapas_modalidad',
+            'meses',
         ]);
         $this->call([
                 AreaTableSeeder::class,
@@ -50,6 +51,7 @@ class DatabaseSeeder extends Seeder
                 TramiteTableSeeder::class,
                 UnidadTableSeeder::class,
                 EtapasModalidadTableSeeder::class,
+                MesesTableSeeder::class,
             ]);
 
     }

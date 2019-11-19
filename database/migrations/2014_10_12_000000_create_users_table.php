@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->integer('dependencia_id')->unsigned()->nullable();
-            $table->foreign('dependencia_id')->references('id')->on('vsaad_dependencias');
+            // $table->integer('dependencia_id')->unsigned()->nullable();
+            // $table->foreign('dependencia_id')->references('id')->on('vsaad_dependencias');
 
             //$table->integer('area_id')->unsigned()->nullable();
             // $table->foreign('area_id')->references('id')->on('areas');
