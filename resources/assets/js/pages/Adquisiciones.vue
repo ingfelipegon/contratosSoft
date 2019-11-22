@@ -59,11 +59,13 @@
                                     <label>Formulario PAA</label>
                                     <v-text-field label="Código UNSPSC" v-model="editedItem.codUNSPSC" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Número de Ítem"  v-model="editedItem.item" :rules="requiredRules"></v-text-field>
-                                    <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
+                                    <v-textarea label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-textarea>
+                                    <v-text-field label="Número del Proceso"  v-model="editedItem.numero_proceso" :rules="requiredRules"></v-text-field>
+                                    <v-text-field label="Número de Contrato"  v-model="editedItem.numero_contrato" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
-                                            v-model="editedItem.mesinicio"
-                                            :items="contadorMeses"
+                                            v-model="editedItem.mes_inicio_id"
+                                            :items="mesinicio"
                                             label="Mes estimado de inicio del proceso de selección"
                                             item-text="nombre"
                                             item-value='id'
@@ -73,16 +75,26 @@
                                     </v-layout>
                                     <v-layout>
                                         <v-select
-                                            v-model="editedItem.mesoferta"
-                                            :items="contadorMeses"
+                                            v-model="editedItem.mes_oferta_id"
+                                            :items="mesoferta"
                                             label="Mes estimado de presentación de ofertas"
                                             item-text="nombre"
                                             item-value='id'
                                             :rules="requiredRules"
                                             chips
                                         ></v-select>            
+                                    </v-layout>                                    
+                                    <v-layout>
+                                        <v-select
+                                            v-model="editedItem.abogado_id"
+                                            :items="abogados"
+                                            label="Abogado responsable del proceso"
+                                            item-text="name"
+                                            item-value='id'
+                                            :rules="requiredRules"
+                                            chips
+                                        ></v-select>            
                                     </v-layout>
-                                    <v-text-field label="Duracion" v-model="editedItem.duracion" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.unidadtiempo_id"
@@ -94,6 +106,7 @@
                                             chips
                                         ></v-select>            
                                     </v-layout>
+                                    <v-text-field label="Duracion" v-model="editedItem.duracion" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.modalidad_id"
@@ -108,7 +121,7 @@
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.fuente_id"
-                                            :items="fuentesIngreso"
+                                            :items="fuente_recursos"
                                             label="Fuente de los recursos"
                                             item-text="nombre"
                                             item-value='id'
@@ -140,50 +153,79 @@
         </v-dialog>
         </v-toolbar>    
 
-        <v-data-table :headers="headers" :items="tableData" class="elevation-1">
-          <template slot="items" slot-scope="props">    
-                <td class="text-xs-left" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
-                <td class="text-xs-left" v-if="props.item.item">
-                  <v-chip color="indigo" text-color="white">
-                    {{ props.item.item }} 
-                  </v-chip>
-                </td>
+        <template>
+          <v-card>
+            <v-card-title>
+              Busqueda por número
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="search"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+            <v-data-table :headers="headers" :items="tableData" item-key="item" :search="search" class="elevation-1">
+              <template slot="items" slot-scope="props">    
+                    <td class="text-xs-left" v-if="props.item.codUNSPSC">{{ props.item.codUNSPSC }}</td>
+                    <td class="text-xs-left" v-if="props.item.item">
+                      <v-chip color="green darken-1" text-color="white">
+                        {{ props.item.item }} 
+                      </v-chip>
+                    </td>
 
-                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-left" v-if="props.item.mesinicio">{{ props.item.mesinicio }}</td>
-                <td class="text-xs-left" v-if="props.item.mesoferta">{{ props.item.mesoferta }}</td>
-                <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
-                <td class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
-                <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
-                <td class="text-xs-left" v-if="props.item.unidadtiempo_id">{{ props.item.unidadtiempo_id }}</td>    
-                <td class="text-xs-left" v-if="props.item.modalidades.nombre">{{ props.item.modalidades.nombre }}</td>   
-                <td class="justify-center layout px-0">
-                    <!-- <v-icon
-                            small
-                            class="done"
-                            @click="showItem(props.item)"
-                    >
-                        visibility
-                    </v-icon> -->
-                    <v-icon
-                            small
-                            class="done"
-                            @click="editItem(props.item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                            small
-                            @click="deleteItem(props.item)"
-                    >
-                        delete
-                    </v-icon>
-                </td>  
-          </template>
-          <template slot="no-data">
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
-          </template>
-        </v-data-table>
+                    <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                    <td class="text-xs-left" v-if="props.item.numero_proceso">{{ props.item.numero_proceso }}</td>
+                    <td class="text-xs-left" v-if="props.item.numero_contrato">{{ props.item.numero_contrato }}</td>
+                    <td class="text-xs-left" v-if="props.item.abogado_id">
+                      <router-link class="justify-center" :to="{ name: 'logAdquisiciones', params: {id : props.item.id} }">
+                            <v-chip color="indigo" text-color="white">
+                              <v-avatar>
+                                <v-icon>account_circle</v-icon>
+                              </v-avatar>
+                              {{ props.item.abogado.name }}   
+                            </v-chip>   
+                      </router-link>
+                    </td>    
+                    <td class="text-xs-left" v-if="props.item.mes_inicio_id">{{ props.item.mesinicio.nombre }}</td>
+                    <td class="text-xs-left" v-if="props.item.mes_oferta_id">{{ props.item.mesoferta.nombre }}</td>
+                    <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
+                    <td width="3px" class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
+                    <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
+                    <td class="text-xs-left" v-if="props.item.unidades_tiempo">{{ props.item.unidades_tiempo.nombre }}</td>    
+                    <td class="text-xs-left" v-if="props.item.modalidades">{{ props.item.modalidades.nombre }}</td>  
+                    <td width="3px" class="text-xs-left" v-if="props.item.fuente_recursos">{{ props.item.fuente_recursos.nombre }}</td>   
+                    <td class="justify-center layout px-0">
+                        <!-- <v-icon
+                                small
+                                class="done"
+                                @click="showItem(props.item)"
+                        >
+                            visibility
+                        </v-icon> -->
+                        <v-icon color="light-blue darken-1"
+                                small
+                                class="done"
+                                @click="editItem(props.item)"
+                        >
+                            edit
+                        </v-icon>
+                        <v-icon color="deep-orange"
+                                small
+                                @click="deleteItem(props.item)"
+                        >
+                            delete
+                        </v-icon>
+                    </td>  
+              </template>
+              <template slot="no-data">
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+              </template>
+            </v-data-table>    
+          </v-card>
+        </template>
+
     </div>
 </template>
 
@@ -197,32 +239,42 @@ import CargarDocumento from '../components/CargarDocumento'
       valid: true,
       dialog: false,
       dialog2: false,
+      search: '',
       headers: [
         {text: 'Cod. UNSPSC', value: 'codUNSPSC'},
         {text: 'Num. Ítem', value: 'item'},
         {text: 'Descripción', value: 'descripcion'},
-        {text: 'Mes Inicio', value: 'mesinicio'},
-        {text: 'Mes Oferta', value: 'mesoferta'},
-        {text: 'Valor Total', value: 'valortotal'},
-        {text: 'Nombre Responsable', value: 'nombreresponsable'},
-        {text: 'Duracion', value: 'duracion'},
-        {text: 'Tiempo', value: 'unidadtiempo_id'},
-        {text: 'Modalidad', value: 'modalidad_id'},
+        {text: 'Número del Proceso', value: 'numero_proceso'},
+        {text: 'Número de Contrato', value: 'numero_contrato'},
+        {text: 'Abogado responsable', value: 'abogado_id'},
+        {text: 'Mes Inicio', value: 'mes_inicio_id'},
+        {text: 'Mes Oferta', value: 'mes_oferta_id'},
+        {text: 'Valor Total', value: 'valortotal', width: "3px"},
+        {text: 'Nombre Responsable', value: 'nombreresponsable', width: "3px"},
+        {text: 'Duracion', value: 'duracion', width: "3px"},
+        {text: 'Tiempo', value: 'unidadtiempo_id', width: "3px"},
+        {text: 'Modalidad', value: 'modalidad_id', width: "3px"},
+        {text: 'Fuente de Recursos', value: 'fuente_id'},
       ],
       tableData: [],
       editedIndex: -1,
       unidadesTiempo:[],
+      abogados:[],
+      mesinicio:[],
+      mesoferta:[],
       modalidades:[],  
-      fuentesIngreso:[],
-      contadorMeses:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      fuente_recursos:[],
       editedItem: {
         id: '',
         created_at: '',
         codUNSPSC:'',
         item:'',
         descripcion:'',
-        mesinicio:'',
-        mesoferta:'',
+        abogado_id:'',
+        numero_proceso:'',
+        numero_contrato:'',
+        mes_inicio_id:'',
+        mes_oferta_id:'',  
         duracion:'',
         valortotal:'',
         valorvigencia:'',
@@ -239,8 +291,11 @@ import CargarDocumento from '../components/CargarDocumento'
         codUNSPSC:'',
         item:'',
         descripcion:'',
-        mesinicio:'',
-        mesoferta:'',
+        abogado_id:'',
+        numero_proceso:'',
+        numero_contrato:'',        
+        mes_inicio_id:'',
+        mes_oferta_id:'', 
         duracion:'',
         valortotal:'',
         valorvigencia:'',
@@ -283,6 +338,24 @@ import CargarDocumento from '../components/CargarDocumento'
       formTitle() {
         return this.editedIndex === -1 ? 'Registrar plan de Adquisiciones Anual' : 'Editar plan de Adquisiciones Anual';
       },
+
+      headers0() {
+        return this.headers.map(header => Object.assign({}, header, {fixed: false}))
+      },
+      headers2() {
+        return [
+          { text: '', fixed: true, width: '100px', sortable: false }
+        ].concat(this.headers)
+      },
+      headers3() {
+        return [
+          { text: '', fixed: true, width: '100px'}
+        ].concat(this.headers)
+      },
+      headers5() {
+        return this.headers3
+      },    
+
     },
 
     watch: {
@@ -324,22 +397,18 @@ import CargarDocumento from '../components/CargarDocumento'
         
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
         axios.get('/api/permissions').then(response=>this.allPermissions=response.data.data);
-        axios.get('/api/unidades').then(response => {
-          this.unidadesTiempo=response.data.data;
-        });
-
-        axios.get('/api/modalidades').then(response => {
-          this.modalidades=response.data.data;
-        });
-
-        axios.get('/api/fuentes').then(response => {
-          this.fuentesIngreso=response.data.data;
-        });
+        axios.get('/api/unidades').then(response => {this.unidadesTiempo=response.data.data;});
+        axios.get('/api/meses').then(response => {this.mesinicio=response.data.data;});
+        axios.get('/api/meses').then(response => {this.mesoferta=response.data.data;});
+        axios.get('/api/modalidades').then(response => {this.modalidades=response.data.data;});
+        axios.get('/api/fuentes').then(response => {this.fuente_recursos=response.data.data;});
+        axios.get('/api/users').then(response => {this.abogados=response.data.data;});
       },
 
       editItem(item) {
         // alert("entro a editar");
         this.editedIndex = this.tableData.indexOf(item);
+        console.log("entro a editar: " + item);
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
       },
@@ -412,7 +481,12 @@ import CargarDocumento from '../components/CargarDocumento'
         if (this.editedIndex > -1) {
           console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/adquisiciones/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
+          axios.put('/api/adquisiciones/'+this.editedItem.id,this.editedItem).then(response=>{
+            console.log(response.data.adquisision)
+            axios.get('/api/adquisiciones').then(response => {
+              this.tableData = response.data.data;
+            });
+          });
         } else {
           console.log("Entró a save de adquisiciones");
           axios.post('/api/adquisiciones',this.editedItem).then(response=>{

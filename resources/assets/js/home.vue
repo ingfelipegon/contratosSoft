@@ -39,6 +39,14 @@
                             <v-list-tile-title>Configuracion PAA</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
+                    <v-list-tile hidden to="/home/LogAdquisiciones">
+                        <v-list-tile-action hidden>
+                            <v-icon>person</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content hidden>
+                            <v-list-tile-title>Log PAA</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
                     <v-list-tile to="/home/Solicitudes">
                         <v-list-tile-action>
                             <v-icon>person</v-icon>

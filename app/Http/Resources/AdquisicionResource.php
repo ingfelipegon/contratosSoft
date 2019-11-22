@@ -21,20 +21,26 @@ class AdquisicionResource extends JsonResource
             'codUNSPSC' => $this->codUNSPSC,		
             'item' => $this->item,					
             'descripcion' => $this->descripcion,	
-            'mesinicio' => $this->mesinicio,			
-            'mesoferta' => $this->mesoferta,
             'duracion' => $this->duracion,
+            'numero_proceso' => $this->numero_proceso,
+            'numero_contrato' => $this->numero_contrato,
             'valortotal' => $this->valortotal,
             'valorvigencia' =>  $this->valorvigencia,
             'vigenciafutura' =>  $this->vigenciafutura,
             'nombreresponsable' =>  $this->nombreresponsable,
             'estadovigencia' =>  $this->estadovigencia,
             'unidadtiempo_id' =>  $this->unidadtiempo_id,
-            //'unidades_tiempo' => $this->unidadMedida,           //RELACION CON UNIDADES
+            'unidades_tiempo' => $this->unidadMedida,               //RELACION CON UNIDADES
             'modalidad_id' =>  $this->modalidad_id,             
-            'modalidades' => $this->modalidad,                  //RELACION CON MODALIDAD
-            'fuente_id' =>  $this->fuente_id,                   
-            //'fuente_recursos' => $this->fuenteRecurso,          //RELACION CON LA FUENTES DE LOS RECURSOS
+            'modalidades' => $this->modalidad,                      //RELACION CON MODALIDAD
+            'mes_inicio_id' => $this->mes_inicio_id,	
+            'mesinicio' => $this->mes_inicio,			            //RELACION CON MES 
+            'mes_oferta_id' =>  $this->mes_oferta_id,		
+            'mesoferta' => $this->mes_oferta,                       //RELACION CON MES   
+            'fuente_id' => $this->fuente_id,                    
+            'fuente_recursos' => $this->fuenteRecurso,              //RELACION CON LA FUENTES DE LOS RECURSOS
+            'abogado_id' => $this->fuente_id,                    
+            'abogado' => $this->abogado,                            //RELACION CON EL ABOGADO RESPONSABLE            
         ];
     }
 }

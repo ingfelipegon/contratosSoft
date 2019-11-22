@@ -33,10 +33,10 @@ class Mes extends Model
         'updated_at'
     ];
     
-    //UNA MODALIDAD PERTENECE A MUCHAS SOLCITUDES
-	public function solicitudes()
-	{
-		return $this->hasMany(Solicitud::class);
+    //UN MES PERTENECE A MUCHAS ADQUISICIONES
+    public function adquisiciones()
+    {
+        return $this->hasMany(Adquisicion::class);
     }
     
 }

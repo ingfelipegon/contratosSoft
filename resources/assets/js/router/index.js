@@ -8,6 +8,7 @@ import AbogadosConfianza from '../pages/AbogadosConfianza'
 import AtencionVictimas from '../pages/AtencionVictimas'
 import AtencionVictimasRegistro from '../pages/AtencionVictimasRegistro'
 import Adquisiciones from '../pages/Adquisiciones'
+import LogAdquisiciones from '../pages/LogAdquisiciones'
 import Solicitudes from '../pages/Solicitudes'
 import SolicitudesPostcontractual from '../pages/Postcontractual'
 import Procesos from '../pages/Procesos'
@@ -57,6 +58,11 @@ export default new Router({
 			 path: '/home/adquisiciones',
 			 component: Adquisiciones
 	 },
+	 {
+			 path: '/home/logAdquisiciones/:id',
+			 name: 'logAdquisiciones',
+			 component: LogAdquisiciones
+	 },	 
 	 {
 			 path: '/home/solicitudes',
 			 component: Solicitudes

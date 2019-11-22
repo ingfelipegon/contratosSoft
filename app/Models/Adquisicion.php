@@ -15,8 +15,10 @@ class Adquisicion extends Model
     	'codUNSPSC',			//STRING
     	'item',					//INT			NUMERO CODIGO ITEM
     	'descripcion',			//STRING     	DESCRIPCION CONTRTATO
-    	'mesinicio',			//INT           MES ESTIMADO INICIO PROCESO DE SELECCION
-    	'mesoferta',			//INT           MES ESTIMADO PRESENTACION DE OFERTAS
+    	'mes_inicio_id',		//INT           MES ESTIMADO INICIO PROCESO DE SELECCION
+		'mes_oferta_id',		//INT           MES ESTIMADO PRESENTACION DE OFERTAS
+		'numero_proceso',		//STRING        NUMERO DE PROCESO
+		'numero_contrato',		//STRING        NUMERO DE CONTRATO
     	'duracion',				//INT       	DURACION ESTIMADA DEL CONTRATO
     	'valortotal',			//STRING        VALOR TOTAL ESTIMADO   
     	'valorvigencia',		//STRING        VALOR ESTIMADO EN LA VIGENCIA ACTUAL  
@@ -25,7 +27,8 @@ class Adquisicion extends Model
 		'estadovigencia',		//STRING        ESTADO DE LA SOLICITUD DE LA VIGENCIA FUTURA, ASUME UNA DESCRIPCION
     	'unidadtiempo_id',		//INT  			UNIDAD DE TIEMPO DE LA DURACION ESIMADA DEL CONTRATO
     	'modalidad_id',			//INT           MODALIDAD DE SELECCION
-    	'fuente_id'				//INT           FUENTE DE LOS RECURSOS
+		'fuente_id',			//INT           FUENTE DE LOS RECURSOS
+		'abogado_id'			//INT           ABOGADO RESPONSABLE
 	];
 	
 	protected $hidden =['created_at','updated_at'];
@@ -33,7 +36,7 @@ class Adquisicion extends Model
     //UN PLAN DE ADQUISICION PERTENECE A UNA UNIDAD DE MEDIDA
 	public function unidadMedida()
 	{
-		return $this->belongsTo(Unidad::class);
+		return $this->belongsTo('App\Models\Unidad','unidadtiempo_id');
     }
     
     //UN PLAN DE ADQUISICION PERTENECE A UNA MODALIDAD
@@ -45,6 +48,29 @@ class Adquisicion extends Model
     //UN PLAN DE ADQUISICION PERTENECE A UNA FUENTE DE RECURSOS
 	public function fuenteRecurso()
 	{
-		return $this->belongsTo(Fuente::class);
+		return $this->belongsTo('App\Models\Fuente','fuente_id');
+	}
+
+	//UN PLAN DE ADQUISICION PERTENECE A UN REGISTRO EN MESES
+	public function mes_inicio()
+	{
+		return $this->belongsTo('App\Models\Mes','mes_inicio_id');
+	}
+
+	public function mes_oferta()
+	{
+		return $this->belongsTo('App\Models\Mes','mes_oferta_id');
+	}
+
+	//UNA SOLICITUD ESTA A CARGO DE UN RESPONSABLE O PERTENECE A UN RESPONSABLE
+	public function abogado()
+	{
+		return $this->belongsTo('App\Models\User','abogado_id'::class);
+	}
+
+	//UN REGISTRO DE ADQUISICION PAA TIENE MUCHAS TRANSACCIONES
+	public function logAdquisiciones()
+	{
+		return $this->hasMany(LogAdquisicion::class);
 	}
 }

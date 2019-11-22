@@ -25,5 +25,11 @@ class Unidad extends Model
 	{
 		return $this->hasMany(Adquisicion::class);
 	}
+
+	//UNA UNIDADA DE TIEMPO ESTA MUCHAS ADQUISICIONES TIENE MUCHAS TRANSACCIONES
+	public function logAdquisiciones()
+	{
+		return $this->hasMany(LogAdquisicion::class);
+	}
     
 }
