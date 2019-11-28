@@ -6,7 +6,6 @@
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>       
         <v-dialog v-model="dialog" max-width="70%">
-            <v-btn slot="activator" color="primary" dark class="mb-2">Registrar PAA</v-btn>
             <v-card>
                 <v-card-title>
                     <span class="headline">Registro del PAA</span>
@@ -105,8 +104,6 @@
                                     </v-radio-group>
                                     <v-text-field label="Estado de solicitud de vigencias futuras" v-model="editedItem.estadovigencia" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Datos de contacto del responsable" v-model="editedItem.nombreresponsable" :rules="requiredRules"></v-text-field>
-
-                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1, 0)">Guardar</v-btn>
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -145,11 +142,11 @@
                     <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                     <td class="text-xs-left" v-if="props.item.numero_proceso">{{ props.item.numero_proceso }}</td>
                     <td class="text-xs-left" v-if="props.item.numero_contrato">{{ props.item.numero_contrato }}</td>
-                    <td class="text-xs-left" v-if="props.item.abogado_id">{{ props.item.abogado.name }}</td>
+                    <!-- <td class="text-xs-left" v-if="props.item.abogado_id">{{ props.item.abogado.name }}</td> -->
                     <td class="text-xs-left" v-if="props.item.mes_inicio_id">{{ props.item.mesinicio.nombre }}</td>
                     <td class="text-xs-left" v-if="props.item.mes_oferta_id">{{ props.item.mesoferta.nombre }}</td>
                     <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
-                    <td width="3px" class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
+                    <!-- <td width="3px" class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td> -->
                     <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
                     <td class="text-xs-left" v-if="props.item.unidades_tiempo">{{ props.item.unidades_tiempo.nombre }}</td>    
                     <td class="text-xs-left" v-if="props.item.modalidades">{{ props.item.modalidades.nombre }}</td>  
@@ -168,12 +165,6 @@
                                 @click="editItem(props.item)"
                         >
                             edit
-                        </v-icon>
-                        <v-icon color="red darken-1"
-                                small
-                                @click="deleteItem(props.item)"
-                        >
-                            delete
                         </v-icon>
                     </td>  
               </template>
@@ -204,11 +195,11 @@ import CargarDocumento from '../components/CargarDocumento'
         {text: 'Descripción', value: 'descripcion'},
         {text: 'Número del Proceso', value: 'numero_proceso'},
         {text: 'Número de Contrato', value: 'numero_contrato'},
-        {text: 'Abogado responsable', value: 'abogado_id'},
+        // {text: 'Abogado responsable', value: 'abogado_id'},
         {text: 'Mes Inicio', value: 'mes_inicio_id'},
         {text: 'Mes Oferta', value: 'mes_oferta_id'},
         {text: 'Valor Total', value: 'valortotal', width: "3px"},
-        {text: 'Nombre Responsable', value: 'nombreresponsable', width: "3px"},
+        // {text: 'Nombre Responsable', value: 'nombreresponsable', width: "3px"},
         {text: 'Duracion', value: 'duracion', width: "3px"},
         {text: 'Tiempo', value: 'unidadtiempo_id', width: "3px"},
         {text: 'Modalidad', value: 'modalidad_id', width: "3px"},

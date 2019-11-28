@@ -15,6 +15,7 @@ import Procesos from '../pages/Procesos'
 import ProcesoAbogado from '../pages/ProcesoAbogado'
 import ProcesoAbogadoPost from '../pages/ProcesoAbogadoPost'
 import Custodias from '../pages/Custodias'
+import ProcesoObservaciones from '../pages/ProcesoObservaciones'
 import Biblioteca from '../pages/Biblioteca'
 
 Vue.use(Router)
@@ -85,6 +86,11 @@ export default new Router({
 			 name: 'procesoAbogadoPost',
 			 component: ProcesoAbogadoPost
 	 },	 
+	 {
+			 path: '/home/movimientosObservaciones/:id',
+			 name: 'movimientosObservaciones',
+			 component: ProcesoObservaciones
+     },	 
 	 {
 			 path: '/home/custodias', 
 			 component: Custodias

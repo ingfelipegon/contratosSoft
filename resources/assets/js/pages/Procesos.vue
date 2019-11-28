@@ -232,6 +232,7 @@ import CargarDocumento from '../components/CargarDocumento'
         id: '',
         item:'',
         descripcion:'',
+        observacion:'',
         duracioncontrato:'',
         modalidad_id:'',
         nombresupervisor:'',

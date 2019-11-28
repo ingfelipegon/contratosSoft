@@ -19,6 +19,7 @@ class MovimientoResource extends JsonResource
           return [
             'id' => $this->id,  				
             'descripcion' => $this->descripcion,	
+            'observacion' => $this->observacion,	
             'duracionetapa' => $this->duracionetapa,			
             'estadooperacion_id' =>  $this->estadooperacion_id,
             'estadosOperacion' =>  $this->estadoOperacion,          //RELACION CON LOS ESTADOS DE LA OPERACION

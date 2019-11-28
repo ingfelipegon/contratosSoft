@@ -15,7 +15,8 @@ class Movimiento extends Model
     // ];
 
     protected $fillable = [
-    	'descripcion',			//STRING        DESCRIPCION SOLICITUD
+		'descripcion',			//STRING        DESCRIPCION SOLICITUD
+		'observacion',			//STRING        OBSERVACION POR ETAPA
     	'duracionetapa',		//INT           DURACION ETAPA POR MODALIDAD
 
         'solicitud_id' ,   	    //INT           ID SOLICITUD
@@ -23,7 +24,9 @@ class Movimiento extends Model
     	'estadooperacion_id',	//INT           ID ESTADO OPERACION
         'respopnsable_id',		//INT           ID RESPONSABLE ACTUAL HEREDA DE LA TABLA USER
         'etapa_id' ,    	    //INT           ID ETAPA
-    ];
+	];
+	
+	protected $hidden =['created_at','updated_at'];
 
     //UN MOVIMIENTO ESPECIFICO PERTENECE A UNA SOLCITUD REGISTRADA
 	public function estadoOperacion()
@@ -53,5 +56,11 @@ class Movimiento extends Model
 	public function modalidad()
 	{
 		return $this->belongsTo('App\Models\Modalidad','modalidad_id');
-    }
+	}
+	
+	//UN REGISTRO DE ADQUISICION PAA TIENE MUCHAS TRANSACCIONES
+	public function observaciones()
+	{
+		return $this->hasMany(MovimientoObservacion::class);
+	}
 }

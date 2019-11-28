@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
 Route::resource('areas','AdminApi\AreasController');
 Route::resource('estadosOperacion','AdminApi\EstadosOperacionController',['only'=>['index','show']]);
 Route::resource('estadosProceso','AdminApi\EstadosProcesoController',['only'=>['index','show']]);
@@ -41,11 +42,10 @@ Route::get('verificar_registro_PAA_solicitud/{item}', 'AdminApi\SolicitudesPostc
 Route::get('showfiles/{item}', 'AdminApi\ArchivoController@showfiles');
 Route::get('descarga/{id}/{nombre}', 'AdminApi\ArchivoController@show');
 Route::get('descarga/{nombre}', 'AdminApi\ArchivoController@showBiblioteca');
-
-
 Route::resource('movimientos','AdminApi\MovimientoController');
+Route::resource('movimientos.observaciones','AdminApi\MovimientoObservacionesController',['only'=>['index','show']]);
 Route::get('obtener_dias_etapa/{idModaldad}/{idEtapa}', 'AdminApi\MovimientoController@obtenerDiasEtapa');
-
+Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
 
 

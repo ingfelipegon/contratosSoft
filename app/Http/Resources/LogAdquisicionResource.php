@@ -18,7 +18,8 @@ class LogAdquisicionResource extends JsonResource
           // return parent::toArray($request);
           return [
             'id' => $this->id,  
-            'codUNSPSC' => $this->codUNSPSC,			
+            'codUNSPSC' => $this->codUNSPSC,	
+            'item' => $this->item,	            
             'descripcion' => $this->descripcion,	
             'duracion' => $this->duracion,
             'numero_proceso' => $this->numero_proceso,
@@ -38,10 +39,8 @@ class LogAdquisicionResource extends JsonResource
             'mesoferta' => $this->mes_oferta,                       //RELACION CON MES   
             'fuente_id' => $this->fuente_id,                    
             'fuente_recursos' => $this->fuenteRecurso,              //RELACION CON LA FUENTES DE LOS RECURSOS
-            'abogado_id' => $this->fuente_id,                    
-            'abogado' => $this->abogado,                            //RELACION CON EL ABOGADO RESPONSABLE     
-            'item_id' => $this->fuente_id,                    
-            'abogado' => $this->abogado,                            //RELACION CON EL ABOGADO RESPONSABLE            
+            'abogado_id' => $this->abogado_id,                    
+            'abogado' => $this->abogado,                            //RELACION CON EL ABOGADO RESPONSABLE       
         ];
     }
 }

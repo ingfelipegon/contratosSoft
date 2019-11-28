@@ -190,7 +190,8 @@
                     </td>    
                     <td class="text-xs-left" v-if="props.item.mes_inicio_id">{{ props.item.mesinicio.nombre }}</td>
                     <td class="text-xs-left" v-if="props.item.mes_oferta_id">{{ props.item.mesoferta.nombre }}</td>
-                    <td class="text-xs-left" v-if="props.item.valortotal">{{ props.item.valortotal }}</td>
+                    <td class="text-xs-left" v-if="props.item.valortotal">{{ formatPrice(props.item.valortotal) }}</td>
+                    <td class="text-xs-left" v-if="props.item.valorvigencia">{{ formatPrice(props.item.valorvigencia) }}</td>                    
                     <td width="3px" class="text-xs-left" v-if="props.item.nombreresponsable">{{ props.item.nombreresponsable }}</td>
                     <td class="text-xs-left" v-if="props.item.duracion">{{ props.item.duracion }}</td>
                     <td class="text-xs-left" v-if="props.item.unidades_tiempo">{{ props.item.unidades_tiempo.nombre }}</td>    
@@ -250,6 +251,7 @@ import CargarDocumento from '../components/CargarDocumento'
         {text: 'Mes Inicio', value: 'mes_inicio_id'},
         {text: 'Mes Oferta', value: 'mes_oferta_id'},
         {text: 'Valor Total', value: 'valortotal', width: "3px"},
+        {text: 'Valor Estimado', value: 'valorvigencia', width: "3px"},
         {text: 'Nombre Responsable', value: 'nombreresponsable', width: "3px"},
         {text: 'Duracion', value: 'duracion', width: "3px"},
         {text: 'Tiempo', value: 'unidadtiempo_id', width: "3px"},
@@ -459,11 +461,15 @@ import CargarDocumento from '../components/CargarDocumento'
       agregar_documento(){
         this.openFileDialog[this.num_docs]=true;
        this.num_docs++;
-
-
       },
+
       delete_skillset (id_set) {
           this.items_educa++;
+      },
+
+      formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       },
 
       close() {

@@ -1,56 +1,20 @@
 <template>
     <div>
-        <h1>Proceso Contrato {{this.descripcionProceso}} - Consecutivo de Registro Número: {{ $route.params.id }} </h1>  
+        <h1>Log de Observaciones por etapas de proceso, Identificador: {{ $route.params.id }} </h1>  
         <v-toolbar dark flat color="grey-lighten">
-        <v-toolbar-title>Etapas del proceso de Contratación</v-toolbar-title>
+        <v-toolbar-title>Observaciones al proceso seleccionado </v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog2" max-width="60%">
-          <v-card>
-            <v-card-text> 
-              <div>
-                <h4 class="headline mb-0">Información PAA - ITEM: {{editedItem.item}}</h4>
-                  <div> <label>Código UNSPSC : </label> {{editedItem.codUNSPSC}}</div>
-                  <div> <label>Número de Ítem : </label>  {{editedItem.item}} </div>
-                  <div> <label>Descripción : </label>  {{editedItem.descripcion}} </div>
-                  <div> <label>Mes estimado de inicio de proceso de selección: </label>  {{editedItem.mesinicio}} </div>
-                  <div> <label>Mes estimado de presentación de ofertas : {{editedItem.mesoferta}}</label> </div>
-                  <div> <label>Duración estimada del contrato (número) : {{editedItem.duracion}} </label></div>
-                  <div> <label>Duración estimada del contrato (intervalo: días, meses, años): </label> {{editedItem.unidadtiempo_id}} </div>
-                  <div> <label>Modalidad de selección : </label> {{editedItem.modalidad_id}} </div>
-                  <div> <label>Fuente de los recursos: </label> {{editedItem.fuente_id}} </div>
-                  <div> <label>Valor total estimado: </label> {{editedItem.valortotal}} </div>
-                  <div> <label>Valor estimado en la vigencia actual: </label> {{editedItem.valorvigencia}} </div>
-                  <div> <label>Estado de solicitud de vigencias futuras: </label> {{editedItem.estadovigencia}} </div>
-                  <div> <label>Datos de contacto del responsible: </label> {{editedItem.nombreresponsable}} </div>
-              </div>        
-            </v-card-text>   
-          </v-card>
-        </v-dialog>
-        <v-dialog max-width="60%">
-            <v-card>
-                <v-card-title class="headline">{{ formTitle }}</v-card-title>
-                <v-card-text>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                </v-card-actions>
-            </v-card>    
-        </v-dialog>
         <v-spacer></v-spacer>
         
         <v-dialog v-model="dialog" max-width="70%">
-            <!-- <v-btn @click="loadRegister" color="primary" dark class="mb-2">Registrar etapa del proceso Contractual - JEP II</v-btn> -->
-            <v-btn slot="activator" @click="loadRegister" color="primary" dark class="mb-2">Registrar etapa del proceso Contractual - JEP</v-btn>
-            <!-- <v-btn color="primary" dark class="mb-2" flat @click="loadRegister">cargar</v-btn> -->
             <v-card>
                 <v-card-title>
-                    <span class="headline">Registro de etapa - JEP</span>
+                    <span class="headline">Log de Observaciones por etapas de proceso - JEP</span>
                 </v-card-title>
                 <v-card-text>                        
                     <v-stepper  v-model="step" vertical>
                         <v-stepper-header>
-                            <v-stepper-step editable step="1"> Formulario de ingreso de datos por cada Etapa </v-stepper-step>
+                            <v-stepper-step editable step="1"> Observaciones por Etapa seleccionada </v-stepper-step>
                         </v-stepper-header>
                         <v-stepper-items>
                             <v-stepper-content step="1">
@@ -59,45 +23,9 @@
                                 v-model="valid"
                                 lazy-validation
                                 >
-                                    <label>Formulario Etapa</label>
-                                    <v-layout v-if="this.editedIndex == -1">
-                                        <v-select
-                                            v-model="editedItem.etapa_id"
-                                            :items="etapas[0]"
-                                            label="Etapa actual del proceso"
-                                            item-text="nombre"
-                                            item-value='id'
-                                            v-on:change="obtenerDuracionEtapa"
-                                            :rules="requiredRules"
-                                            chips
-                                        ></v-select>            
-                                    </v-layout>                                 
-                                    <v-layout>
-                                        <v-select
-                                            v-model="editedItem.modalidad_id"
-                                            :items="modalidades"
-                                            label="Modalidad de contratación"
-                                            item-text="nombre"
-                                            item-value='id'
-                                            :rules="requiredRules"
-                                            chips
-                                            readonly
-                                        ></v-select>                                                              
-                                    </v-layout>   
-                                    <v-text-field readonly label="Duración de etapa" v-model="editedItem.duracionetapa" ></v-text-field>
+                                    <label>Formulario Etapa</label>                             
                                     <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
-                                    <v-text-field label="Observación" v-model="editedItem.observacion" :rules="requiredRules"></v-text-field>
-                                    <v-layout v-if="this.editedItem.estadooperacion_id != 5">
-                                        <v-select
-                                            v-model="editedItem.respopnsable_id"
-                                            :items="responsables"
-                                            label="Responsable actual del proceso"
-                                            item-text="name"
-                                            item-value='id'
-                                            :rules="requiredRules"
-                                            chips
-                                        ></v-select>            
-                                    </v-layout>                                    
+                                    <v-text-field label="Observación" v-model="editedItem.observacion" :rules="requiredRules"></v-text-field>                 
                                     <v-layout v-if="this.editedItem.estadooperacion_id != 5">
                                         <v-select
                                             v-model="editedItem.estadooperacion_id"
@@ -108,8 +36,7 @@
                                             :rules="requiredRules"
                                             chips
                                         ></v-select>            
-                                    </v-layout>
-                                    <v-btn color="primary" @click.prevent="validate($refs.form_step_1,0)">Guardar</v-btn>
+                                    </v-layout>                                    
                                 </v-form>
                             </v-stepper-content>
                         </v-stepper-items>
@@ -131,15 +58,8 @@
                   </v-chip>
                 </td>
                 <td class="text-xs-left" v-if="props.item.creado">{{ props.item.creado }}</td>
-                <td class="text-xs-left" v-if="props.item.modalidad_id">{{ props.item.modalidades.nombre }}</td>
-                <td class="text-xs-left" v-if="props.item.etapa_id">{{ props.item.etapas.nombre }}</td>
-                <td class="text-xs-left" v-if="props.item.estadooperacion_id">
-                  <router-link class="justify-center" :to="{ name: 'movimientosObservaciones', params: {id : props.item.id} }">
-                        <v-chip color="deep-purple" text-color="white">
-                          {{ props.item.estadosOperacion.nombre }} 
-                        </v-chip>   
-                  </router-link>
-                </td>    
+                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
+                <td class="text-xs-left" v-if="props.item.observacion">{{ props.item.observacion }}</td>                
                 <td class="text-xs-left" v-if="props.item.estadooperacion_id==1">
                   <v-icon color="green darken-2">
                     brightness_1
@@ -164,18 +84,7 @@
                   <v-icon color="blue darken-2">
                     brightness_1
                   </v-icon>
-                </td>
-                <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
-                <td class="text-xs-left" v-if="props.item.observacion">{{ props.item.observacion }}</td>
-                <td class="text-xs-left" v-if="props.item.duracionetapa">{{ props.item.duracionetapa }}</td>
-                <td class="text-xs-left" v-if="props.item.respopnsable_id">
-                  <v-chip color="indigo" text-color="white">
-                    <v-avatar>
-                      <v-icon>account_circle</v-icon>
-                    </v-avatar>
-                    {{ props.item.responsables.name }}   
-                  </v-chip>      
-                </td>  
+                </td>                
                 <td class="justify-center layout px-0">
                     <!-- <v-icon
                             small
@@ -190,12 +99,6 @@
                             @click="editItem(props.item)"
                     >
                         edit
-                    </v-icon>
-                    <v-icon
-                            small
-                            @click="deleteItem(props.item)"
-                    >
-                        delete
                     </v-icon>
                 </td>    
           </template>
@@ -218,16 +121,11 @@ import CargarDocumento from '../components/CargarDocumento'
       dialog: false,
       dialog2: false,
       headers: [
-        {text: 'Id Registro', value: 'id'},
-        {text: 'Creado', value: 'creado'},
-        {text: 'Modalidad', value: 'modalidad_id'},
-        {text: 'Etapa', value: 'etapa_id'},
-        {text: 'Estado Operación', value: 'estadooperacion_id'},
-        {text: 'Semáforo', value: ''},
+        {text: 'Id Registro', value: 'id'},        
+        {text: 'Modificación', value: 'creado'},
         {text: 'Descripción', value: 'descripcion'},
         {text: 'Observación', value: 'observacion'},
-        {text: 'Duración de la Etapa', value: 'duracionetapa'},
-        {text: 'Responsable Actual', value: 'respopnsable_id'},            
+        {text: 'Estado Operación', value: 'estadooperacion_id'},        
       ],
       tableData: [],
       editedIndex: -1,
@@ -332,28 +230,19 @@ import CargarDocumento from '../components/CargarDocumento'
 
     methods: {
       initialize() {
-        var idSolicitud = this.$route.params.id;
-        console.log(idSolicitud);
+        var idProceso = this.$route.params.id;
+        console.log(idProceso);
 
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
         axios.get('/api/permissions').then(response=>this.allPermissions=response.data.data);
-        axios.get('/api/users').then(response => {this.responsables=response.data.data;});
+        // axios.get('/api/users').then(response => {this.responsables=response.data.data;});
         axios.get('/api/estadosOperacion').then(response => {this.estadosOperacion=response.data.data;});                
-        axios.get('/api/modalidades').then(response => {this.modalidades=response.data.data;});        
-        axios.get('/api/solicitudes/'+ idSolicitud + '/etapas').then(response => {
-          this.etapas=response.data.data;
-          console.log(
-            "etapas por solicitud"
-          );
-          console.log(response.data.data);
-        });        
-
-        axios.get('/api/solicitudes/'+ idSolicitud + '/movimientos').then(response => {
+        // axios.get('/api/modalidades').then(response => {this.modalidades=response.data.data;});        
+        axios.get('/api/movimientos/'+ idProceso + '/observaciones').then(response => {
           console.log(response);
           this.descripcionProceso =  response.data.data.descripcion; 
           this.tableData = response.data.data;
-        });
-
+        });        
       },
 
       actulizarEstados(){

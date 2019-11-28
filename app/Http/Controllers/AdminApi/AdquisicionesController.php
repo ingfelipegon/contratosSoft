@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Adquisicion;
 use App\Http\Resources\AdquisicionResource;
 use App\Models\LogAdquisicion;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AdquisicionesController extends Controller
@@ -19,6 +20,10 @@ class AdquisicionesController extends Controller
      */
     public function index(Adquisicion $adquisicion)
     {
+        $user_connected = Auth::user();
+        Log::info('el usuario conectado es: ');
+        Log::info($user_connected);
+
         $adquisiciones = Adquisicion::all();        
         return AdquisicionResource::collection($adquisiciones);
     }
@@ -61,6 +66,30 @@ class AdquisicionesController extends Controller
         }
 
         $adquisicion = Adquisicion::create($data);
+
+        //INSERTAMOS DATOS EN LOG DE ADQUISICIONES
+        $adquisicionLog = new LogAdquisicion();
+        $adquisicionLog->codUNSPSC = $adquisicion->codUNSPSC;
+        $adquisicionLog->item = $adquisicion->item;        
+        $adquisicionLog->descripcion = $adquisicion->descripcion;
+        $adquisicionLog->mes_inicio_id = $adquisicion->mes_inicio_id;
+        $adquisicionLog->mes_oferta_id = $adquisicion->mes_oferta_id;
+        $adquisicionLog->numero_proceso = $adquisicion->numero_proceso;
+        $adquisicionLog->numero_contrato = $adquisicion->numero_contrato;
+        $adquisicionLog->duracion = $adquisicion->duracion;
+        $adquisicionLog->valortotal = $adquisicion->valortotal;
+        $adquisicionLog->valorvigencia = $adquisicion->valorvigencia;
+        $adquisicionLog->vigenciafutura = $adquisicion->vigenciafutura;
+        $adquisicionLog->nombreresponsable = $adquisicion->nombreresponsable;   
+        $adquisicionLog->estadovigencia = $adquisicion->estadovigencia;
+        $adquisicionLog->unidadtiempo_id = $adquisicion->unidadtiempo_id;
+        $adquisicionLog->modalidad_id = $adquisicion->modalidad_id;
+        $adquisicionLog->modalidad_id = $adquisicion->modalidad_id;
+        $adquisicionLog->fuente_id = $adquisicion->fuente_id;
+        $adquisicionLog->abogado_id = $adquisicion->abogado_id;
+        $adquisicionLog->adquisicion_id = $adquisicion->id;
+        $adquisicionLog->save();
+
         return response(['message'=>'Plan de adquisision creado', 'adquisision'=>new AdquisicionResource($adquisicion)]);
     }
 

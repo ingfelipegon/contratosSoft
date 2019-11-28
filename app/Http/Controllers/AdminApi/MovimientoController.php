@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Movimiento;
 use App\Http\Resources\MovimientoResource;
 use App\Models\EtapaModadalidad;
+use App\Models\MovimientoObservacion;
 use App\Models\Solicitud;
 
 class MovimientoController extends Controller
@@ -48,6 +49,7 @@ class MovimientoController extends Controller
     {
         $rules = [			
             'descripcion' => 'required',	
+            'observacion' => 'required',	
             'duracionetapa' => 'required|integer|min:1',
             'modalidad_id' => 'required|integer|min:1',
             'estadooperacion_id' => 'required|integer|min:1',
@@ -68,6 +70,15 @@ class MovimientoController extends Controller
         $solicitud->save();   
 
         $movimiento = Movimiento::create($data);
+
+        //INSERTAMOS DATOS EN LOG DE OBSERVACIONES
+        $movimientoObservacion = new MovimientoObservacion();
+        $movimientoObservacion->descripcion = $movimiento->descripcion;
+        $movimientoObservacion->observacion = $movimiento->observacion;        
+        $movimientoObservacion->estadooperacion_id = $movimiento->estadooperacion_id;
+        $movimientoObservacion->movimiento_id = $movimiento->id;
+        $movimientoObservacion->save();
+
         return response(['message'=>'La etapa del actual proceso de contratación ha sido creada correctamente', 'movimiento'=>new MovimientoResource($movimiento)]);
     }
 
@@ -83,6 +94,7 @@ class MovimientoController extends Controller
     {
         $rules = [
             'descripcion' => 'required',	
+            'observacion' => 'required',
             'duracionetapa' => 'required|integer|min:1',
             'modalidad_id' => 'required|integer|min:1',
             'estadooperacion_id' => 'required|integer|min:1',
@@ -104,6 +116,16 @@ class MovimientoController extends Controller
         
 
         $movimiento->update($data);
+
+        //INSERTAMOS DATOS EN LOG DE OBSERVACIONES
+        $movimientoObservacion = new MovimientoObservacion();
+        $movimientoObservacion->descripcion = $movimiento->descripcion;
+        $movimientoObservacion->observacion = $movimiento->observacion;        
+        $movimientoObservacion->estadooperacion_id = $movimiento->estadooperacion_id;
+        $movimientoObservacion->movimiento_id = $movimiento->id;
+        $movimientoObservacion->save();
+
+        
         $idSolicitud = $movimiento->solicitud_id;
         $idEstadooperacion = $data['estadooperacion_id'];
         $idResponsable = $data['respopnsable_id'];
