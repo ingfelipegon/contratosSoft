@@ -148,7 +148,7 @@
                                     </v-layout>   
 
                                     <template v-for='(item, index) in adjuntar_documentos'>
-                                    <cargar-documento documento="Adjunto" :tipo="index" ></cargar-documento>
+                                    <cargar-documento documento="Adjunto" :tipo="index" :index=index>></cargar-documento>
                                     <!-- adjuntar_documentos ++; -->
                                     <!-- <v-btn color="danger" @click="less_documentos(index)">-</v-btn> -->
                                     <v-divider class="mx-1"></v-divider>
@@ -173,7 +173,7 @@
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
                 <td class="text-xs-left" v-if="props.item.item">
-                  <v-chip color="teal" text-color="white">
+                  <v-chip color="green darken-1" text-color="white">
                     {{ props.item.item }} 
                   </v-chip>
                 </td>
@@ -508,9 +508,8 @@ import CargarDocumento from '../components/CargarDocumento'
       agregar_documento(){
         this.openFileDialog[this.num_docs]=true;
        this.num_docs++;
-
-
       },
+
       delete_skillset (id_set) {
           this.items_educa++;
       },
@@ -524,6 +523,7 @@ import CargarDocumento from '../components/CargarDocumento'
       },
 
       verificar_registro_PAA() {
+        var idAdquisicion = 0;
         axios.get('/api/verificar_registro_PAA/'+this.editedItem.item).then((response) => {
           console.log(response);
           if(response.data==0)
@@ -533,7 +533,38 @@ import CargarDocumento from '../components/CargarDocumento'
           }
         });
 
+        axios.get('/api/obtener_id_adquisicion/'+this.editedItem.item).then(response => {
+          console.log(response.data);
+          if(response.data!=0)
+          {
+            idAdquisicion = response.data; 
+            //obtiene la adquisicion por ID
+            axios.get('/api/adquisiciones/'+idAdquisicion).then((response) => {
+              console.log('La adquisicion a precargar es: ');
+              console.log(response.data.data.descripcion);                
+              this.editedItem.descripcion=response.data.data.descripcion;
+              this.editedItem.duracioncontrato=response.data.data.duracion;
+              this.editedItem.modalidad_id=response.data.data.modalidad_id;
+              this.editedItem.nombresupervisor=response.data.data.nombreresponsable;
+              this.editedItem.respopnsable_id=response.data.data.abogado_id;
+              // this.editedItem.tipotramite_id=response.data.data.modalidad_id;
+              // this.editedItem.descripcion=response.data.data.descripcion;
+
+            });
+          }              
+        }, function (error) {
+            console.log(error.response.data); 
+        });
+
       },
+
+      // obtenerAdquisicionItem(){
+      //     var idAdquisicion = 0;
+      //     if(this.editedItem.etapa_id > 0 && this.editedItem.modalidad_id>0){
+      //       // alert("igresar duracion etapa");    
+
+      //     }   
+      // },
 
       save() {
         console.log(this.editedIndex);
@@ -542,7 +573,14 @@ import CargarDocumento from '../components/CargarDocumento'
         if (this.editedIndex > -1) {
           // console.log("Entró a update");
           Object.assign(this.tableData[this.editedIndex], this.editedItem);
-          axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
+          // axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>console.log(response.data));
+          
+          axios.put('/api/solicitudes/'+this.editedItem.id,this.editedItem).then(response=>{
+            console.log(response.data.adquisision)
+            axios.get('/api/solicitudes').then(response => {
+              this.tableData = response.data.data;
+            });
+          });
         } else {
           console.log("Entró a save de adquisiciones");
           // axios.post('/api/solicitudes',this.editedItem).then(response=>{

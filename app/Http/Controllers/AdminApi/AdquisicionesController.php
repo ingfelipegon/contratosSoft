@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Log;
 class AdquisicionesController extends Controller
 {
 
+
+    public function obtenerIdAdquisicion( $item)
+    {
+        $idAdquisicionItem = 0;
+        $adquisicion = Adquisicion::where('item', $item)
+                                            ->get()->first();
+        if(!empty($adquisicion->id))
+        {
+            $idAdquisicionItem = $adquisicion->id;
+            return $idAdquisicionItem;                        //EXISTE LA ADQUISICION ASOCIADA AL ITEM, RETORMA EL ID
+        }                                                       
+        else
+        {return 0;}                                           //NO EXISTE LA ADQUISICION ASOCIADA AL ITEM, RETORNA 0
+    }          
+
     /**
      * Display a listing of the resource.
      *

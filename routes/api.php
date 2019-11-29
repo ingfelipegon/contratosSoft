@@ -45,6 +45,7 @@ Route::get('descarga/{nombre}', 'AdminApi\ArchivoController@showBiblioteca');
 Route::resource('movimientos','AdminApi\MovimientoController');
 Route::resource('movimientos.observaciones','AdminApi\MovimientoObservacionesController',['only'=>['index','show']]);
 Route::get('obtener_dias_etapa/{idModaldad}/{idEtapa}', 'AdminApi\MovimientoController@obtenerDiasEtapa');
+Route::get('obtener_id_adquisicion/{item}', 'AdminApi\AdquisicionesController@obtenerIdAdquisicion');
 Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
 
