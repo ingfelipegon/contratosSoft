@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SolicitudeResource extends JsonResource
+class LogSolicitudResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -37,6 +37,8 @@ class SolicitudeResource extends JsonResource
             'tipotramite_id' =>  $this->tipotramite_id,              
             'tiposTramite' =>  $this->tipoTramite,                  //RELACION CON TIPOS TRAMITE 
             'movimientos' =>  $this->movimientos,                   //RELACION CON MOVIMIENTOS
+            'usuarioNovedad_id' =>  $this->usuarioNovedad_id,
+            'usuarioNovedad' =>  $this->usuarioNovedad,             //RELACION DE USUARIOS QUE REALIZAN LAS NOVEDADES O MODIFICACIONES
             
         ];
     }

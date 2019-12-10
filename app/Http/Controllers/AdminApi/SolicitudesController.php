@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Solicitud;
 use App\Http\Resources\SolicitudeResource;
 use App\Models\Adquisicion;
+use App\Models\LogSolicitud;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SolicitudesController extends Controller
 {
@@ -53,6 +56,10 @@ class SolicitudesController extends Controller
      */
     public function store(Request $request)
     {
+        $user_connected = Auth::user();
+        Log::info('el usuario conectado en solcitudes es: ');
+        Log::info($user_connected);
+
         $rules = [
             'item' => 'required|integer|min:1',					
             'descripcion' => 'required',	
@@ -78,6 +85,26 @@ class SolicitudesController extends Controller
         }    
 
         $solicitud = Solicitud::create($data);
+
+        //INSERTAMOS DATOS EN LOG DE SOLICITUDES
+        $solicitudLog = new LogSolicitud();
+        $solicitudLog->item = $solicitud->item;
+        $solicitudLog->descripcion = $solicitud->descripcion;    
+        $solicitudLog->observacion = $solicitud->observacion;    
+        $solicitudLog->duracioncontrato = $solicitud->duracioncontrato;
+        $solicitudLog->nombresupervisor = $solicitud->nombresupervisor;
+        $solicitudLog->tienereparto = $solicitud->tienereparto;
+        $solicitudLog->modalidad_id = $solicitud->modalidad_id;
+        $solicitudLog->estadoproceso_id = $solicitud->estadoproceso_id;
+        $solicitudLog->estadooperacion_id = $solicitud->estadooperacion_id;
+        $solicitudLog->areasolicitante_id = $solicitud->areasolicitante_id;
+        $solicitudLog->respopnsable_id = $solicitud->respopnsable_id;
+        $solicitudLog->tipotramite_id = $solicitud->tipotramite_id;
+        $solicitudLog->solicitud_id = $solicitud->id;   
+        $solicitudLog->usuarioNovedad_id = $user_connected->id;
+        $solicitudLog->save();
+
+
         return response(['message'=>'Solicitud de contratación ha sido creada correctamente', 'solicitud'=>new SolicitudeResource($solicitud)]);
     }
 

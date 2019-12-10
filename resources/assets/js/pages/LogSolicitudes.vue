@@ -2,66 +2,19 @@
     <div>
         <v-toolbar dark flat color="grey-lighten">
         <v-toolbar-title>Registro de Solictudes para dar tramite de Contratación</v-toolbar-title>
-        <v-divider class="mx-2" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog
-          v-model="dialog3"
-          max-width="30%"
-        >
-          <v-data-table
-                  :headers="headersFiles"
-                  :items="tableDataFiles"
-                  class="elevation-1"
-          >
-              <template slot="items" slot-scope="props" >
-                  <td ><a @click.prevent="downloadItem(props.item.id, props.item.nombre, props.item.ruta)" target="_blank"  :href="props.item">{{ props.item.nombre}} </a></td>
-              </template>
-          </v-data-table>
-        </v-dialog>
-        <v-dialog v-model="dialog2" max-width="60%">
-          <v-card>
-            <v-card-text> 
-              <div>
-                <h4 class="headline mb-0">Información PAA - ITEM: {{editedItem.item}}</h4>
-                  <div> <label>Código UNSPSC : </label> {{editedItem.codUNSPSC}}</div>
-                  <div> <label>Número de Ítem : </label>  {{editedItem.item}} </div>
-                  <div> <label>Descripción : </label>  {{editedItem.descripcion}} </div>
-                  <div> <label>Mes estimado de inicio de proceso de selección: </label>  {{editedItem.mesinicio}} </div>
-                  <div> <label>Mes estimado de presentación de ofertas : {{editedItem.mesoferta}}</label> </div>
-                  <div> <label>Duración estimada del contrato (número) : {{editedItem.duracion}} </label></div>
-                  <div> <label>Duración estimada del contrato (intervalo: días, meses, años): </label> {{editedItem.unidadtiempo_id}} </div>
-                  <div> <label>Modalidad de selección : </label> {{editedItem.modalidad_id}} </div>
-                  <div> <label>Fuente de los recursos: </label> {{editedItem.fuente_id}} </div>
-                  <div> <label>Valor total estimado: </label> {{editedItem.valortotal}} </div>
-                  <div> <label>Valor estimado en la vigencia actual: </label> {{editedItem.valorvigencia}} </div>
-                  <div> <label>Estado de solicitud de vigencias futuras: </label> {{editedItem.estadovigencia}} </div>
-                  <div> <label>Datos de contacto del responsible: </label> {{editedItem.nombreresponsable}} </div>
-              </div>        
-            </v-card-text>   
-          </v-card>
-        </v-dialog>
-        <v-dialog max-width="60%">
-            <v-card>
-                <v-card-title class="headline">{{ formTitle }}</v-card-title>
-                <v-card-text>
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                </v-card-actions>
-            </v-card>    
-        </v-dialog>
+        <v-divider class="mx-2" inset vertical></v-divider>        
         <v-spacer></v-spacer>
         
         <v-dialog v-model="dialog" max-width="70%">
-            <v-btn slot="activator" color="primary" dark class="mb-2">Registrar solcitud Contractual - JEP</v-btn>
+            <v-btn slot="activator" color="primary" dark class="mb-2">Seguimiento solcitud Contractual - JEP</v-btn>
             <v-card>
                 <v-card-title>
-                    <span class="headline">Registro de la solcitud - JEP</span>
+                    <span class="headline">Novedades solcitud - JEP</span>
                 </v-card-title>
                 <v-card-text>                        
                     <v-stepper  v-model="step" vertical>
                         <v-stepper-header>
-                            <v-stepper-step editable step="1"> Formulario de ingreso de datos por cada Solicitud </v-stepper-step>
+                            <v-stepper-step editable step="1"> Historia de novedades por Solicitud </v-stepper-step>
                         </v-stepper-header>
                         <v-stepper-items>
                             <v-stepper-content step="1">
@@ -73,12 +26,7 @@
                                     <label>Formulario PAA</label>
                                     <v-text-field label="Número de Ítem" @change="verificar_registro_PAA" v-model="editedItem.item" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Descripción" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
-                                    <v-textarea
-                                      outlined
-                                      name="input-7-4"
-                                      label="Observación de la Novedad"
-                                       v-model="editedItem.observacion"
-                                    ></v-textarea>
+                                    <v-text-field label="Observación" v-model="editedItem.descripcion" :rules="requiredRules"></v-text-field>
                                     <v-text-field label="Duración del Contrato" v-model="editedItem.duracioncontrato" :rules="requiredRules"></v-text-field>
                                     <v-layout>
                                         <v-select
@@ -181,18 +129,8 @@
                 <td class="text-xs-left" v-if="props.item.item">
                   <v-chip color="green darken-1" text-color="white">
                     {{ props.item.item }} 
-                  </v-chip>                  
+                  </v-chip>
                 </td>
-                <td class="text-xs-left" v-if="props.item.item">
-                  <router-link class="justify-center" :to="{ name: 'logAdquisiciones', params: {id : props.item.id} }">
-                        <v-chip color="indigo" text-color="white">
-                          <v-avatar>
-                            <v-icon>account_circle</v-icon>
-                          </v-avatar>
-                          {{ props.item.item }}   
-                        </v-chip>   
-                  </router-link>
-                </td>    
                 <td class="text-xs-left" v-if="props.item.descripcion">{{ props.item.descripcion }}</td>
                 <td class="text-xs-left" v-if="props.item.duracioncontrato">{{ props.item.duracioncontrato }}</td>
                 <td class="text-xs-left" v-if="props.item.nombresupervisor">{{ props.item.nombresupervisor }}</td>

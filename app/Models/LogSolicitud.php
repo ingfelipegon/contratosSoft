@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Solicitud extends Model
+class LogSolicitud extends Model
 {
     use SoftDeletes;
     protected $date = ['delete_at'];
-    // protected $hidden = [
-    //     'created_at',
-    //     'updated_at'
-    // ];
-    protected $table = 'solicitudes';
+    protected $table = 'log_solicitudes';
 
     protected $fillable = [
     	'item',					//INT           NUMERO ITEM
@@ -29,7 +25,11 @@ class Solicitud extends Model
     	'areasolicitante_id',   //INT           ID AREA SOLICITANTE
         'respopnsable_id',		//INT           ID RESPONSABLE ACTUAL HEREDA DE LA TABLA USER
         'tipotramite_id',	    //INT           ID TIPO TRAMITE
+		'solicitud_id', 		//INT           ID SOLICITUD
+		'usuarioNovedad_id',	//INT           ID USUARIO QUIEN RALIZA LA NOVEDAD		
     ];
+
+    protected $hidden =['created_at','updated_at'];
 
 	//UNA SOLICITUD PERTENECE A UNA MODALIDAD
 	public function modalidad()
@@ -73,16 +73,17 @@ class Solicitud extends Model
 		return $this->hasMany(Archivo::class);
     }
     
-    //UNA SOLICITUD COONTIENE VARIOS MOVIMIENTOS
-	public function movimientos()
+    //UNA SOLICITUD PERTENECE A UN LOG DETALLE
+	public function solicitud()
 	{
-		return $this->hasMany('App\Models\Movimiento','solicitud_id');
+		return $this->belongsTo('App\Models\Solicitud','solicitud_id'::class);
 	}
-	
-	//UNA SOLICITUD TIENE MUCHAS OBSERVACIONES DETALLE
-	public function logSolicitudes()
+
+	//UNA SOLICITUD ESTA A CARGO DE UN RESPONSABLE O PERTENECE A UN RESPONSABLE
+	public function usuarioNovedad()
 	{
-		return $this->hasMany(LogSolicitud::class);
+		return $this->belongsTo('App\Models\User','usuarioNovedad_id'::class);
 	}
+
     
 }

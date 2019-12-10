@@ -21,7 +21,8 @@ Auth::routes();
 Route::any('/publico/{any?}', 'PublicoController@index')->where('any','.*');
 Route::any('/home/{any?}', 'HomeController@index')->where('any','.*')->middleware('auth');
 Route::get('exportar_pdf', 'AdminApi\AtencionVictimasController@exportar_pdf');
-// Route::resource('api/adquisiciones','AdminApi\AdquisicionesController');
+Route::resource('api/adquisiciones','AdminApi\AdquisicionesController');
+Route::resource('api/solicitudes','AdminApi\SolicitudesController');
 // Route::post('uploadFile','AdminApi\FileController@uploadFile');
 // Route::get('tipo_documentos','AxiosController@listar_documentos');
 

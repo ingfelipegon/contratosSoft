@@ -29,9 +29,10 @@ Route::get('modalidadesPostcontractual','AdminApi\ModalidadesController@modalida
 Route::resource('tiposIdentificacion','AdminApi\TipoIdentificacionController',['only'=>['index','show']]);
 Route::resource('tiposTramite','AdminApi\TipoTramiteController',['only'=>['index','show']]);
 Route::resource('unidades','AdminApi\UnidadController',['only'=>['index','show']]);
-Route::resource('adquisiciones','AdminApi\AdquisicionesController');
+// Route::resource('adquisiciones','AdminApi\AdquisicionesController');
 Route::resource('adquisiciones.logAdquisiciones','AdminApi\AdquisicionLogAdquisicionesController',['only'=>['index','show']]);
-Route::resource('solicitudes','AdminApi\SolicitudesController');
+// Route::resource('solicitudes','AdminApi\SolicitudesController');
+Route::resource('solicitudes.logSolicitudes','AdminApi\SolicitudLogSolicitudesController',['only'=>['index','show']]);
 Route::resource('solicitudesPostcontractual','AdminApi\SolicitudesPostcontractualController');
 Route::get('solicitudesPrePost','AdminApi\SolicitudesController@solicitudesPrePost');
 Route::resource('custodias','AdminApi\CustodiaController');
