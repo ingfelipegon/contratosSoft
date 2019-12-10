@@ -49,6 +49,9 @@ Route::get('obtener_dias_etapa/{idModaldad}/{idEtapa}', 'AdminApi\MovimientoCont
 Route::get('obtener_id_adquisicion/{item}', 'AdminApi\AdquisicionesController@obtenerIdAdquisicion');
 Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
+//TRASLADOS
+Route::resource('personas.bloques','Traslado\PersonaBloqueController',['only'=>['index']]);
+
 
 
 Route::apiResource('users', 'AdminApi\UserController');
