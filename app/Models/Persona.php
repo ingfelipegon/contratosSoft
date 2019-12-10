@@ -12,8 +12,7 @@ class Persona extends Model
 		'name',		        	//STRING        name
 		'numeroDocumento',		//STRING        numeroDocumento
         'email',		        //STRING        email
-        'password',             //STRING        password
-        // 'bloque_id',			//INT           
+        'password',             //STRING        password       
     ];
     
     protected $hidden = [
@@ -26,6 +25,13 @@ class Persona extends Model
 	public function bloques()
 	{
         return $this->belongsToMany(Bloque::class, 'persona_bloque');
+        // return $this->belongsToMany('App\Models\Bloque','bloque_id');
+    }
+    
+    //UN PERSONA PERTENCE A MUCHOS REPRESENTANTES
+	public function representates()
+	{
+        return $this->belongsToMany(Representante::class, 'representante_persona');
         // return $this->belongsToMany('App\Models\Bloque','bloque_id');
 	}
 
