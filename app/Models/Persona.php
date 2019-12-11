@@ -33,6 +33,12 @@ class Persona extends Model
 	{
         return $this->belongsToMany(Representante::class, 'representante_persona');
         // return $this->belongsToMany('App\Models\Bloque','bloque_id');
+    }
+    
+    //UNA PERSONA TIENE MUCHOS TRASLADOS
+	public function traslados()
+	{
+		return $this->hasMany(Traslado::class);
 	}
 
 }

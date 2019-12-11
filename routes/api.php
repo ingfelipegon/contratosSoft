@@ -51,8 +51,9 @@ Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenControl
 
 //TRASLADOS
 Route::resource('personas.bloques','Traslado\PersonaBloqueController',['only'=>['index']]);
+Route::resource('personas.traslados','Traslado\PersonaTrasladoController',['only'=>['index']]);
 Route::resource('representante.persona','Traslado\RepresentantePersonaController',['only'=>['index']]);
-Route::resource('traslados','Traslado\TrasladoController',['only'=>['index','store']]);
+Route::resource('traslados','Traslado\TrasladoController',['only'=>['store', 'update']]);
 
 
 

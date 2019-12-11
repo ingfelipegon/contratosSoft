@@ -20,6 +20,18 @@ class Traslado extends Model
 	public function bloque()
 	{
         return $this->belongsTo('App\Models\Bloque','bloque_id');
+	}
+	
+	//UNA PERSONA PERTENECE A UN TRASLADO
+	public function persona()
+	{
+        return $this->belongsTo('App\Models\Persona','persona_id');
+	}
+			
+	//UN ABOGADO REPRESENTANTE PERTENECE A UN TRASLADO
+	public function representante()
+	{
+        return $this->belongsTo('App\Models\Representante','representante_id');
     }
 
     //UN TRASLADO TIENE MUCHAS RESPUESTAS
