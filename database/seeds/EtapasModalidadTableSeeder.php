@@ -305,66 +305,116 @@ class EtapasModalidadTableSeeder extends Seeder
         ]);
 
         /*
+            CONFGIURACION DE TIEMPOS MODALIDAD: CONTRATACION SIN PLURALIDAD DE OFERENTES
+        */
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 1,
+            'modalidad_id'    => 6,
+            'duracionetapa'    => 1,
+        ]);
+
+        /*
+            CONFGIURACION DE TIEMPOS MODALIDAD: TIENDA VIRTUAL
+        */
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 23,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 2,
+        ]);
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 24,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 1,
+        ]);
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 25,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 10,
+        ]);
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 26,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 1,
+        ]);
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 28,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 1,
+        ]);
+
+        EtapaModadalidad::create([
+            'etapa_id'    => 29,
+            'modalidad_id'    => 7,
+            'duracionetapa'    => 1,
+        ]);
+
+        /*
             CONFGIURACION DE TIEMPOS MODALIDAD: INCUMPLIMIENTO CLAUSULA PENAL PECUNIARIA
         */
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 6,
+            'modalidad_id'    => 8,
             'duracionetapa'    => 4,
         ]);
 
@@ -374,61 +424,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 7,
+            'modalidad_id'    => 9,
             'duracionetapa'    => 4,
         ]);        
 
@@ -438,61 +488,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 8,
+            'modalidad_id'    => 10,
             'duracionetapa'    => 4,
         ]);           
         
@@ -502,61 +552,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 9,
+            'modalidad_id'    => 11,
             'duracionetapa'    => 4,
         ]);        
         
@@ -566,61 +616,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 10,
+            'modalidad_id'    => 12,
             'duracionetapa'    => 4,
         ]);             
 
@@ -630,61 +680,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 11,
+            'modalidad_id'    => 13,
             'duracionetapa'    => 4,
         ]);        
         
@@ -694,61 +744,61 @@ class EtapasModalidadTableSeeder extends Seeder
 
         EtapaModadalidad::create([
             'etapa_id'    => 13,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 14,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 15,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 16,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 17,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 18,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 19,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
     
         EtapaModadalidad::create([
             'etapa_id'    => 20,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 21,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);
 
         EtapaModadalidad::create([
             'etapa_id'    => 22,
-            'modalidad_id'    => 12,
+            'modalidad_id'    => 14,
             'duracionetapa'    => 4,
         ]);               
     }

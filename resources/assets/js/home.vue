@@ -36,7 +36,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Configuracion PAA</v-list-tile-title>
+                            <v-list-tile-title>Base PAA</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile to="/home/Solicitudes">
@@ -44,7 +44,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Solicitud Precontractual JEP</v-list-tile-title>
+                            <v-list-tile-title>Precontractual</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile to="/home/Postcontractual">
@@ -52,7 +52,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Solicitud Postcontractual JEP</v-list-tile-title>
+                            <v-list-tile-title>Postcontractual</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile to="/home/Procesos">
@@ -60,7 +60,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Procesos de Contratación JEP</v-list-tile-title>
+                            <v-list-tile-title>Procesos JEP</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
                     <v-list-tile to="/home/Custodias">
@@ -68,7 +68,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Registro y custodia de documentos físicos</v-list-tile-title>
+                            <v-list-tile-title>Archivo</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>     
                     <v-list-tile to="/home/Biblioteca">
@@ -76,7 +76,7 @@
                             <v-icon>person</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>Biblioteca de Documentos</v-list-tile-title>
+                            <v-list-tile-title>Biblioteca</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>                    
                     <!-- <v-list-tile to="/home/abogados">

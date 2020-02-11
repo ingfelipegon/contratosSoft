@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(VsaadDependenciasSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(PersonasSeeder::class);
-        $this->call(BloquesSeeder::class);
-        $this->call(PersonasBloquesSeeder::class);
-        $this->call(RepresentantesSeeder::class);
-        $this->call(RepresentantesPersonaSeeder::class);
         
         
         

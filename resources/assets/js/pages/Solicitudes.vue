@@ -179,12 +179,7 @@
         <v-data-table :headers="headers" :items="tableData" class="elevation-1">
           <template slot="items" slot-scope="props">    
                 <td class="text-xs-left" v-if="props.item.item">
-                  <v-chip color="green darken-1" text-color="white">
-                    {{ props.item.item }} 
-                  </v-chip>                  
-                </td>
-                <td class="text-xs-left" v-if="props.item.item">
-                  <router-link class="justify-center" :to="{ name: 'logAdquisiciones', params: {id : props.item.id} }">
+                  <router-link class="justify-center" :to="{ name: 'logSolicitudes', params: {id : props.item.id} }">
                         <v-chip color="indigo" text-color="white">
                           <v-avatar>
                             <v-icon>account_circle</v-icon>

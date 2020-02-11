@@ -9,6 +9,7 @@ import AtencionVictimas from '../pages/AtencionVictimas'
 import AtencionVictimasRegistro from '../pages/AtencionVictimasRegistro'
 import Adquisiciones from '../pages/Adquisiciones'
 import LogAdquisiciones from '../pages/LogAdquisiciones'
+import LogSolicitudes from '../pages/LogSolicitudes'
 import Solicitudes from '../pages/Solicitudes'
 import SolicitudesPostcontractual from '../pages/Postcontractual'
 import Procesos from '../pages/Procesos'
@@ -64,6 +65,11 @@ export default new Router({
 			 name: 'logAdquisiciones',
 			 component: LogAdquisiciones
 	 },	 
+	 {
+			 path: '/home/logSolicitudes/:id',
+			 name: 'logSolicitudes',
+			 component: LogSolicitudes
+	 },
 	 {
 			 path: '/home/solicitudes',
 			 component: Solicitudes
