@@ -9,6 +9,7 @@ use App\Http\Resources\MovimientoResource;
 use App\Models\EtapaModadalidad;
 use App\Models\MovimientoObservacion;
 use App\Models\Solicitud;
+use Illuminate\Support\Facades\Log;
 
 class MovimientoController extends Controller
 {
@@ -67,6 +68,7 @@ class MovimientoController extends Controller
         $solicitud = Solicitud::where('id', $idSolicitud)->get()->first();
         // $solicitud->estadooperacion_id = $idEstadooperacion;
         $solicitud->respopnsable_id = $idResponsable;
+        $solicitud->estadooperacion_id = $data['estadooperacion_id'];
         $solicitud->save();   
 
         $movimiento = Movimiento::create($data);
@@ -125,13 +127,20 @@ class MovimientoController extends Controller
         $movimientoObservacion->movimiento_id = $movimiento->id;
         $movimientoObservacion->save();
 
+
+        Log::info('ingreso a ACTUALIZAR UN MOVIMIENTO ID SOLICITUD:  ');
+        Log::info($movimiento->solicitud_id);
+        Log::info($data['estadooperacion_id']);
+
         
         $idSolicitud = $movimiento->solicitud_id;
-        $idEstadooperacion = $data['estadooperacion_id'];
         $idResponsable = $data['respopnsable_id'];
-        $solicitud = Solicitud::find($idSolicitud)->first();
-        $solicitud->estadooperacion_id = $idEstadooperacion;
+        // $solicitud = Solicitud::find($idSolicitud)->first();   
+        $solicitud = Solicitud::where('id', $idSolicitud)->first();     
+        $solicitud->estadooperacion_id = $data['estadooperacion_id'];
         $solicitud->respopnsable_id = $idResponsable;
+        Log::info('SOLICITUD');
+        Log::info($solicitud);
         $solicitud->save();   
 
         return response(['message'=>'La etapa del actual proceso de contratación ha sido actualizada', 'movimiento'=>new MovimientoResource($movimiento)]);

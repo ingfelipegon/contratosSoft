@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Solicitud;
 use Illuminate\Support\Carbon;
 use App\Models\EstadoOperacion;
+use Illuminate\Support\Facades\Log;
 
 class SolicitudMovimientoController extends Controller
 {
@@ -19,7 +20,7 @@ class SolicitudMovimientoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Solicitud $solicitude)
-    {
+    {        
         //DECLARACION DE CONSTANTES
         $idOperacionEtapa = 0;              // ID OPERACION ETAPA
 

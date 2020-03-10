@@ -16,7 +16,7 @@ class ModalidadesController extends Controller
     public function index()
     {
         $modadlidades = Modalidad::all();
-        $modadlidades = $modadlidades->whereIn('id', array(1, 2, 3, 4, 5));        
+        $modadlidades = $modadlidades->whereIn('id', array(1, 2, 3, 4, 5, 6, 7));        
         return ModalidadesResource::collection($modadlidades);
     }
 
@@ -28,7 +28,7 @@ class ModalidadesController extends Controller
     public function modalidadesPostcontractual()
     {
         $modadlidades = Modalidad::all();
-        $modadlidades = $modadlidades->whereIn('id', array(6, 7, 8, 9, 10, 11, 12));
+        $modadlidades = $modadlidades->whereIn('id', array(8, 9, 10, 11, 12, 13, 14));
         return ModalidadesResource::collection($modadlidades);
     }
 

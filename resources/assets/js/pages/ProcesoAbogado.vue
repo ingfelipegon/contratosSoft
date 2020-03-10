@@ -63,7 +63,7 @@
                                     <v-layout v-if="this.editedIndex == -1">
                                         <v-select
                                             v-model="editedItem.etapa_id"
-                                            :items="etapas[0]"
+                                            :items="etapas"
                                             label="Etapa actual del proceso"
                                             item-text="nombre"
                                             item-value='id'
@@ -333,6 +333,7 @@ import CargarDocumento from '../components/CargarDocumento'
     methods: {
       initialize() {
         var idSolicitud = this.$route.params.id;
+        console.log('EL ID DE LA SOLICITUD ES: ');
         console.log(idSolicitud);
 
         axios.get('/api/roles').then(response=>this.allRoles=response.data.data);
@@ -363,12 +364,20 @@ import CargarDocumento from '../components/CargarDocumento'
       loadRegister() {
         
         var idSolicitud = this.$route.params.id;
+
+        axios.get('/api/solicitudes/'+ idSolicitud + '/etapas').then(response => {
+            this.etapas=response.data.data;
+            console.log("etapas por solicitud");
+            console.log(response.data.data);
+            });        
+
         //alert("entro a cargar registro la solcitud: " + idSolicitud);
         axios.get('/api/solicitudes/'+idSolicitud).then(response => {
             //alert("entro a cargar registro la solcitud adentro del llamdo");
             // console.log("estaod de opercion de una etapa: " + response.data.data.estadooperacion_id);
-            this.movimientosRead = response.data.data.movimientos;
+            this.movimientosRead = response.data.data.movimientos;            
             console.log("estaod de opercion de una etapa: " + this.movimientosRead.length);
+            console.log(response.data.data);
             if(response.data.data.estadooperacion_id != 5 && this.movimientosRead.length > 0){
               alert("No se puede registrar una nueva etapa sin antes haber modificado la inmediatamente anterior a ETAPA FINALIZADA");
               this.dialog = false;
@@ -382,7 +391,7 @@ import CargarDocumento from '../components/CargarDocumento'
             this.editedItem.estadooperacion_id_read =  response.data.data.estadooperacion_id;                                        
             this.editedItem.modalidad_id =  response.data.data.modalidad_id;
             this.editedItem.solicitud_id =  idSolicitud;
-            console.log(this.editedItem.descripcion);     
+            console.log(this.editedItem.descripcion);                 
         });
       },
 

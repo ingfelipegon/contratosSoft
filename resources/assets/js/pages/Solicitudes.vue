@@ -144,7 +144,7 @@
                                     <v-layout>
                                         <v-select
                                             v-model="editedItem.tipotramite_id"
-                                            :items="tiposTramite[0]"
+                                            :items="tiposTramite"
                                             label="Tipo de Tramite"
                                             item-text="nombre"
                                             item-value='id'

@@ -31,6 +31,7 @@ class SolicitudesController extends Controller
      */
     public function index(Solicitud $solicitude)
     {
+        Log::info('entro a la coleccion de solicitudes');
         $solicitudes = Solicitud::all();        
         $solicitudes = $solicitudes->where('tipotramite_id', 1); 
         return SolicitudeResource::collection($solicitudes);
@@ -165,6 +166,10 @@ class SolicitudesController extends Controller
      */
     public function show(Solicitud $solicitude)
     {
+        Log::info('entro a la coleccion de solicitudes');
+        Log::info($solicitude);
+        $model = Solicitud::findOrFail($solicitude->id);
+        Log::info($model);
         // return SolicitudeResource::collection($solicitude);
         // return response(['data'=>$solicitude]);
         return new SolicitudeResource($solicitude);

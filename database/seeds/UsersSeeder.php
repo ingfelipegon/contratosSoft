@@ -23,5 +23,11 @@ class UsersSeeder extends Seeder
         'email'=>"pipesoft2010@gmail.com",
         'password'=>bcrypt("123456")
         ]);
+
+        $user=User::create([
+            'name'=>"Orlando",
+            'email'=>"orlano,perez@jep.gov.co",
+            'password'=>bcrypt("123456")
+            ]);
     }
 }
